@@ -1,0 +1,105 @@
+baseURL: https://example.org/
+languageCode: en
+defaultContentLanguage: en
+title: Example Site
+theme: fluidity
+enableRobotsTXT: true
+summaryLength: 100 # Configure how long the post summary should be on the homepage.
+hasCJKLanguage: false
+enableEmoji: true
+
+# NOTE: Required for theme-defined highlight style
+pygmentsUseClasses: true
+pygmentsCodefences: true
+
+outputs:
+  home:
+    - html
+
+menus:
+  # Menu: Configure the menu items on the header.
+  main:
+    - identifier: home
+      pageRef: /
+      weight: 10
+    - identifier: post
+      pageRef: /posts
+      weight: 20
+    - identifier: tag
+      pageRef: /tags
+      weight: 30
+    - identifier: archive
+      pageRef: /archives
+      weight: 40
+    - identifier: about
+      pageRef: /about
+      weight: 50
+    - identifier: search
+      pageRef: /search
+      weight: 60
+
+ignoreLogs:
+  - warning-goldmark-raw-html
+markup:
+  defaultMarkdownHandler: goldmark
+
+build:
+  buildStats:
+    enable: true
+  cachebusters:
+    - source: assets/notwatching/hugo_stats\.json
+      target: css
+    - source: (postcss|tailwind)\.config\.js
+      target: css
+module:
+  hugoVersion:
+    min: 0.128.0
+  mounts:
+    - source: assets
+      target: assets
+    - source: content
+      target: content
+    - source: hugo_stats.json
+      disableWatch: true
+      target: assets/notwatching/hugo_stats.json
+
+# Params: Configure the site metadata. Theme-defined params are listed below.
+params:
+  description: 'Your site description'
+  fullContentRSS: true
+
+  # main section will be listed at home page
+  mainSections:
+    - posts
+
+  # Page size
+  pageSize:
+    home: 5
+    list: 10
+    archives: 20
+
+  # Social links
+  social:
+    twitter: 'Your Twitter username'
+    github: 'Your GitHub username'
+    linkedin: 'Your LinkedIn username'
+    disableShareByType:
+      - not-exist
+
+  # Table of contents
+  toc:
+    disabled: false
+
+  # Comment
+  comment:
+    disabled: false
+    disableCommentByType:
+      - page
+    thirdPartyComment: |
+      this is your comment script
+
+  # Search
+  search:
+    disabled: false
+    provider: pagefind # available: google, pagefind
+

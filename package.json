@@ -1,0 +1,19 @@
+{
+  "name": "fluidity",
+  "version": "1.0.0",
+  "description": "A fluid and responsive Hugo theme.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@fluentui/web-components": "^3.0.0-beta.73",
+    "@tailwindcss/cli": "^4.0.0-beta.4",
+    "@tailwindcss/typography": "^0.5.15",
+    "prettier": "^3.4.1",
+    "prettier-plugin-go-template": "^0.0.15",
+    "tailwindcss": "^4.0.0-beta.4"
+  }
+}

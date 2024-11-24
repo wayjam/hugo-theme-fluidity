@@ -1,0 +1,73 @@
+home:
+  other: home
+tag:
+  one: tag
+  other: tags
+archive:
+  other: archives
+toggleTheme:
+  other: toggle theme
+next:
+  other: next
+previous:
+  other: previous
+readMore:
+  other: read more
+readingTime:
+  one: a min to read
+  other: "{{ .Count }} mins to read"
+comment:
+  other: comment
+publishedAt:
+  other: published at
+updatedAt:
+  other: updated at
+taggedWith:
+  other: tagged with
+shareWith:
+  other: share with
+toc:
+  other: table of contents
+about:
+  other: about
+sections:
+  other: sections
+connect:
+  other: connect
+allRightsReserved:
+  other: all rights reserved.
+published:
+  other: published
+lastModified:
+  other: last modified
+article:
+  one: article
+  other: articles
+totalArticles:
+  other: articles in total
+toggleToc:
+  other: toggle table of contents
+relatedArticles:
+  other: related articles
+searchPlaceholder:
+  other: search articles...
+noSearchResults:
+  other: no results found
+loading:
+  other: loading...
+# Menu items
+home:
+  other: home
+archives:
+  other: archives
+categories:
+  other: categories
+about:
+  other: about
+page:
+  other: page
+post:
+  one: post
+  other: posts
+search:
+  other: search

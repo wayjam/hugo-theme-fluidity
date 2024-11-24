@@ -1,0 +1,27 @@
+<div id="toc">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-lg font-semibold text-gray-900 dark:text-white">
+            {{ i18n "toc" | strings.Title | default "Table of Contents" }}
+        </h2>
+        <fluent-button 
+            appearance="lightweight"
+            id="toc-toggle"
+            aria-label="{{ i18n "toggleToc" }}">
+            <span class="toc-expand hidden">{{ partial "utils/icon.html" (dict "icon" "arrow-expand-all") }}</span>
+            <span class="toc-collapse">{{ partial "utils/icon.html" (dict "icon" "arrow-collapse-all") }}</span>
+        </fluent-button>
+    </div>
+    
+    {{ $toc := .TableOfContents }}
+    {{ if not (eq $toc "<nav id=\"TableOfContents\"></nav>") }}
+    <div class="toc-content transition-all duration-200">
+        <nav>
+            {{ $toc := replaceRE "<nav>" "<nav class='space-y-2'>" .TableOfContents }}
+            {{ $toc := replaceRE "<ul>" "<ul class='space-y-1 ml-4'>" $toc }}
+            {{ $toc := replaceRE "<li>" "<li class='py-1'>" $toc }}
+            {{ $toc := replaceRE "<a " "<a class='block text-gray-600 dark:text-gray-300 hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200 hover:translate-x-1 transform' " $toc }}
+            {{ $toc | safeHTML }}
+        </nav>
+    </div>
+    {{ end }}
+</div>

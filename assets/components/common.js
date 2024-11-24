@@ -1,0 +1,12 @@
+import '@fluentui/web-components/button.js';
+import '@fluentui/web-components/anchor-button.js';
+import '@fluentui/web-components/link.js';
+import '@fluentui/web-components/badge.js';
+import '@fluentui/web-components/divider.js';
+import '@fluentui/web-components/label.js';
+import '@fluentui/web-components/text.js';
+import '@fluentui/web-components/accordion.js';
+import '@fluentui/web-components/tooltip.js';
+import '@fluentui/web-components/tabs.js';
+import '@fluentui/web-components/tab-panel.js';
+import '@fluentui/web-components/tab.js';

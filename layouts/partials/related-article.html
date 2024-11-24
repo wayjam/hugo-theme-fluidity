@@ -1,0 +1,21 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  {{ $related := .Site.RegularPages.Related . | first 3 }}
+  {{ range $related }}
+    <div
+      class="p-4 bg-white dark:bg-gray-800 rounded-xl 
+                    border border-gray-200 dark:border-gray-700 
+                    transition-all duration-200 
+                    hover:bg-gray-50 dark:hover:bg-gray-700/50">
+      <h3 class="text-lg font-semibold mb-2">
+        <a
+          href="{{ .RelPermalink }}"
+          class="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
+          {{ .Title }}
+        </a>
+      </h3>
+      <p class="text-gray-700 dark:text-gray-300 mb-4">
+        {{ .Summary | truncate 120 }}
+      </p>
+    </div>
+  {{ end }}
+</div>

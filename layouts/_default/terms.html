@@ -1,0 +1,51 @@
+{{ define "main" }}
+    <div class="container mx-auto mx-auto px-4 py-8 max-w-6xl">
+      <div class="mb-8">
+        {{ if eq .Title "Tags" }}
+          <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
+            <span class="inline-block mr-1">{{ partial "utils/icon.html" (dict "icon" "tags") }}</span>
+            {{ i18n "tag" | strings.Title }}
+          </h1>
+        {{ else }}
+          <h1 class="text-3xl font-semibold text-gray-900 dark:text-white">
+            {{ .Title | strings.Title }}
+          </h1>
+        {{ end }}
+      </div>
+
+      <div class="p-6 bg-white dark:bg-gray-800 rounded-xl 
+                  border border-gray-200 dark:border-gray-700">
+        <div class="flex flex-wrap gap-4 justify-center">
+          {{ range sort .Data.Terms.Alphabetical "Count" "desc" }}
+            {{ if ne .Page.Title "" }}
+              {{ $tagSize := "text-base" }}
+              {{ if ge .Count 12 }}
+                {{ $tagSize = "text-2xl font-semibold" }}
+              {{ else if ge .Count 9 }}
+                {{ $tagSize = "text-xl font-medium" }}
+              {{ else if ge .Count 6 }}
+                {{ $tagSize = "text-lg font-normal" }}
+              {{ end }}
+
+              <a href="{{ .Page.Permalink }}" class="group relative inline-flex items-center">
+                <fluent-badge
+                  appearance="outline"
+                  color="brand"
+                  shape="rounded"
+                  size="extra-large"
+                  class="
+                  {{ $tagSize }}
+                  text-gray-700 dark:text-gray-300 rounded-lg px-4 py-2 transition-all duration-200
+                  bg-white hover:bg-gray-50
+                  dark:bg-gray-800 dark:hover:bg-gray-700/50
+                  border border-gray-200 dark:border-gray-700">
+                  {{ .Page.Title }}
+                  <span class="ml-2 text-sm">({{ .Count }})</span>
+                </fluent-badge>
+              </a>
+            {{ end }}
+          {{ end }}
+        </div>
+      </div>
+    </div>
+{{ end }}

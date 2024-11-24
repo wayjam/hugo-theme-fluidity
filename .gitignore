@@ -1,0 +1,27 @@
+# Hugo default output directory
+/public/
+/resources/_gen/
+/assets/jsconfig.json
+/.hugo_build.lock
+
+# Node modules
+/node_modules/
+
+# Temporary files
+.DS_Store
+*.log
+.env
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Theme specific
+exampleSite/public/
+exampleSite/resources/
+exampleSite/.hugo_build.lock
+
+# Local development
+/themes/

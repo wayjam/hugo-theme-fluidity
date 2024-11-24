@@ -1,0 +1,68 @@
+{{ $pag := .Paginator }}
+{{ if $pag }}
+  {{ if gt $pag.TotalPages 1 }}
+    <div id="pagination">
+      <nav class="mt-12 flex justify-center items-center gap-2">
+        {{ if $pag.HasPrev }}
+          <fluent-anchor-button appearance="ghost" href="{{ $pag.Prev.URL }}" aria-label="{{ i18n "previous" }}">
+            {{ partial "utils/icon.html" (dict "icon" "arrow-left") }}
+            {{ i18n "previous" }}
+          </fluent-anchor-button>
+        {{ else }}
+          <fluent-button appearance="ghost" disabled>{{ i18n "previous" }}</fluent-button>
+        {{ end }}
+        <ul class="flex gap-1">
+          {{ $ellipsed := false }}
+          {{ $shouldEllipse := false }}
+
+          {{ range $pag.Pagers }}
+            {{ $right := sub .TotalPages .PageNumber }}
+            {{ $showNumber := or (le .PageNumber 3) (eq $right 0) }}
+            {{ $showNumber := or $showNumber (and (gt .PageNumber (sub $pag.PageNumber 2)) (lt .PageNumber (add $pag.PageNumber 2))) }}
+            {{ $isCurrent := eq . $pag }}
+
+            {{ if $showNumber }}
+              {{ $ellipsed = false }}
+              {{ $shouldEllipse = false }}
+            {{ else }}
+              {{ $shouldEllipse = not $ellipsed }}
+              {{ $ellipsed = true }}
+            {{ end }}
+
+            {{ if $showNumber }}
+              <li>
+                <fluent-anchor-button
+                  class="border border-gray-200 {{ if $isCurrent }}disabled{{ end }}"
+                  {{ if $isCurrent }}disabled{{ end }}
+                  href="{{ if $isCurrent }}
+                    #
+                  {{ else }}
+                    {{ .URL }}
+                  {{ end }}"
+                  size="medium"
+                  appearance="{{ if $isCurrent }}
+                    primary
+                  {{ else }}
+                    outline
+                  {{ end }}"
+                  aria-label="Page {{ .PageNumber }}">
+                  {{ .PageNumber }}
+                </fluent-anchor-button>
+              </li>
+            {{ else if $shouldEllipse }}
+              <li class="flex items-center px-2 diasbled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+            {{ end }}
+          {{ end }}
+        </ul>
+        {{ if $pag.HasNext }}
+          <fluent-anchor-button appearance="ghost" href="{{ $pag.Next.URL }}" aria-label="{{ i18n "next" }}">
+            {{ i18n "next" }}
+            {{ partial "utils/icon.html" (dict "icon" "arrow-right") }}
+          </fluent-anchor-button>
+        {{ else }}
+          <fluent-button appearance="ghost" disabled>{{ i18n "next" }}</fluent-button>
+        {{ end }}
+      </nav>
+    </div>
+  {{ end }}
+{{ end }}

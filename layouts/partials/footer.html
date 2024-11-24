@@ -1,0 +1,130 @@
+<footer class="mt-16 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 backdrop-blur-sm">
+  <div class="max-w-6xl mx-auto px-4 py-12">
+    <div class="grid md:grid-cols-4 gap-8">
+      <!-- About Section -->
+      <div class="col-span-2">
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ i18n "about" | strings.Title }}</h3>
+        <p class="text-gray-700 dark:text-gray-300 mb-4 italic">
+          {{ .Site.Params.description | default "" }}
+          {{ if (where .Site.RegularPages "Layout" "==" "about") }}
+            <a
+              href="{{ "about" | relURL }}"
+              class="inline-flex items-center underline text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 transition-colors duration-200">
+              ({{ i18n "page" | default "page" }})
+            </a>
+          {{ end }}
+        </p>
+        <fluent-divider role="separator" appearance="subtle" class="p-1"></fluent-divider>
+        <fluent-text class="text-gray-500 dark:text-gray-400 mb-4 text-sm font-mono">
+          Site built with
+          <a class="italic" rel="nofollow" target="_blank" href="https://gohugo.io" title="Built with hugo">Hugo</a>
+          , using theme
+          <a
+            class="italic"
+            rel="nofollow"
+            target="_blank"
+            href="https://github.com/wayjam/hugo-theme-fludity"
+            title="Hugo Theme Fludity">
+            Fludity
+          </a>
+          .
+        </fluent-text>
+      </div>
+
+      <!-- Categories Section -->
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          {{ i18n "sections" | strings.Title }}
+        </h3>
+        {{ $sections := slice }}
+        {{ range .Site.Sections }}
+          {{ $section := . }}
+          {{ $count := len $section.Pages }}
+          {{ if gt $count 0 }}
+            {{ $sections = $sections | append (dict "Title" .Title "Count" $count "URL" .RelPermalink) }}
+          {{ end }}
+        {{ end }}
+
+        {{ $sortedSections := sort $sections "Count" "desc" }}
+        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+          {{ range first 5 $sortedSections }}
+            <li>
+              <a
+                href="{{ .URL }}"
+                class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center group">
+                {{ .Title }}
+                <span
+                  class="text-gray-400 dark:text-gray-500 text-sm ml-2 group-hover:translate-x-1 transition-transform duration-200">
+                  ({{ .Count }})
+                </span>
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+
+      <!-- Connect Section -->
+      <div>
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
+          {{ i18n "connect" | strings.Title }}
+        </h3>
+        <ul class="space-y-2 text-gray-600 dark:text-gray-300">
+          <li>
+            <a
+              href="{{ "index.xml" | relURL }}"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
+              <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "rss") }}</span>
+              RSS Feed
+            </a>
+          </li>
+          {{ with .Site.Params.social.twitter }}
+            <li>
+              <a
+                href="https://x.com/{{ . }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
+                <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "xcom") }}</span>
+                X.com
+              </a>
+            </li>
+          {{ end }}
+          {{ with .Site.Params.social.github }}
+            <li>
+              <a
+                href="https://github.com/{{ . }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
+                <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "github") }}</span>
+                GitHub
+              </a>
+            </li>
+          {{ end }}
+          {{ with .Site.Params.social.linkedin }}
+            <li>
+              <a
+                href="https://linkedin.com/in/{{ . }}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
+                <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "linkedin") }}</span>
+                LinkedIn
+              </a>
+            </li>
+          {{ end }}
+        </ul>
+      </div>
+    </div>
+
+    <!-- Copyright -->
+    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+      <p class="text-center text-gray-600 dark:text-gray-400 font-sans">
+        &copy; {{ now.Year }} {{ .Site.Title }}.
+        {{ i18n "allRightsReserved" | default "All rights reserved." }}
+      </p>
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,65 @@
+home:
+  other: 首页
+tag:
+  other: 标签
+archive:
+  other: 归档
+archives:
+  other: 归档
+categories:
+  other: 分类
+toggleTheme:
+  other: 切换主题
+next:
+  other: 下一页
+previous:
+  other: 上一页
+readMore:
+  other: 阅读更多
+readingTime:
+  other: 预计阅读 {{ .Count }} 分钟
+comment:
+  other: 评论
+publishedAt:
+  other: 发布于
+updatedAt:
+  other: 修改于
+taggedWith:
+  other: 标记为
+shareWith:
+  other: 分享在
+toc:
+  other: 目录
+about:
+  other: 关于
+sections:
+  other: 栏目
+connect:
+  other: 联系
+allRightsReserved:
+  other: 版权所有
+published:
+  other: 发布时间
+lastModified:
+  other: 最后修改
+article:
+  one: 篇文章
+  other: 篇文章
+totalArticles:
+  other: 篇文章
+toggleToc:
+  other: 切换目录
+relatedArticles:
+  other: 相关文章
+searchPlaceholder:
+  other: 搜索文章...
+noSearchResults:
+  other: 未找到结果
+loading:
+  other: 加载中...
+page:
+  other: 页面
+post:
+  other: 文章
+search:
+  other: 搜索

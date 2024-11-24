@@ -1,0 +1,193 @@
+{{ define "main" }}
+  <div class="container mt-1 mx-auto px-4 py-8 min-h-screen bg-gray-50 dark:bg-gray-900">
+    <!-- Article Header -->
+    <header class="mb-8">
+      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $dateHuman := .Date | time.Format ":date_long" }}
+      {{ $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" }}
+      {{ $lastmodHuman := .Lastmod | time.Format ":date_long" }}
+      <h1 class="text-4xl font-bold text-gray-900 dark:text-white mb-6">{{ .Title }}</h1>
+
+      <div
+        class="p-4 bg-white dark:bg-gray-800 backdrop-blur-sm border border-gray-200 dark:border-gray-700 rounded-xl transition-all duration-200">
+        <div class="flex flex-wrap items-center gap-4">
+          {{ with .Params.author }}
+            <div class="flex items-center gap-3">
+              <div>
+                <div class="font-medium text-gray-900 dark:text-white">{{ . }}</div>
+                {{ with $.Params.role }}
+                  <div class="text-sm text-gray-600 dark:text-gray-400">{{ . }}</div>
+                {{ end }}
+              </div>
+            </div>
+          {{ end }}
+          <div class="flex items-center gap-4 text-gray-500 dark:text-gray-400">
+            <div class="flex items-center gap-1">
+              {{ partial "utils/icon.html" (dict "icon" "calendar") }}
+              <time datetime="{{ $dateMachine }}" title="{{ i18n "published" | default "Published" }}">
+                {{ $dateHuman }}
+              </time>
+            </div>
+            {{ if ne ($lastmodHuman) ($dateHuman) }}
+              <div class="flex items-center gap-1">
+                {{ partial "utils/icon.html" (dict "icon" "calendar-edit") }}
+                <time datetime="{{ $lastmodMachine }}" title="{{ i18n "lastModified" | default "Last modified" }}">
+                  {{ $lastmodHuman }}
+                </time>
+              </div>
+            {{ end }}
+            <div class="flex items-center gap-1">
+              {{ partial "utils/icon.html" (dict "icon" "timer") }}
+              <span>{{ i18n "readingTime" .ReadingTime }}</span>
+            </div>
+          </div>
+        </div>
+
+        {{- if .GetTerms "tags" }}
+          <div class="mt-4">
+            {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+          </div>
+        {{- end }}
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="md:col-span-2">
+        <div
+          class="p-6 bg-white dark:bg-gray-800 rounded-xl 
+                    border border-gray-200 dark:border-gray-700 transition-all duration-200">
+          <article
+            class="prose prose-neutral dark:prose-invert max-w-none
+              prose-headings:font-semibold 
+              prose-a:text-primary-600 hover:prose-a:text-primary-500 dark:prose-a:text-primary-400 dark:hover:prose-a:text-primary-300
+              prose-p:text-justify 
+              prose-img:rounded-lg">
+            {{ .Content }}
+          </article>
+        </div>
+      </div>
+
+      <div class="md:col-span-1">
+        <div
+          class="sticky top-1 space-y-6 p-4 bg-white dark:bg-gray-800 rounded-xl 
+                    border border-gray-200 dark:border-gray-700 transition-all duration-200">
+          {{ $enableToc := and (gt .WordCount 400) (and (not (eq .Params.toc false)) (not .Site.Params.toc.disabled)) }}
+          {{ $enableShare := not (in .Site.Params.social.disableShareByType .Type) }}
+          {{ if $enableToc }}
+            {{ partial "toc.html" . }}
+          {{ end }}
+
+          {{ if and $enableToc $enableShare }}
+            <fluent-divider orientation="horizontal"></fluent-divider>
+          {{ end }}
+
+          {{ if $enableShare }}
+            <div id="share">
+              <h2 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">{{ i18n "shareWith" | strings.Title }}</h2>
+              <div class="flex gap-2">
+                {{ $tag_list := "" }}
+                {{ with .Params.Tags }}
+                  {{ $tag_list = delimit . "," }}
+                {{ end }}
+                <fluent-anchor-button
+                  href="https://reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}"
+                  appearance="accent"
+                  size="small"
+                  aria-label="share {{ .Title | plainify }} on reddit">
+                  <span class="underline font-mono">Reddit</span>
+                </fluent-anchor-button>
+
+                <fluent-anchor-button
+                  aria-label="share {{ .Title | plainify }} on x.com"
+                  href="https://x.com/intent/tweet/?text={{ .Title }}&amp;url={{ .Permalink }}&amp;hashtags={{ $tag_list }}"
+                  appearance="accent"
+                  size="small">
+                  <span class="underline font-mono">X.com</span>
+                </fluent-anchor-button>
+
+                <fluent-anchor-button
+                  href="https://facebook.com/sharer/sharer.php?u={{ .Permalink }}"
+                  aria-label="share {{ .Title | plainify }} on facebook"
+                  appearance="accent"
+                  size="small">
+                  <span class="underline font-mono">Facebook</span>
+                </fluent-anchor-button>
+
+                <fluent-anchor-button
+                  href="https://www.google.com/bookmarks/mark?op=edit&bkmk={{ .Permalink }}&title={{ .Title }}"
+                  aria-label="share {{ .Title | plainify }} on google"
+                  appearance="accent"
+                  size="small">
+                  <span class="underline font-mono">Google</span>
+                </fluent-anchor-button>
+
+                <fluent-anchor-button
+                  href="https://telegram.me/share/url?url={{ .Permalink }}&text={{ .Title }}"
+                  aria-label="share {{ .Title | plainify }} on telegram"
+                  appearance="accent"
+                  size="small">
+                  <span class="underline font-mono">Telegram</span>
+                </fluent-anchor-button>
+              </div>
+            </div>
+          {{ end }}
+
+          {{ if or $enableToc $enableShare }}
+            <fluent-divider orientation="horizontal"></fluent-divider>
+          {{ end }}
+
+
+          <div class="flex gap-2 justify-between">
+            <fluent-button
+              icon
+              shape="rounded"
+              size="small"
+              class="px-2"
+              onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+              aria-label="Back to top">
+              {{ partial "utils/icon.html" (dict "icon" "arrow-export-up") }}
+              <span class="px-2">{{ i18n "backToTop" | default "Back to Top" }}</span>
+            </fluent-button>
+
+            <fluent-button
+              icon
+              shape="rounded"
+              size="small"
+              class="px-2"
+              onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
+              aria-label="Jump to comments">
+              {{ partial "utils/icon.html" (dict "icon" "comments") }}
+              <span class="px-2">{{ i18n "jumpToComments" | default "Jump to Comments" }}</span>
+            </fluent-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="mt-12">
+      {{ $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableCommentByType .Type)) }}
+      {{ $activeTab := "comments" }}
+      {{ if not $enableComments }}
+        {{ $activeTab = "related" }}
+      {{ end }}
+      <fluent-tabs activeid="{{ $activeTab }}" size="large">
+        {{ if $enableComments }}
+          <fluent-tab id="comments" class="p-2 mb-1">{{ i18n "comments" | strings.Title }}</fluent-tab>
+        {{ end }}
+        <fluent-tab id="related" class="p-2 mb-1">{{ i18n "relatedArticles" | strings.Title }}</fluent-tab>
+
+        {{ if $enableComments }}
+          <fluent-tab-panel id="comments">
+            {{ partial "comment.html" . }}
+          </fluent-tab-panel>
+        {{ end }}
+        <fluent-tab-panel id="related">
+          {{ if .Site.RegularPages.Related . }}
+            {{ partial "related-article.html" . }}
+          {{ end }}
+        </fluent-tab-panel>
+      </fluent-tabs>
+    </aside>
+  </div>
+{{ end }}

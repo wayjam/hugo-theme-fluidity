@@ -1,0 +1,3 @@
+source: public
+glob: posts/*/*.{html}
+bundle_dir: pagefind

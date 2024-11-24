@@ -1,0 +1,241 @@
+/* Background style */
+.bg {
+  background-color: transparent;
+}
+.chroma {
+  background-color: transparent;
+}
+
+/* Basic elements */
+.chroma .cl {
+  @apply text-[rgb(var(--color-neutral-text))];
+}
+.chroma .x {
+  @apply text-[rgb(var(--color-neutral-text))];
+}
+.chroma .err {
+  @apply text-[rgb(var(--color-error))];
+}
+
+/* Line handling */
+.chroma .lnlinks {
+  @apply outline-none no-underline text-current;
+}
+.chroma .lntd {
+  @apply align-top m-0 border-0;
+  padding: 0 calc(var(--spacing) * 0);
+}
+.chroma .lntable {
+  @apply border-spacing-0 p-0 m-0 border-0;
+}
+.chroma .hl {
+  @apply bg-[rgb(var(--color-primary))]/5 
+         dark:bg-[rgb(var(--color-primary))]/10
+         relative;
+}
+.chroma .hl::before {
+  @apply content-['']
+         absolute
+         left-0
+         top-0
+         bottom-0
+         w-1
+         bg-[rgb(var(--color-primary))]/30;
+}
+.chroma .lnt,
+.chroma .ln {
+  @apply text-[rgb(var(--color-neutral-4))]
+         select-none
+         mr-4
+         px-4
+         py-0
+         whitespace-pre;
+}
+.chroma .line {
+  @apply flex;
+}
+
+.highlight>.chroma .lntd:first-child {
+  width: 48px;
+}
+
+/* Names - Fluent Design 2 style */
+.chroma .n {
+  @apply text-[rgb(var(--color-neutral-text))];
+} /* variable name */
+.chroma .na {
+  @apply text-[rgb(var(--color-info))];
+} /* attribute name */
+.chroma .nb {
+  @apply text-[rgb(var(--color-primary))];
+} /* built-in name */
+.chroma .bp {
+  @apply text-[rgb(var(--color-info))];
+} /* built-in name pseudo */
+.chroma .nc {
+  @apply text-[rgb(var(--color-primary-light))];
+} /* class name */
+.chroma .no {
+  @apply text-[rgb(var(--color-info))];
+} /* constant name */
+.chroma .nd {
+  @apply text-[rgb(var(--color-primary))];
+} /* decorator name */
+.chroma .ni {
+  @apply text-[rgb(var(--color-info))];
+} /* entity name */
+.chroma .ne {
+  @apply text-[rgb(var(--color-error))];
+} /* exception name */
+.chroma .nf {
+  @apply text-[rgb(var(--color-primary))];
+} /* function name */
+.chroma .fm {
+  @apply text-[rgb(var(--color-primary))];
+} /* method name */
+.chroma .nl {
+  @apply text-[rgb(var(--color-info))];
+} /* label name */
+.chroma .nn {
+  @apply text-[rgb(var(--color-primary-light))];
+} /* namespace name */
+.chroma .nx {
+  @apply text-[rgb(var(--color-neutral-text))];
+} /* other name */
+.chroma .py {
+  @apply text-[rgb(var(--color-info))];
+} /* attribute name */
+.chroma .nt {
+  @apply text-[rgb(var(--color-primary))];
+} /* HTML/XML tag */
+.chroma .nv {
+  @apply text-[rgb(var(--color-info))];
+} /* variable name */
+.chroma .vc {
+  @apply text-[rgb(var(--color-info))];
+} /* class variable */
+.chroma .vg {
+  @apply text-[rgb(var(--color-info))];
+} /* global variable */
+.chroma .vi {
+  @apply text-[rgb(var(--color-info))];
+} /* instance variable */
+.chroma .vm {
+  @apply text-[rgb(var(--color-info))];
+} /* magic variable */
+
+/* Keywords - Fluent Design 2 style */
+.chroma .k,
+.chroma .kc,
+.chroma .kd,
+.chroma .kn,
+.chroma .kp,
+.chroma .kr {
+  @apply text-[rgb(var(--color-primary))]; /* keyword */
+}
+.chroma .kt {
+  @apply text-[rgb(var(--color-primary-light))];
+} /* type keyword */
+
+/* Literals */
+.chroma .l {
+  @apply text-[rgb(var(--color-neutral-text))];
+}
+.chroma .ld {
+  @apply text-[rgb(var(--color-success))];
+} /* date literal */
+.chroma .s,
+.chroma .sa,
+.chroma .sb,
+.chroma .sc,
+.chroma .dl,
+.chroma .sd,
+.chroma .s2,
+.chroma .se,
+.chroma .sh,
+.chroma .si,
+.chroma .sx,
+.chroma .sr,
+.chroma .s1,
+.chroma .ss {
+  @apply text-[rgb(var(--color-success))]; /* string literal */
+}
+
+/* Numbers */
+.chroma .m,
+.chroma .mb,
+.chroma .mf,
+.chroma .mh,
+.chroma .mi,
+.chroma .il,
+.chroma .mo {
+  @apply text-[rgb(var(--color-warning))]; /* number literal */
+}
+
+/* Operators */
+.chroma .o {
+  @apply text-[rgb(var(--color-neutral-text))];
+}
+.chroma .ow {
+  @apply text-[rgb(var(--color-primary))];
+}
+
+/* Punctuation */
+.chroma .p {
+  @apply text-[rgb(var(--color-neutral-text))];
+}
+
+/* Comments */
+.chroma .c,
+.chroma .ch,
+.chroma .cm,
+.chroma .c1,
+.chroma .cs {
+  @apply text-[rgb(var(--color-neutral-4))] /* comment */
+         italic;
+}
+.chroma .cp,
+.chroma .cpf {
+  @apply text-[rgb(var(--color-primary))]; /* preprocessor */
+}
+
+/* Generic */
+.chroma .g {
+  @apply text-[rgb(var(--color-neutral-text))];
+}
+.chroma .gd {
+  @apply text-[rgb(var(--color-error))];
+}
+.chroma .ge {
+  @apply italic;
+}
+.chroma .gr {
+  @apply text-[rgb(var(--color-error))];
+}
+.chroma .gh {
+  @apply text-[rgb(var(--color-primary))] font-semibold;
+}
+.chroma .gi {
+  @apply text-[rgb(var(--color-success))];
+}
+.chroma .go {
+  @apply text-[rgb(var(--color-neutral-4))];
+}
+.chroma .gp {
+  @apply text-[rgb(var(--color-neutral-text))] font-semibold;
+}
+.chroma .gs {
+  @apply font-semibold;
+}
+.chroma .gu {
+  @apply text-[rgb(var(--color-info))] font-semibold;
+}
+.chroma .gt {
+  @apply text-[rgb(var(--color-error))];
+}
+.chroma .gl {
+  @apply text-[rgb(var(--color-neutral-4))];
+}
+.chroma .w {
+  @apply text-[rgb(var(--color-neutral-3))];
+}

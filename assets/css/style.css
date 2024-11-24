@@ -1,0 +1,137 @@
+/*
+ * Hugo Theme Fluidity
+ * Licensed under the MIT License.
+ */
+
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+@variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    /* Fluent Design 2 Colors */
+    --color-neutral-base: 243 242 241; /* Neutral Base */
+    --color-neutral-1: 250 249 248; /* Neutral Lighter */
+    --color-neutral-2: 234 234 234; /* Neutral Light */
+    --color-neutral-3: 201 201 201; /* Neutral Primary */
+    --color-neutral-4: 161 161 161; /* Neutral Secondary */
+    --color-neutral-5: 96 94 92; /* Neutral Dark */
+    --color-neutral-text: 37 36 35; /* Text color */
+
+    /* Fluent Primary Colors */
+    --color-primary: 0 95 184; /* Communication Blue */
+    --color-primary-light: 43 136 216;
+    --color-accent: 140 140 140; /* Gray */
+
+    /* Semantic Colors */
+    --color-success: 92 184 92; /* Green */
+    --color-info: 0 120 212; /* Blue */
+    --color-warning: 234 169 0; /* Yellow */
+    --color-error: 205 41 52; /* Red */
+
+    /* Typography */
+    --font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    --font-family-mono: 'Cascadia Code', Consolas, monospace;
+
+    /* Spacing (Fluent Design 2 uses 4px grid) */
+    --spacing-unit: 4px;
+
+    /* Border Radius */
+    --radius-small: 2px;
+    --radius-medium: 4px;
+    --radius-large: 6px;
+
+    /* Elevation/Shadow */
+    --shadow-depth-1: 0 2px 4px rgba(0, 0, 0, 0.14);
+    --shadow-depth-2: 0 4px 8px rgba(0, 0, 0, 0.14);
+    --shadow-depth-3: 0 8px 16px rgba(0, 0, 0, 0.14);
+  }
+
+  /* Dark theme variables */
+  .dark {
+    --color-neutral-base: 32 31 30;
+    --color-neutral-1: 50 49 48;
+    --color-neutral-2: 68 67 66;
+    --color-neutral-3: 138 136 134;
+    --color-neutral-4: 161 159 157;
+    --color-neutral-5: 200 198 196;
+    --color-neutral-text: 255 255 255;
+
+    --color-primary: 96 205 255;
+    --color-primary-light: 157 224 255;
+    --color-accent: 118 118 118;
+  }
+}
+
+@layer components {
+  /* Typography customization for Fluent Design 2 */
+  .prose {
+    @apply 
+      /* Code styles */
+      prose-code:text-gray-900 dark:text-gray-100
+      prose-pre:bg-gray-50 dark:bg-gray-800
+      prose-pre:text-gray-900 dark:text-gray-100;
+
+    /* Custom code block styles */
+    pre {
+      @apply border
+             border-gray-200 dark:border-gray-700
+             backdrop-blur-sm
+             rounded-lg
+             p-4;
+    }
+
+    /* Custom inline code styles */
+    :not(pre) > code {
+      @apply font-mono
+             bg-gray-100 dark:bg-gray-800
+             border
+             border-gray-200 dark:border-gray-700
+             rounded-md
+             px-1.5
+             py-0.5;
+    }
+  }
+
+  /* Dark mode styles */
+  .dark .prose {
+    @apply 
+      prose-code:text-gray-100
+      prose-pre:bg-gray-800
+      prose-pre:text-gray-100;
+
+    pre {
+      @apply border-gray-700;
+    }
+
+    :not(pre) > code {
+      @apply bg-gray-800
+             border-gray-700;
+    }
+  }
+}
+
+@layer utilities {
+  .elevation-1 {
+    @apply shadow-[var(--shadow-depth-1)];
+  }
+  .elevation-2 {
+    @apply shadow-[var(--shadow-depth-2)];
+  }
+  .elevation-3 {
+    @apply shadow-[var(--shadow-depth-3)];
+  }
+}
+
+/* Base styles */
+body {
+  @apply bg-[rgb(var(--color-neutral-base))]
+         text-[rgb(var(--color-neutral))]
+         font-[var(--font-family-base)]
+         antialiased;
+}
+
+
+fluent-tab::before, fluent-tab::after {
+  @apply mt-auto;
+}
