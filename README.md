@@ -18,13 +18,25 @@ A fluid and responsive Hugo theme
 > https://gohugo.io/hugo-modules/use-modules/
 
 ```bash
-hugo mod init github.com/wayjam/hugo-theme-fluidity
+hugo mod init github.com/<your_user>/<your_project>
+```
+
+```yaml
+module:
+  imports:
+    - path: github.com/wayjam/hugo-theme-fluidity
 ```
 
 ### Git Submodule
 
 ```bash
-git submodule add https://github.com/wayjam/hugo-theme-fluidity.git themes/fluidity
+git submodule add https://github.com/wayjam/hugo-theme-fluidity.git themes/hugo-theme-fluidity
+```
+
+set theme in `hugo.yaml`
+
+```yaml
+theme: hugo-theme-fluidity
 ```
 
 ## Configuration
