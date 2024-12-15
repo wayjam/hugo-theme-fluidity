@@ -1,7 +1,6 @@
-cd exampleSite && \
-    hugo server \
-    --themesDir ../../ \
-    --printI18nWarnings \
-    --templateMetrics \
-    --templateMetricsHints \
-    --logLevel debug
+hugo server \
+--source exampleSite \
+--printI18nWarnings \
+--templateMetrics \
+--templateMetricsHints \
+--logLevel debug
