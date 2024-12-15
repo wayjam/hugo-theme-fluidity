@@ -27,6 +27,10 @@ module:
     - path: github.com/wayjam/hugo-theme-fluidity
 ```
 
+```bash
+hugo mod npm pack && npm update
+```
+
 ### Git Submodule
 
 ```bash
@@ -37,6 +41,10 @@ set theme in `hugo.yaml`
 
 ```yaml
 theme: hugo-theme-fluidity
+```
+
+```bash
+hugo mod npm pack && npm update
 ```
 
 ## Configuration
