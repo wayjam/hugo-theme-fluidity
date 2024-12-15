@@ -1,18 +1,18 @@
 {{- /*
-Renders a menu for the given menu ID.
+  Renders a menu for the given menu ID.
 
-@context {page} page The current page.
-@context {string} menuID The menu ID.
+  @context {page} page The current page.
+  @context {string} menuID The menu ID.
 
-@example: {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+  @example: {{ partial "menu.html" (dict "menuID" "main" "page" .)
+}}
 */}}
-
 {{- $page := .page }}
 {{- $menuID := .menuID }}
 
 {{- with index site.Menus $menuID }}
-  <nav>
-    <ul class="flex items-center space-x-6">
+  <nav class="hidden md:block">
+    <ul class="flex items-center gap-1">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
     </ul>
   </nav>
@@ -21,10 +21,10 @@ Renders a menu for the given menu ID.
 {{- define "partials/inline/menu/walk.html" }}
   {{- $page := .page }}
   {{- range .menuEntries }}
-    {{- $attrs := dict "href" .URL }}
+    {{- $attrs := dict "href" ( .URL | relLangURL ) }}
     {{- if $page.IsMenuCurrent .Menu . }}
       {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
-    {{- else if $page.HasMenuCurrent .Menu .}}
+    {{- else if $page.HasMenuCurrent .Menu . }}
       {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
     {{- end }}
 
@@ -32,48 +32,48 @@ Renders a menu for the given menu ID.
     {{- if .Identifier }}
       {{- $name = i18n .Identifier | default $name | default .Identifier | title }}
     {{- end }}
-  
 
-    <li class="relative">
+
+    <li class="relative group">
       <a
         class="
-          inline-block px-4 py-2 rounded-md
-          text-neutral-600 hover:text-neutral-900
-          dark:text-neutral-300 dark:hover:text-white
-          transition-all duration-200 ease-out
-          hover:bg-neutral-100 dark:hover:bg-neutral-800
-          relative
-          after:content-['']
-          after:absolute after:bottom-0 after:left-0
-          after:w-full after:h-0.5
-          after:bg-primary-500
-          after:scale-x-0 hover:after:scale-x-100
-          after:transition-transform after:duration-200
-          {{ if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
-            text-primary-600 dark:text-primary-400
-            after:scale-x-100
-          {{ end }}
-        "
+           inline-flex items-center px-4 py-2 rounded-md
+           text-sm font-medium
+           text-neutral-700 dark:text-neutral-200
+           hover:text-neutral-900 dark:hover:text-white
+           hover:bg-neutral-100 dark:hover:bg-neutral-800/70
+           transition-all duration-200 ease-out
+           relative
+           after:absolute after:bottom-0 after:left-2 after:right-2
+           after:h-0.5 after:rounded-full
+           after:bg-primary-500 dark:after:bg-primary-400
+           after:origin-left after:scale-x-0
+           hover:after:scale-x-100
+           after:transition-transform after:duration-200
+           {{ if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
+          text-primary-600 dark:text-primary-400 after:scale-x-100
+        {{ end }}"
         {{- range $k, $v := $attrs }}
           {{- with $v }}
             {{- printf " %s=%q" $k $v | safeHTMLAttr }}
           {{- end }}
-        {{- end -}}
-      >
-        <span class="relative z-10">{{ $name }}</span>
+        {{- end -}}>
+        <span class="relative">{{ $name }}</span>
       </a>
+
       {{- with .Children }}
-        <ul class="
-          absolute top-full left-0 mt-1
-          min-w-[200px]
-          bg-white dark:bg-neutral-800
-          shadow-lg rounded-md
-          opacity-0 invisible
-          transform translate-y-2
-          transition-all duration-200
-          group-hover:opacity-100 group-hover:visible group-hover:translate-y-0
-          border border-neutral-200 dark:border-neutral-700
-        ">
+        <ul
+          class="
+            absolute top-full left-0 mt-1
+            min-w-[200px]
+            bg-white dark:bg-neutral-900
+            shadow-lg shadow-neutral-200/50 dark:shadow-neutral-900/50
+            rounded-lg
+            border border-neutral-200/80 dark:border-neutral-800
+            opacity-0 invisible
+            transform -translate-y-2
+            transition-all duration-200 ease-out
+            group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
         </ul>
       {{- end }}

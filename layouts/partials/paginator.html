@@ -31,26 +31,30 @@
 
             {{ if $showNumber }}
               <li>
-                <fluent-anchor-button
-                  class="border border-gray-200 {{ if $isCurrent }}disabled{{ end }}"
-                  {{ if $isCurrent }}disabled{{ end }}
-                  href="{{ if $isCurrent }}
-                    #
-                  {{ else }}
-                    {{ .URL }}
-                  {{ end }}"
-                  size="medium"
-                  appearance="{{ if $isCurrent }}
-                    primary
-                  {{ else }}
-                    outline
-                  {{ end }}"
-                  aria-label="Page {{ .PageNumber }}">
-                  {{ .PageNumber }}
-                </fluent-anchor-button>
+                {{ if $isCurrent }}
+                  <fluent-button
+                    class="border border-neutral-200 dark:border-neutral-700"
+                    size="medium"
+                    appearance="primary"
+                    disabled
+                    aria-label="Current Page {{ .PageNumber }}">
+                    {{ .PageNumber }}
+                  </fluent-button>
+                {{ else }}
+                  <fluent-anchor-button
+                    class="border border-neutral-200 dark:border-neutral-700"
+                    href="{{ .URL }}"
+                    size="medium"
+                    appearance="outline"
+                    aria-label="Go to Page {{ .PageNumber }}">
+                    {{ .PageNumber }}
+                  </fluent-anchor-button>
+                {{ end }}
               </li>
             {{ else if $shouldEllipse }}
-              <li class="flex items-center px-2 diasbled"><span aria-hidden="true">&nbsp;&hellip;&nbsp;</span></li>
+              <li class="flex items-center px-2">
+                <span aria-hidden="true">&hellip;</span>
+              </li>
             {{ end }}
           {{ end }}
         </ul>

@@ -12,7 +12,7 @@ For a given taxonomy, renders a list of terms assigned to the page.
 
 {{- with $page.GetTerms $taxonomy }}
   <div class="flex flex-wrap gap-2">
-    {{ partial "utils/icon.html" (dict "icon" "tags") }}
+    <span class="text-gray-500 dark:text-gray-400">{{ partial "utils/icon.html" (dict "icon" "tags") }}</span>
     {{- range . }}
       <a href="{{ .RelPermalink }}" class="no-underline">
         <fluent-badge 

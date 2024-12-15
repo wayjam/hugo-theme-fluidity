@@ -22,7 +22,7 @@
           {{- range $paginator.Pages }}
             <div
               class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl">
-              <a href="{{ .Permalink }}" class="block">
+              <a href="{{ .Permalink | relURL }}" class="block">
                 <div class="px-4 py-3">
                   <div class="flex justify-between items-center gap-4">
                     <!-- Left content -->
@@ -41,8 +41,8 @@
                               <span
                                 class="inline-flex items-center px-2.5 py-1 rounded-md text-xs 
                                          bg-primary-50 dark:bg-primary-900/30 
-                                         text-primary-700 dark:text-primary-300
-                                         border border-primary-200 dark:border-primary-800">
+                                         text-gray-700 dark:text-gray-300
+                                         border border-gray-400 dark:border-primary-800">
                                 {{ . }}
                               </span>
                             {{ end }}
@@ -69,7 +69,7 @@
                                 </span>
                               {{ end }}
                               {{ if gt (len .) 3 }}
-                                {{ $tagID := printf "tags-%d" (hash.FNV32a $.Permalink) }}
+                                {{ $tagID := printf "tags-%d" ($.Permalink | relURL | hash.FNV32a) }}
                                 <span id="{{ $tagID }}" class="text-xs text-gray-600 dark:text-gray-400">
                                   +{{ sub (len .) 3 }}
                                 </span>

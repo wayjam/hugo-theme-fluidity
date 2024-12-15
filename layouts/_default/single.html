@@ -1,5 +1,5 @@
 {{ define "main" }}
-  <div class="container mt-1 mx-auto px-4 py-8 min-h-screen bg-gray-50 dark:bg-gray-900">
+  <div class="container mt-1 mx-auto px-4 py-8 min-h-screen">
     <!-- Article Header -->
     <header class="mb-8">
       {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
@@ -52,8 +52,8 @@
     </header>
 
     <!-- Main Content -->
-    <div class="grid md:grid-cols-3 gap-8">
-      <div class="md:col-span-2">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="col-span-1 md:col-span-2">
         <div
           class="p-6 bg-white dark:bg-gray-800 rounded-xl 
                     border border-gray-200 dark:border-gray-700 transition-all duration-200">
@@ -68,13 +68,15 @@
         </div>
       </div>
 
-      <div class="md:col-span-1">
+      <div class="hidden md:block md:col-span-1">
         <div
           class="sticky top-1 space-y-6 p-4 bg-white dark:bg-gray-800 rounded-xl 
                     border border-gray-200 dark:border-gray-700 transition-all duration-200">
           {{ $enableToc := and (gt .WordCount 400) (and (not (eq .Params.toc false)) (not .Site.Params.toc.disabled)) }}
+          {{ $enableToc = not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}
           {{ $enableShare := not (in .Site.Params.social.disableShareByType .Type) }}
-          {{ if $enableToc }}
+
+          {{ if and $enableToc }}
             {{ partial "toc.html" . }}
           {{ end }}
 
@@ -84,14 +86,16 @@
 
           {{ if $enableShare }}
             <div id="share">
-              <h2 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">{{ i18n "shareWith" | strings.Title }}</h2>
+              <h2 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
+                {{ i18n "shareWith" | strings.Title }}
+              </h2>
               <div class="flex gap-2">
                 {{ $tag_list := "" }}
                 {{ with .Params.Tags }}
                   {{ $tag_list = delimit . "," }}
                 {{ end }}
                 <fluent-anchor-button
-                  href="https://reddit.com/submit?url={{ .Permalink }}&title={{ .Title }}"
+                  href="https://reddit.com/submit?url={{ .Permalink | relURL }}&title={{ .Title }}"
                   appearance="accent"
                   size="small"
                   aria-label="share {{ .Title | plainify }} on reddit">
@@ -100,14 +104,14 @@
 
                 <fluent-anchor-button
                   aria-label="share {{ .Title | plainify }} on x.com"
-                  href="https://x.com/intent/tweet/?text={{ .Title }}&amp;url={{ .Permalink }}&amp;hashtags={{ $tag_list }}"
+                  href="https://x.com/intent/tweet/?text={{ .Title }}&amp;url={{ .Permalink | relURL }}&amp;hashtags={{ $tag_list }}"
                   appearance="accent"
                   size="small">
                   <span class="underline font-mono">X.com</span>
                 </fluent-anchor-button>
 
                 <fluent-anchor-button
-                  href="https://facebook.com/sharer/sharer.php?u={{ .Permalink }}"
+                  href="https://facebook.com/sharer/sharer.php?u={{ .Permalink | relURL }}"
                   aria-label="share {{ .Title | plainify }} on facebook"
                   appearance="accent"
                   size="small">
@@ -115,7 +119,7 @@
                 </fluent-anchor-button>
 
                 <fluent-anchor-button
-                  href="https://www.google.com/bookmarks/mark?op=edit&bkmk={{ .Permalink }}&title={{ .Title }}"
+                  href="https://www.google.com/bookmarks/mark?op=edit&bkmk={{ .Permalink | relURL }}&title={{ .Title }}"
                   aria-label="share {{ .Title | plainify }} on google"
                   appearance="accent"
                   size="small">
@@ -123,7 +127,7 @@
                 </fluent-anchor-button>
 
                 <fluent-anchor-button
-                  href="https://telegram.me/share/url?url={{ .Permalink }}&text={{ .Title }}"
+                  href="https://telegram.me/share/url?url={{ .Permalink | relURL }}&text={{ .Title }}"
                   aria-label="share {{ .Title | plainify }} on telegram"
                   appearance="accent"
                   size="small">
@@ -136,7 +140,6 @@
           {{ if or $enableToc $enableShare }}
             <fluent-divider orientation="horizontal"></fluent-divider>
           {{ end }}
-
 
           <div class="flex gap-2 justify-between">
             <fluent-button
@@ -173,9 +176,9 @@
       {{ end }}
       <fluent-tabs activeid="{{ $activeTab }}" size="large">
         {{ if $enableComments }}
-          <fluent-tab id="comments" class="p-2 mb-1">{{ i18n "comments" | strings.Title }}</fluent-tab>
+          <fluent-tab id="comments" class="p-2 mb-4">{{ i18n "comment" | strings.Title }}</fluent-tab>
         {{ end }}
-        <fluent-tab id="related" class="p-2 mb-1">{{ i18n "relatedArticles" | strings.Title }}</fluent-tab>
+        <fluent-tab id="related" class="p-2 mb-4">{{ i18n "relatedArticles" | strings.Title }}</fluent-tab>
 
         {{ if $enableComments }}
           <fluent-tab-panel id="comments">

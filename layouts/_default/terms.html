@@ -27,7 +27,7 @@
                 {{ $tagSize = "text-lg font-normal" }}
               {{ end }}
 
-              <a href="{{ .Page.Permalink }}" class="group relative inline-flex items-center">
+              <a href="{{ .Page.Permalink | relURL }}" class="group relative inline-flex items-center">
                 <fluent-badge
                   appearance="outline"
                   color="brand"
