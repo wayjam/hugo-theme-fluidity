@@ -1,6 +1,6 @@
 ---
 title: "Syntax Highlighting"
-date: 2020-04-30T16:01:23+08:00
+date: 2024-10-01T16:01:23+08:00
 draft: false
 tags: ["preview", "Syntax Highlighting", "tag-5"]
 categories: ["Syntax Highlighting"]

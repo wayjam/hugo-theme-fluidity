@@ -1,7 +1,7 @@
 ---
 title: "Emojis Support"
 description: "Emoji can be enabled in a Hugo project in a number of ways."
-publishDate: 2019-03-28T12:24:47+01:00
+publishDate: 2024-08-01T12:24:47+01:00
 draft: false
 images: []
 tags: ["emojis", "hugo"]

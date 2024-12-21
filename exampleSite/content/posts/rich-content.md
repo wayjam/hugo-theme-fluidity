@@ -1,6 +1,6 @@
 ---
 title: 'Rich Content'
-date: '2020-01-02'
+date: '2024-12-01'
 description: 'A brief description of Hugo Shortcodes'
 tags: ['shortcodes', 'privacy']
 ---

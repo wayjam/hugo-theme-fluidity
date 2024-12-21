@@ -2,7 +2,7 @@ baseURL: https://example.org/
 languageCode: en
 defaultContentLanguage: en
 title: Example Site
-theme: hugo-theme-fluidity
+theme: fluidity
 enableRobotsTXT: true
 summaryLength: 100 # Configure how long the post summary should be on the homepage.
 hasCJKLanguage: false
@@ -14,7 +14,15 @@ pygmentsCodefences: true
 
 outputs:
   home:
-    - html
+  - html
+  - rss
+  section:
+  - html
+  - rss
+  taxonomy:
+  - html
+  term:
+  - html
 
 menus:
   # Menu: Configure the menu items on the header.
@@ -80,7 +88,7 @@ params:
   # Page size
   pageSize:
     home: 5
-    list: 10
+    list: 5
     archives: 20
 
   # Social links
@@ -100,11 +108,11 @@ params:
     disabled: false
     disableCommentByType:
       - page
-    thirdPartyComment: |
-      this is your comment script
+    thirdParty: |
+      your comment script will be loaded here
 
   # Search
   search:
     disabled: false
-    provider: pagefind # available: google, pagefind
+    provider: pagefind #available: google, pagefind
 
