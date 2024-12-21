@@ -73,13 +73,19 @@ params:
 
 #### PageFind
 
+1. Step 1: Set the provider to pagefind
+
 ```yaml
 params:
   search:
     provider: pagefind
 ```
 
-Create a pagefind config file, for example <exampleSite/pagefind.yml>
+2. Create a pagefind config file, for example <exampleSite/pagefind.yml>
+ 
+3. Install pagefind: `npm i pagefind`
+
+4. Run pagefind before every build: `npx pagefind`
 
 ## Credits
 

@@ -3,7 +3,6 @@
   "comments": {
     "dependencies": {},
     "devDependencies": {
-      "@fluentui/web-components": "project",
       "@tailwindcss/cli": "project",
       "@tailwindcss/typography": "project",
       "prettier": "project",
@@ -14,7 +13,6 @@
   "dependencies": {},
   "description": "A fluid and responsive Hugo theme.",
   "devDependencies": {
-    "@fluentui/web-components": "^3.0.0-beta.73",
     "@tailwindcss/cli": "^4.0.0-beta.4",
     "@tailwindcss/typography": "^0.5.15",
     "prettier": "^3.4.1",

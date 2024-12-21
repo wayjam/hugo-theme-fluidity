@@ -1,27 +1,32 @@
 {{- /*
-For a given taxonomy, renders a list of terms assigned to the page.
+  For a given taxonomy, renders a list of terms assigned to the page.
 
-@context {page} page The current page.
-@context {string} taxonomy The taxonomy.
+  @context {page} page The current page.
+  @context {string} taxonomy The taxonomy.
 
-@example: {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+  @example: {{ partial "terms.html" (dict "taxonomy" "tags" "page" .)
+}}
 */}}
-
 {{- $page := .page }}
 {{- $taxonomy := .taxonomy }}
 
 {{- with $page.GetTerms $taxonomy }}
-  <div class="flex flex-wrap gap-2">
-    <span class="text-gray-500 dark:text-gray-400">{{ partial "utils/icon.html" (dict "icon" "tags") }}</span>
+  <div class="flex flex-wrap gap-2 items-center">
+    <span class="text-neutral-600 dark:text-neutral-400">
+      {{ partial "utils/icon.html" (dict "icon" "tags") }}
+    </span>
     {{- range . }}
-      <a href="{{ .RelPermalink }}" class="no-underline">
-        <fluent-badge 
-          class="p-1"
-          size="medium"
-          shape="rounded" 
-          class="hover:brightness-110 transition-all">
-          {{ .LinkTitle }}
-        </fluent-badge>
+      <a
+        href="{{ .RelPermalink }}"
+        class="group inline-flex items-center rounded-md px-2 py-0.5 text-sm
+          bg-neutral-50 dark:bg-neutral-800 
+          text-neutral-900 dark:text-neutral-300
+          hover:bg-blue-50 dark:hover:bg-blue-900/30
+          hover:text-blue-600 dark:hover:text-blue-300
+          ring-1 ring-neutral-400/50 dark:ring-neutral-700
+          hover:ring-blue-500/50 dark:hover:ring-blue-400/30
+          transition-all duration-200">
+        {{ .LinkTitle }}
       </a>
     {{- end }}
   </div>

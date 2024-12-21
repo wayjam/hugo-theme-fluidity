@@ -1,6 +1,6 @@
 {{ $data := (dict "res" . )}}
 
-{{ with (templates.Defer (dict "key" "global" "data" $data)) }}
+{{ with (templates.Defer (dict "key" $data.res.Name "data" $data)) }}
 {{ $t := debug.Timer "tailwindcss" }}
 {{ with .res }}
   {{ $opts := dict

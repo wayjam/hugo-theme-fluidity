@@ -2,11 +2,11 @@
   <div class="container mx-auto px-4 py-8 space-y-8">
     <!-- Header section -->
     <div class="mb-8">
-      <h1 class="text-3xl font-semibold text-gray-900 dark:text-white mb-2">
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
         <span class="inline-block mr-1">{{ partial "utils/icon.html" (dict "icon" "collection") }}</span>
         {{ .Title }}
       </h1>
-      <p class="text-gray-700 dark:text-gray-300">
+      <p class="text-base text-neutral-600 dark:text-neutral-400">
         {{ len .Pages }}
         {{ i18n "article" | default "articles" }}
       </p>
@@ -18,94 +18,9 @@
       {{ $paginator := .Paginate .Pages $pageSize }}
       {{ if $paginator }}
         <div
-          class="bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl divide-y divide-gray-200 dark:divide-gray-700">
+          class="bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-800 rounded-xl divide-y divide-neutral-200 dark:divide-neutral-700">
           {{- range $paginator.Pages }}
-            <div
-              class="hover:bg-gray-50 dark:hover:bg-gray-700/50 transition-all duration-200 first:rounded-t-xl last:rounded-b-xl">
-              <a href="{{ .Permalink | relURL }}" class="block">
-                <div class="px-4 py-3">
-                  <div class="flex justify-between items-center gap-4">
-                    <!-- Left content -->
-                    <div class="space-y-2 flex-grow">
-                      <h3
-                        class="text-base font-semibold text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
-                        {{ .Title }}
-                      </h3>
-                      <div class="flex items-center flex-wrap gap-x-3 gap-y-1">
-                        <!-- Categories -->
-                        {{ $hasCategories := false }}
-                        {{ if ne $.Kind "taxonomy" }}
-                          {{ with .Params.categories }}
-                            {{ $hasCategories = true }}
-                            {{ range first 1 . }}
-                              <span
-                                class="inline-flex items-center px-2.5 py-1 rounded-md text-xs 
-                                         bg-primary-50 dark:bg-primary-900/30 
-                                         text-gray-700 dark:text-gray-300
-                                         border border-gray-400 dark:border-primary-800">
-                                {{ . }}
-                              </span>
-                            {{ end }}
-                          {{ end }}
-                        {{ end }}
-
-
-                        <!-- Tags -->
-                        {{ $hasTags := false }}
-                        {{ if and (ne $.Kind "taxonomy") (ne $.Kind "term") }}
-                          {{ with .Params.tags }}
-                            {{ $hasTags = true }}
-                            {{ if $hasCategories }}
-                              <span class="h-3 w-px bg-gray-200 dark:bg-gray-700"></span>
-                            {{ end }}
-                            <div class="flex flex-wrap gap-1.5">
-                              {{ range first 3 . }}
-                                <span
-                                  class="inline-flex items-center px-2 py-0.5 rounded-full text-xs 
-                                           bg-gray-100 dark:bg-gray-800 
-                                           text-gray-700 dark:text-gray-300
-                                           border border-gray-200 dark:border-gray-700">
-                                  {{ . }}
-                                </span>
-                              {{ end }}
-                              {{ if gt (len .) 3 }}
-                                {{ $tagID := printf "tags-%d" ($.Permalink | relURL | hash.FNV32a) }}
-                                <span id="{{ $tagID }}" class="text-xs text-gray-600 dark:text-gray-400">
-                                  +{{ sub (len .) 3 }}
-                                </span>
-                                <fluent-tooltip anchor="{{ $tagID }}">
-                                  <span class="text-xs text-gray-700 dark:text-gray-300 px-2 py-2">
-                                    {{ delimit . ", " }}
-                                  </span>
-                                </fluent-tooltip>
-                              {{ end }}
-                            </div>
-                          {{ end }}
-                        {{ end }}
-
-
-                        <!-- Reading time -->
-                        {{ if .ReadingTime }}
-                          {{ if or $hasTags $hasCategories }}
-                            <span class="h-3 w-px bg-gray-200 dark:bg-gray-700"></span>
-                          {{ end }}
-                          <span class="text-sm text-gray-600 dark:text-gray-400">
-                            {{ i18n "readingTime" .ReadingTime }}
-                          </span>
-                        {{ end }}
-                      </div>
-                    </div>
-
-                    <!-- Right date -->
-                    <time
-                      datetime="{{ .PublishDate.Format "2006-01-02" }}"
-                      class="text-sm text-gray-600 dark:text-gray-400 whitespace-nowrap self-center">
-                      {{ .PublishDate.Format "January 02, 2006" }}
-                    </time>
-                  </div>
-                </div>
-              </a>
-            </div>
+            {{- partial "partials/archive-article.html" . }}
           {{ end }}
         </div>
       {{ end }}

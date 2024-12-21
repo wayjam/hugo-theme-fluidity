@@ -1,29 +1,30 @@
-<div class="container mx-auto px-4">
-  <div class="flex justify-between items-center p-4 h-16">
-    <h1 class="text-2xl">
-      <a href="{{ .Site.BaseURL }}" class="flex items-center gap-2 font-semibold">
-        {{ if .Site.Params.logo }}
-          <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" class="w-8 h-8" />
-        {{ end }}
-        <span
-          class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
-          {{ .Site.Title }}
-        </span>
-      </a>
-    </h1>
+<div class="bg-neutral-100/50 dark:bg-neutral-700 shadow-sm">
+  <div class="container mx-auto">
+    <div class="flex justify-between items-center py-5">
+      <h1 class="text-2xl">
+        <a href="{{ .Site.BaseURL }}" class="flex items-center gap-2 font-semibold">
+          {{ if .Site.Params.logo }}
+            <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" class="w-8 h-8" />
+          {{ end }}
+          <span class="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-teal-400">
+            {{ .Site.Title }}
+          </span>
+        </a>
+      </h1>
 
-    <div class="flex items-center gap-4">
-      {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
-      <button
-        id="theme-toggle"
-        class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800">
-        <div id="theme-toggle-dark-icon" class="hidden">
-          {{ partial "utils/icon.html" (dict "icon" "moon") }}
-        </div>
-        <div id="theme-toggle-light-icon" class="hidden">
-          {{ partial "utils/icon.html" (dict "icon" "sun") }}
-        </div>
-      </button>
+      <div class="flex items-center gap-4">
+        {{ partial "menu.html" (dict "menuID" "main" "page" .) }}
+        <button
+          id="theme-toggle"
+          class="p-2 rounded-lg text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-800 cursor-pointer">
+          <div id="theme-toggle-dark-icon" class="hidden">
+            {{ partial "utils/icon.html" (dict "icon" "moon") }}
+          </div>
+          <div id="theme-toggle-light-icon" class="hidden">
+            {{ partial "utils/icon.html" (dict "icon" "sun") }}
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </div>

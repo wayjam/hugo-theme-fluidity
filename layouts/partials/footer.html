@@ -3,32 +3,20 @@
     <div class="grid md:grid-cols-4 gap-8">
       <!-- About Section -->
       <div class="col-span-2">
-        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">{{ i18n "about" | strings.Title }}</h3>
-        <p class="text-gray-700 dark:text-gray-300 mb-4 italic">
-          {{ .Site.Params.description | default "" }}
+        <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
           {{ if (where .Site.RegularPages "Layout" "==" "about") }}
             <a
               href="{{ "about" | relURL }}"
               class="inline-flex items-center underline text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 transition-colors duration-200">
-              ({{ i18n "page" | default "page" }})
+              {{ i18n "about" | strings.Title }}
             </a>
+          {{ else }}
+            {{ i18n "about" | strings.Title }}
           {{ end }}
+        </h3>
+        <p class="text-gray-700 dark:text-gray-300 mb-4 italic">
+          {{ .Site.Params.description | default "" }}
         </p>
-        <fluent-divider role="separator" appearance="subtle" class="p-1"></fluent-divider>
-        <fluent-text class="text-gray-500 dark:text-gray-400 mb-4 text-sm font-mono">
-          Site built with
-          <a class="italic" rel="nofollow" target="_blank" href="https://gohugo.io" title="Built with hugo">Hugo</a>
-          , using theme
-          <a
-            class="italic"
-            rel="nofollow"
-            target="_blank"
-            href="https://github.com/wayjam/hugo-theme-fludity"
-            title="Hugo Theme Fludity">
-            Fludity
-          </a>
-          .
-        </fluent-text>
       </div>
 
       <!-- Categories Section -->
@@ -98,7 +86,9 @@
                 target="_blank"
                 rel="noopener noreferrer"
                 class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
-                <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "github") }}</span>
+                <span class="inline-block mr-1 dark:text-gray-500">
+                  {{ partial "utils/icon" (dict "icon" "github") }}
+                </span>
                 GitHub
               </a>
             </li>
@@ -119,11 +109,38 @@
       </div>
     </div>
 
+    <span class="relative flex justify-center my-4">
+      <div
+        class="absolute inset-x-0 top-1/2 h-[1px] -translate-y-1/2 bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-600 to-transparent opacity-90 blur-[0.5px]"></div>
+
+      <span
+        class="relative z-10 bg-white dark:bg-gray-800 px-6 text-gray-400 dark:text-gray-500 text-xs font-mono italic backdrop-blur-sm">
+        Site built with
+        <a
+          rel="nofollow"
+          class="underline decoration-blue-500[.33]"
+          target="_blank"
+          href="https://gohugo.io"
+          title="Built with hugo">
+          Hugo
+        </a>
+        &&
+        <a
+          class="underline decoration-blue-500[.33]"
+          rel="nofollow"
+          target="_blank"
+          href="https://github.com/wayjam/hugo-theme-fluidity"
+          title="Hugo Theme Fludity">
+          Theme Fludity
+        </a>
+      </span>
+    </span>
+
     <!-- Copyright -->
-    <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-800">
+    <div class="">
       <p class="text-center text-gray-600 dark:text-gray-400 font-sans">
         &copy; {{ now.Year }} {{ .Site.Title }}.
-        {{ i18n "allRightsReserved" | default "All rights reserved." }}
+        {{ i18n "allRightsReserved" | default "All rights reserved." | title }}
       </p>
     </div>
   </div>

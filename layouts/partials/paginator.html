@@ -2,19 +2,30 @@
 {{ if $pag }}
   {{ if gt $pag.TotalPages 1 }}
     <div id="pagination">
-      <nav class="mt-12 flex justify-center items-center gap-2">
-        {{ if $pag.HasPrev }}
-          <fluent-anchor-button appearance="ghost" href="{{ $pag.Prev.URL }}" aria-label="{{ i18n "previous" }}">
-            {{ partial "utils/icon.html" (dict "icon" "arrow-left") }}
-            {{ i18n "previous" }}
-          </fluent-anchor-button>
-        {{ else }}
-          <fluent-button appearance="ghost" disabled>{{ i18n "previous" }}</fluent-button>
-        {{ end }}
-        <ul class="flex gap-1">
+      <nav class="mt-8 flex justify-center items-center gap-3" aria-label="Pagination">
+        <!-- Previous button -->
+        <a
+          aria-label="{{ i18n "previous" }}"
+          {{ if $pag.HasPrev }}
+            href="{{ $pag.Prev.URL }}"
+          {{ else }}
+            disabled
+          {{ end }}
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200
+            {{ if $pag.HasPrev }}
+            bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
+            dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
+          {{ else }}
+            bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed
+          {{ end }} 
+            ">
+          {{ partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") }}
+        </a>
+
+        <!-- Page numbers -->
+        <div class="flex items-center gap-1">
           {{ $ellipsed := false }}
           {{ $shouldEllipse := false }}
-
           {{ range $pag.Pagers }}
             {{ $right := sub .TotalPages .PageNumber }}
             {{ $showNumber := or (le .PageNumber 3) (eq $right 0) }}
@@ -30,42 +41,49 @@
             {{ end }}
 
             {{ if $showNumber }}
-              <li>
+              <a
+                href="{{ .URL }}"
                 {{ if $isCurrent }}
-                  <fluent-button
-                    class="border border-neutral-200 dark:border-neutral-700"
-                    size="medium"
-                    appearance="primary"
-                    disabled
-                    aria-label="Current Page {{ .PageNumber }}">
-                    {{ .PageNumber }}
-                  </fluent-button>
+                  aria-current="page" aria-label="Current Page {{ .PageNumber }}"
                 {{ else }}
-                  <fluent-anchor-button
-                    class="border border-neutral-200 dark:border-neutral-700"
-                    href="{{ .URL }}"
-                    size="medium"
-                    appearance="outline"
-                    aria-label="Go to Page {{ .PageNumber }}">
-                    {{ .PageNumber }}
-                  </fluent-anchor-button>
+                  aria-label="Go to Page {{ .PageNumber }}"
                 {{ end }}
-              </li>
+                class="inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 rounded-lg transition-colors duration-200
+                  {{ if $isCurrent }}
+                  bg-blue-600 dark:bg-blue-700 text-white dark:text-white font-medium
+                {{ else }}
+                  bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
+                  dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
+                {{ end }}
+                  ">
+                {{ .PageNumber }}
+              </a>
             {{ else if $shouldEllipse }}
-              <li class="flex items-center px-2">
-                <span aria-hidden="true">&hellip;</span>
-              </li>
+              <span class="inline-flex items-center justify-center px-3 text-neutral-600 dark:text-neutral-400">
+                &hellip;
+              </span>
             {{ end }}
           {{ end }}
-        </ul>
-        {{ if $pag.HasNext }}
-          <fluent-anchor-button appearance="ghost" href="{{ $pag.Next.URL }}" aria-label="{{ i18n "next" }}">
-            {{ i18n "next" }}
-            {{ partial "utils/icon.html" (dict "icon" "arrow-right") }}
-          </fluent-anchor-button>
-        {{ else }}
-          <fluent-button appearance="ghost" disabled>{{ i18n "next" }}</fluent-button>
-        {{ end }}
+        </div>
+
+        <!-- Next button -->
+        <a
+          aria-label="{{ i18n "next" }}"
+          {{ if $pag.HasNext }}
+            href="{{ $pag.Next.URL }}"
+          {{ else }}
+            disabled
+          {{ end }}
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200
+          {{ if $pag.HasNext }}
+            bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
+            dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
+          {{ else }}
+            bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed
+          {{ end }} 
+            ">
+          {{ partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") }}
+        </a>
       </nav>
     </div>
   {{ end }}

@@ -1,6 +1,3 @@
-import { setTheme } from '@fluentui/web-components'
-import { webLightTheme, webDarkTheme } from '@fluentui/tokens'
-
 function setupTheme() {
 	const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon')
 	const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon')
@@ -8,9 +5,6 @@ function setupTheme() {
 
 	// Set theme and sync with system
 	function setThemeAndSync(isDark) {
-		const themeName = isDark ? webDarkTheme : webLightTheme
-		// Keep web component theme setting
-		setTheme(themeName)
 		// Sync with .dark class
 		document.documentElement.classList.toggle('dark', isDark)
 		// document.documentElement.setAttribute('data-mode', isDark ? 'dark' : 'light');
@@ -72,9 +66,85 @@ function setupToc() {
 	}
 }
 
+function setupTabs() {
+	const tabButtons = document.querySelectorAll('.tab-button')
+	const tabContents = document.querySelectorAll('.tab-content')
+	const tabSelect = document.querySelector('select#Tab')
+
+	function switchTab(tabId) {
+		// Hide all tab contents
+		tabContents.forEach(content => {
+			content.classList.add('hidden')
+		})
+
+		// Show selected tab content
+		const selectedContent = document.getElementById(tabId)
+		if (selectedContent) {
+			selectedContent.classList.remove('hidden')
+		}
+
+		// Update tab button states
+		tabButtons.forEach(button => {
+			const isSelected = button.dataset.tab === tabId
+			button.setAttribute('aria-selected', isSelected)
+
+			// Remove all state classes first
+			/* for tailwind
+			border-blue-500 border-transparent
+			text-blue-600 dark:text-blue-400
+			text-neutral-600 dark:text-neutral-400
+			text-neutral-900 dark:text-neutral-300
+			hover:border-blue-500 hover:text-neutral-900 dark:hover:text-neutral-300
+  			*/
+			button.classList.remove(
+				'border-blue-500',
+				'border-transparent',
+				'text-blue-600',
+				'dark:text-blue-400',
+				'text-neutral-600',
+				'dark:text-neutral-400',
+			)
+
+			// Apply active or inactive states
+			if (isSelected) {
+				button.classList.add('border-blue-500', 'text-neutral-900', 'dark:text-neutral-300')
+			} else {
+				button.classList.add('border-transparent', 'text-neutral-600', 'dark:text-neutral-400')
+			}
+		})
+
+		// Update mobile select if it exists
+		if (tabSelect) {
+			tabSelect.value = tabId.charAt(0).toUpperCase() + tabId.slice(1)
+		}
+	}
+
+	// Handle tab button clicks
+	tabButtons.forEach(button => {
+		button.addEventListener('click', e => {
+			e.preventDefault()
+			switchTab(button.dataset.tab)
+		})
+	})
+
+	// Handle mobile select changes
+	if (tabSelect) {
+		tabSelect.addEventListener('change', e => {
+			switchTab(e.target.value.toLowerCase())
+		})
+	}
+
+	// Show initial tab
+	const initialTab = tabButtons[0]?.dataset.tab
+	if (initialTab) {
+		switchTab(initialTab)
+	}
+}
+
 function init() {
 	setupTheme()
 	setupToc()
+	setupTabs()
 }
 
 // Initialize theme when DOM is loaded

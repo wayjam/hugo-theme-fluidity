@@ -1,5 +1,5 @@
 <!-- refer to https://gohugo.io/content-management/comments/ -->
-{{ with .Site.Params.thirdPartyComment }}
+{{ with .Site.Params.comment.thirdParty }}
   {{ . | safeHTML }}
 {{ else }}
   {{ template "_internal/disqus.html" . }}

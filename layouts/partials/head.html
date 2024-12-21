@@ -63,6 +63,3 @@
 {{ partialCached "head/css.html" $css "style.css" }}
 {{ "<!-- Script -->" | safeHTML }}
 {{ partialCached "head/js.html" (resources.Get "js/main.js") "main.js" }}{{ "<!-- Components -->" | safeHTML }}
-{{ $components := resources.Match "components/*.js" }}
-{{ $components = $components | resources.Concat "temp.js" | resources.ExecuteAsTemplate "js/components.js" . }}
-{{ partialCached "head/js.html" $components "components.js" }}

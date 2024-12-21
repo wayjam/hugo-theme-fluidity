@@ -16,119 +16,42 @@
       {{ $pageSize := site.Params.pageSize.archives | default 20 }}
       {{ $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize }}
       {{ if $paginator }}
-        <fluent-accordion
-          expand-mode="multi"
-          class="bg-white dark:bg-neutral-800 rounded-xl p-4
-                                                     border border-neutral-200 dark:border-neutral-700">
+        <div
+          class="bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-800 rounded-xl divide-y divide-neutral-200 dark:divide-neutral-700">
           {{ range $paginator.Pages.GroupByPublishDate "January 2006" }}
             {{ if ne .Key "January 0001" }}
-              <fluent-accordion-item heading-level="2" marker-position="start" size="extra-large" block>
-                <div slot="heading" class="flex items-center justify-between w-full py-2">
+              <div>
+                <!-- Header -->
+                <div class="p-4 bg-neutral-100/50 dark:bg-neutral-900">
                   <div class="flex items-center gap-3">
                     <span class="text-xl font-semibold text-neutral-900 dark:text-white">
                       {{- replace .Key "January 0001" "" }}
                     </span>
-                    <fluent-badge appearance="filled" color="brand" shape="circular" size="medium" class="px-2">
-                      {{ len .Pages }}
-                      {{ i18n "article" | default "articles" }}
-                    </fluent-badge>
+                    <div
+                      class="flex items-center space-x-1 text-xs px-2 py-1 bg-blue-500 rounded-full">
+                      <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-200 rounded-full"></div>
+                      <div class="text-white">
+                        {{ len .Pages }}
+                        {{ i18n "article" | default "articles" }}
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <!-- Archive List -->
-                <div
-                  class="bg-white dark:bg-neutral-800 
-                              border-y border-neutral-200 dark:border-neutral-700 
-                              divide-y divide-neutral-200 dark:divide-neutral-700">
-                  {{- range .Pages }}
-                    {{- if eq .Kind "page" }}
-                      {{ $article := . }}
-                      <div
-                        class="hover:bg-neutral-50 dark:hover:bg-neutral-700/50 
-                                    transition-all duration-200 first:rounded-t-xl last:rounded-b-xl">
-                        <a href="{{ .Permalink | relURL }}" class="block">
-                          <div class="px-4 py-3">
-                            <div class="flex justify-between items-center gap-4">
-                              <!-- Left content -->
-                              <div class="space-y-2 flex-grow">
-                                <h3
-                                  class="text-base font-medium text-neutral-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
-                                  {{ .Title }}
-                                </h3>
-                                <div class="flex items-center flex-wrap gap-x-3 gap-y-1">
-                                  <!-- Categories -->
-                                  {{ with $article.Params.categories }}
-                                    {{ range first 1 . }}
-                                      <span
-                                        class="inline-flex items-center px-2.5 py-1 rounded-md text-xs 
-                                      bg-primary-50 dark:bg-primary-900/30 
-                                      text-gray-700 dark:text-gray-300
-                                      border border-gray-400 dark:border-primary-800">
-                                        {{ . }}
-                                      </span>
-                                    {{ end }}
-                                    {{ if $article.Params.tags }}
-                                      <span class="h-3 w-px bg-gray-200 dark:bg-gray-700"></span>
-                                    {{ end }}
-                                  {{ end }}
-
-
-                                  <!-- Tags -->
-                                  {{ with $article.Params.tags }}
-                                    <div class="flex flex-wrap gap-1.5">
-                                      {{ range first 3 . }}
-                                        <span
-                                          class="inline-flex items-center px-2 py-0.5 rounded-full text-xs 
-                                                     bg-gray-100 dark:bg-gray-800 
-                                                     text-gray-700 dark:text-gray-300
-                                                     border border-gray-200 dark:border-gray-700">
-                                          {{ . }}
-                                        </span>
-                                      {{ end }}
-                                      {{ if gt (len .) 3 }}
-                                        {{ $tagID := printf "tags-%d" ($article.Permalink | relURL | hash.FNV32a) }}
-                                        <span id="{{ $tagID }}" class="text-xs text-gray-600 dark:text-gray-400">
-                                          +{{ sub (len .) 3 }}
-                                        </span>
-                                        <fluent-tooltip anchor="{{ $tagID }}">
-                                          <span class="text-xs text-gray-700 dark:text-gray-300 px-2 py-2">
-                                            {{ delimit . ", " }}
-                                          </span>
-                                        </fluent-tooltip>
-                                      {{ end }}
-                                    </div>
-                                    {{ if $article.ReadingTime }}
-                                      <span class="h-3 w-px bg-gray-200 dark:bg-gray-700"></span>
-                                    {{ end }}
-                                  {{ end }}
-
-
-                                  <!-- Reading time -->
-                                  {{ if $article.ReadingTime }}
-                                    <span class="text-sm text-gray-600 dark:text-gray-400">
-                                      {{ $article.ReadingTime }} min read
-                                    </span>
-                                  {{ end }}
-                                </div>
-                              </div>
-
-                              <!-- Right date -->
-                              <time
-                                datetime="{{ .PublishDate.Format "2006-01-02" }}"
-                                class="text-sm font-normal text-neutral-500 dark:text-neutral-400 whitespace-nowrap self-center">
-                                {{ .PublishDate.Format "January 02, 2006" }}
-                              </time>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-                    {{ end }}
-                  {{ end }}
+                <!-- Content -->
+                <div class="border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900">
+                  <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
+                    {{- range .Pages }}
+                      {{- if eq .Kind "page" }}
+                        {{- partial "partials/archive-article.html" . }}
+                      {{- end }}
+                    {{- end }}
+                  </div>
                 </div>
-              </fluent-accordion-item>
+              </div>
             {{ end }}
           {{ end }}
-        </fluent-accordion>
+        </div>
       {{ end }}
     </div>
 

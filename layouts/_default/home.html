@@ -4,6 +4,7 @@
   {{ if gt (len site.Params.mainSections) 1 }}{{ $showSection = true }}{{ end }}
   {{ $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize }}
 
+
   <div class="container mx-auto px-4 py-8">
     {{ if $paginator.Pages }}
       {{ if eq $paginator.PageNumber 1 }}
@@ -12,7 +13,7 @@
         {{ end }}
 
         {{ if gt (len $paginator.Pages) 1 }}
-          <div class="columns-1 md:columns-2 gap-6 space-y-6 [&>*:first-child]:mt-0">
+          <div class="columns-1 md:columns-2 gap-8 space-y-8 [&>*:first-child]:mt-0">
             {{ range $index, $item := after 1 $paginator.Pages }}
               {{ $index := add $index 1 }}
               {{- partial "inline/home/article.html" (dict "item" $item "showSection" $showSection "isFirst" false) }}
@@ -20,7 +21,7 @@
           </div>
         {{ end }}
       {{ else }}
-        <div class="columns-1 md:columns-2 gap-6 space-y-6 [&>*:first-child]:mt-0">
+        <div class="columns-1 md:columns-2 gap-8 space-y-8 [&>*:first-child]:mt-0">
           {{ range $paginator.Pages }}
             {{- partial "inline/home/article.html" (dict "item" . "showSection" $showSection "isFirst" false) }}
           {{ end }}
@@ -42,68 +43,78 @@
   <div
     class="break-inside-avoid mb-6 last:mb-0
       bg-white dark:bg-neutral-900 rounded-lg p-6 
-      border border-neutral-200/80 dark:border-neutral-800
-      hover:bg-neutral-50/50 dark:hover:bg-neutral-800/50  
-      transition-all duration-300 ease-out
+      border 
       {{ if $isFirst }}
-      mb-12 hover:shadow-lg hover:-translate-y-1 motion-safe:hover:scale-[1.01]
+      mb-12 border-neutral-400 dark:border-neutral-700 hover:shadow-md hover:-translate-y-1 motion-safe:hover:scale-[1.01]
     {{ else }}
-      hover:shadow-md hover:-translate-y-0.5 motion-safe:hover:scale-[1.005]
-    {{ end }}">
+      border-neutral-400/50 dark:border-neutral-800 hover:shadow-sm hover:-translate-y-0.5 motion-safe:hover:scale-[1.005]
+    {{ end }}
+      hover:bg-neutral-50 dark:hover:bg-neutral-800/60
+      transition-all duration-300 ease-out">
     <article class="flex flex-col gap-4">
       <div class="flex justify-between items-center">
         <time
           datetime="{{ $item.Date.Format "2006-01-02T15:04:05Z0700" }}"
-          class="text-sm text-neutral-500 dark:text-neutral-400">
+          class="text-sm text-neutral-600 dark:text-neutral-400">
           {{ $item.Date.Format "January 02, 2006" }}
         </time>
         {{ if $showSection }}
-          <span
-            class="inline-flex items-center px-2.5 py-0.5 rounded-full
-                       text-xs font-medium bg-neutral-50 dark:bg-neutral-800
-                       text-neutral-600 dark:text-neutral-300">
-            <a href="{{ $item.Section | relURL }}">{{ $item.Section }}</a>
-          </span>
+          <a
+            href="{{ $item.Section | relURL }}"
+            class="inline-flex items-center px-2 py-1 rounded-md
+              text-xs font-medium 
+              bg-blue-50 dark:bg-blue-900/30 
+              text-blue-600 dark:text-blue-300
+              hover:bg-blue-100 dark:hover:bg-blue-800/40 
+              transition-colors duration-200">
+            {{ $item.Section }}
+          </a>
         {{ end }}
       </div>
+
       <h3
-        class="{{ if $isFirst }}
+        class="
+        {{ if $isFirst }}
           text-2xl md:text-3xl
         {{ else }}
           text-xl md:text-2xl
         {{ end }}
-               font-bold
-               text-neutral-900 dark:text-white
-               tracking-tight
-               leading-tight">
-        <a href="{{ $item.Permalink | relURL }}">{{ $item.Title }}</a>
+        font-bold
+        text-neutral-900 dark:text-white
+        tracking-tight
+        leading-tight">
+        <a
+          href="{{ $item.Permalink | relURL }}"
+          class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+          {{ $item.Title }}
+        </a>
       </h3>
+
       <div
-        class="text-neutral-600 dark:text-neutral-400 
-                  leading-relaxed
-                  {{ if $isFirst }}
-          text-base
-        {{ else }}
-          text-sm
-        {{ end }}">
+        class="
+        text-neutral-700 dark:text-neutral-300 
+        leading-relaxed
+        text-base">
         {{ $item.Summary | safeHTML }}
         {{ if $item.Truncated }}
           <span class="hellip">&hellip;</span>
         {{ end }}
       </div>
+
       <div class="mt-2">
-        <fluent-anchor-button
-          class="border border-neutral-200 dark:border-neutral-700"
+        <a
           href="{{ $item.Permalink | relURL }}"
-          size="medium"
-          appearance="{{ if $isFirst }}
-            primary
+          class="inline-flex items-center justify-center px-4 h-9 text-sm font-medium rounded-lg
+            {{ if $isFirst }}
+            bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500
           {{ else }}
-            outline
-          {{ end }}"
-          aria-label="{{ i18n "readMore" | upper }}">
-          {{ i18n "readMore" }}
-        </fluent-anchor-button>
+            bg-white text-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300
+            dark:hover:bg-neutral-700 ring-1 ring-neutral-300 dark:ring-neutral-600
+          {{ end }}
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
+            transition-colors duration-200">
+          {{ i18n "readMore" | strings.Title }}
+        </a>
       </div>
     </article>
   </div>

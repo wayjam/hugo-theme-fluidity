@@ -1,20 +1,50 @@
-/* Background style */
-.bg {
-  background-color: transparent;
+@layer highlight {
+  :root {
+    /* Base text colors */
+    --highlight-color-text: var(--color-neutral-800);
+    --highlight-color-text-1: var(--color-neutral-700);
+    --highlight-color-text-2: var(--color-neutral-600);
+    
+    /* Semantic colors */
+    --highlight-color-err: var(--color-red-500);
+    --highlight-color-warning: var(--color-yellow-400);
+    --highlight-color-success: var(--color-green-500);
+    --highlight-color-info: var(--color-blue-600);
+    
+    /* Primary colors */
+    --highlight-color-primary: var(--color-blue-600);
+    --highlight-color-primary-light: var(--color-blue-500);
+  }
+
+  .dark {
+    /* Dark theme overrides */
+    --highlight-color-text: var(--color-neutral-200);
+    --highlight-color-text-1: var(--color-neutral-300);
+    --highlight-color-text-2: var(--color-neutral-400);
+    
+    --highlight-color-err: var(--color-red-400);
+    --highlight-color-warning: var(--color-yellow-300);
+    --highlight-color-success: var(--color-green-400);
+    --highlight-color-info: var(--color-blue-400);
+    
+    --highlight-color-primary: var(--color-blue-400);
+    --highlight-color-primary-light: var(--color-blue-300);
+  }
 }
+
 .chroma {
   background-color: transparent;
 }
 
 /* Basic elements */
 .chroma .cl {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 }
 .chroma .x {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 }
 .chroma .err {
-  @apply text-[rgb(var(--color-error))];
+  color: var(--highlight-err);
 }
 
 /* Line handling */
@@ -23,15 +53,14 @@
 }
 .chroma .lntd {
   @apply align-top m-0 border-0;
-  padding: 0 calc(var(--spacing) * 0);
+  padding: 0 calc(var(--highlight-spacing) * 0);
 }
 .chroma .lntable {
   @apply border-spacing-0 p-0 m-0 border-0;
 }
 .chroma .hl {
-  @apply bg-[rgb(var(--color-primary))]/5 
-         dark:bg-[rgb(var(--color-primary))]/10
-         relative;
+  @apply relative;
+  background-color: var(--highlight-primary);
 }
 .chroma .hl::before {
   @apply content-['']
@@ -39,89 +68,89 @@
          left-0
          top-0
          bottom-0
-         w-1
-         bg-[rgb(var(--color-primary))]/30;
+         w-1;
+  background-color: var(--highlight-primary);
 }
 .chroma .lnt,
 .chroma .ln {
-  @apply text-[rgb(var(--color-neutral-4))]
-         select-none
+  @apply select-none
          mr-4
          px-4
          py-0
          whitespace-pre;
+  color: var(--highlight-color-text-2);
 }
 .chroma .line {
   @apply flex;
 }
 
-.highlight>.chroma .lntd:first-child {
+.highlight > .chroma .lntd:first-child {
   width: 48px;
 }
 
 /* Names - Fluent Design 2 style */
 .chroma .n {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 } /* variable name */
 .chroma .na {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* attribute name */
 .chroma .nb {
-  @apply text-[rgb(var(--color-primary))];
+  color: var(--highlight-color-primary);
 } /* built-in name */
 .chroma .bp {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* built-in name pseudo */
 .chroma .nc {
-  @apply text-[rgb(var(--color-primary-light))];
+  color: var(--highlight-color-primary-light);
 } /* class name */
 .chroma .no {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* constant name */
 .chroma .nd {
-  @apply text-[rgb(var(--color-primary))];
+  color: var(--highlight-color-primary);
 } /* decorator name */
 .chroma .ni {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* entity name */
 .chroma .ne {
-  @apply text-[rgb(var(--color-error))];
+  color: var(--highlight-color-err);
 } /* exception name */
 .chroma .nf {
-  @apply text-[rgb(var(--color-primary))];
+  color: var(--highlight-color-primary);
 } /* function name */
 .chroma .fm {
-  @apply text-[rgb(var(--color-primary))];
+  color: var(--highlight-color-primary);
 } /* method name */
 .chroma .nl {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* label name */
 .chroma .nn {
-  @apply text-[rgb(var(--color-primary-light))];
+  color: var(--highlight-color-primary-light);
 } /* namespace name */
 .chroma .nx {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 } /* other name */
 .chroma .py {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* attribute name */
 .chroma .nt {
-  @apply text-[rgb(var(--color-primary))];
+  color: var(--highlight-color-primary);
 } /* HTML/XML tag */
 .chroma .nv {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* variable name */
 .chroma .vc {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* class variable */
 .chroma .vg {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* global variable */
 .chroma .vi {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* instance variable */
 .chroma .vm {
-  @apply text-[rgb(var(--color-info))];
+  color: var(--highlight-color-info);
 } /* magic variable */
 
 /* Keywords - Fluent Design 2 style */
@@ -131,18 +160,18 @@
 .chroma .kn,
 .chroma .kp,
 .chroma .kr {
-  @apply text-[rgb(var(--color-primary))]; /* keyword */
+  color: var(--highlight-color-primary); /* keyword */
 }
 .chroma .kt {
-  @apply text-[rgb(var(--color-primary-light))];
+  color: var(--highlight-color-primary-light);
 } /* type keyword */
 
 /* Literals */
 .chroma .l {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 }
 .chroma .ld {
-  @apply text-[rgb(var(--color-success))];
+  color: var(--highlight-color-success);
 } /* date literal */
 .chroma .s,
 .chroma .sa,
@@ -158,7 +187,7 @@
 .chroma .sr,
 .chroma .s1,
 .chroma .ss {
-  @apply text-[rgb(var(--color-success))]; /* string literal */
+  color: var(--highlight-color-success); /* string literal */
 }
 
 /* Numbers */
@@ -169,20 +198,20 @@
 .chroma .mi,
 .chroma .il,
 .chroma .mo {
-  @apply text-[rgb(var(--color-warning))]; /* number literal */
+  color: var(--highlight-color-warning); /* number literal */
 }
 
 /* Operators */
 .chroma .o {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 }
 .chroma .ow {
-  @apply text-[rgb(var(--color-primary))];
+  color: var(--highlight-color-primary);
 }
 
 /* Punctuation */
 .chroma .p {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 }
 
 /* Comments */
@@ -191,51 +220,54 @@
 .chroma .cm,
 .chroma .c1,
 .chroma .cs {
-  @apply text-[rgb(var(--color-neutral-4))] /* comment */
-         italic;
+  color: var(--highlight-color-text-2); /* comment */
+  @apply italic;
 }
 .chroma .cp,
 .chroma .cpf {
-  @apply text-[rgb(var(--color-primary))]; /* preprocessor */
+  color: var(--highlight-color-primary); /* preprocessor */
 }
 
 /* Generic */
 .chroma .g {
-  @apply text-[rgb(var(--color-neutral-text))];
+  color: var(--highlight-color-text);
 }
 .chroma .gd {
-  @apply text-[rgb(var(--color-error))];
+  color: var(--highlight-color-err);
 }
 .chroma .ge {
   @apply italic;
 }
 .chroma .gr {
-  @apply text-[rgb(var(--color-error))];
+  color: var(--highlight-color-err);
 }
 .chroma .gh {
-  @apply text-[rgb(var(--color-primary))] font-semibold;
+  color: var(--highlight-color-primary);
+  @apply font-semibold;
 }
 .chroma .gi {
-  @apply text-[rgb(var(--color-success))];
+  color: var(--highlight-color-success);
 }
 .chroma .go {
-  @apply text-[rgb(var(--color-neutral-4))];
+  color: var(--highlight-color-text-2);
 }
 .chroma .gp {
-  @apply text-[rgb(var(--color-neutral-text))] font-semibold;
+  color: var(--highlight-color-text);
+  @apply font-semibold;
 }
 .chroma .gs {
   @apply font-semibold;
 }
 .chroma .gu {
-  @apply text-[rgb(var(--color-info))] font-semibold;
+  color: var(--highlight-color-info);
+  @apply font-semibold;
 }
 .chroma .gt {
-  @apply text-[rgb(var(--color-error))];
+  color: var(--highlight-color-err);
 }
 .chroma .gl {
-  @apply text-[rgb(var(--color-neutral-4))];
+  color: var(--highlight-color-text-2);
 }
 .chroma .w {
-  @apply text-[rgb(var(--color-neutral-3))];
+  color: var(--highlight-color-text-1);
 }

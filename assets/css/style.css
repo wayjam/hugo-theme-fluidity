@@ -9,57 +9,285 @@
 
 @layer base {
   :root {
-    /* Fluent Design 2 Colors */
-    --color-neutral-base: 243 242 241; /* Neutral Base */
-    --color-neutral-1: 250 249 248; /* Neutral Lighter */
-    --color-neutral-2: 234 234 234; /* Neutral Light */
-    --color-neutral-3: 201 201 201; /* Neutral Primary */
-    --color-neutral-4: 161 161 161; /* Neutral Secondary */
-    --color-neutral-5: 96 94 92; /* Neutral Dark */
-    --color-neutral-text: 37 36 35; /* Text color */
+    /* Font Family */
+    --font-family-base: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    --font-family-mono: Consolas, 'Courier New', Courier, monospace;
 
-    /* Fluent Primary Colors */
-    --color-primary: 0 95 184; /* Communication Blue */
-    --color-primary-light: 43 136 216;
-    --color-accent: 140 140 140; /* Gray */
+    /* Font Sizes */
+    --text-xs: 10px;
+    --text-sm: 12px;
+    --text-base: 14px;
+    --text-lg: 16px;
+    --text-xl: 20px;
+    --text-2xl: 24px;
+    --text-3xl: 28px;
+    --text-4xl: 32px;
+    --text-5xl: 40px;
+    --text-6xl: 68px;
 
-    /* Semantic Colors */
-    --color-success: 92 184 92; /* Green */
-    --color-info: 0 120 212; /* Blue */
-    --color-warning: 234 169 0; /* Yellow */
-    --color-error: 205 41 52; /* Red */
+    /* Line Heights */
+    --text-xs--line-height: 14px;
+    --text-sm--line-height: 16px;
+    --text-base--line-height: 20px;
+    --text-lg--line-height: 22px;
+    --text-xl--line-height: 28px;
+    --text-2xl--line-height: 32px;
+    --text-3xl--line-height: 36px;
+    --text-4xl--line-height: 40px;
+    --text-5xl--line-height: 52px;
+    --text-6xl--line-height: 92px;
 
-    /* Typography */
-    --font-family-base: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    --font-family-mono: 'Cascadia Code', Consolas, monospace;
-
-    /* Spacing (Fluent Design 2 uses 4px grid) */
-    --spacing-unit: 4px;
+    /* Font Weights */
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-weight-semibold: 600;
+    --font-weight-bold: 700;
 
     /* Border Radius */
-    --radius-small: 2px;
-    --radius-medium: 4px;
-    --radius-large: 6px;
+    --radius-xs: 2px;
+    --radius-sm: 4px;
+    --radius-md: 6px;
+    --radius-lg: 8px;
+    --radius-xl: 10px;
 
-    /* Elevation/Shadow */
-    --shadow-depth-1: 0 2px 4px rgba(0, 0, 0, 0.14);
-    --shadow-depth-2: 0 4px 8px rgba(0, 0, 0, 0.14);
-    --shadow-depth-3: 0 8px 16px rgba(0, 0, 0, 0.14);
+    /* Spacing */
+    --spacing: 4px;
+
+    /* Shadows */
+    --shadow-2xs: 0 0 2px rgba(0, 0, 0, 0.24), 0 1px 2px rgba(0, 0, 0, 0.28);
+    --shadow-xs: 0 0 2px rgba(0, 0, 0, 0.24), 0 2px 4px rgba(0, 0, 0, 0.28);
+    --shadow-sm: 0 0 2px rgba(0, 0, 0, 0.24), 0 4px 8px rgba(0, 0, 0, 0.28);
+    --shadow-md: 0 0 2px rgba(0, 0, 0, 0.24), 0 8px 16px rgba(0, 0, 0, 0.28);
+    --shadow-lg: 0 0 8px rgba(0, 0, 0, 0.24), 0 14px 28px rgba(0, 0, 0, 0.28);
+    --shadow-xl: 0 0 8px rgba(0, 0, 0, 0.24), 0 32px 64px rgba(0, 0, 0, 0.28);
+    --shadow-2xl: 0 0 2px rgba(0, 0, 0, 0.3), 0 1px 2px rgba(0, 0, 0, 0.25);
+
+    /* Animation Curves */
+    --ease-in: cubic-bezier(1, 0, 1, 1);
+    --ease-out: cubic-bezier(0, 0, 0, 1);
+    --ease-in-out: cubic-bezier(0.33, 0, 0.67, 1);
+
+    /* Breakpoints */
+    --breakpoint-sm: 40rem;
+    --breakpoint-md: 48rem;
+    --breakpoint-lg: 64rem;
+    --breakpoint-xl: 80rem;
+    --breakpoint-2xl: 96rem;
+
+    /* Container Sizes */
+    --container-3xs: 16rem;
+    --container-2xs: 18rem;
+    --container-xs: 20rem;
+    --container-sm: 24rem;
+    --container-md: 28rem;
+    --container-lg: 32rem;
+    --container-xl: 36rem;
+    --container-2xl: 42rem;
+    --container-3xl: 48rem;
+    --container-4xl: 56rem;
+    --container-5xl: 64rem;
+    --container-6xl: 72rem;
+    --container-7xl: 80rem;
+    --container-prose: 65ch;
+
+    /* Gray - Neutral colors based on Fluent 2, from light to dark */
+    --color-gray-50: #faf9f8; /* Lightest */
+    --color-gray-100: #f3f2f1;
+    --color-gray-200: #edebe9;
+    --color-gray-300: #e1dfdd;
+    --color-gray-400: #c8c6c4;
+    --color-gray-500: #a19f9d;
+    --color-gray-600: #605e5c;
+    --color-gray-700: #323130;
+    --color-gray-800: #201f1e;
+    --color-gray-900: #11100f; /* Darkest */
+    --color-gray-950: #000000;
+
+    /* Blue - Brand colors based on Fluent 2, from light to dark */
+    --color-blue-50: #e9f1fb; /* Lightest */
+    --color-blue-100: #cee0f5;
+    --color-blue-200: #9dc3eb;
+    --color-blue-300: #62a0e1;
+    --color-blue-400: #3484d7;
+    --color-blue-500: #0f6cbd;
+    --color-blue-600: #0c5aa0;
+    --color-blue-700: #094884;
+    --color-blue-800: #063768;
+    --color-blue-900: #032546; /* Darkest */
+    --color-blue-950: #001325;
+
+    /* Green - Success colors based on Fluent 2, from light to dark */
+    --color-green-50: #e9f6e9; /* Lightest */
+    --color-green-100: #dff6df;
+    --color-green-200: #9fd89f;
+    --color-green-300: #54b054;
+    --color-green-400: #13a10e;
+    --color-green-500: #107c10;
+    --color-green-600: #054b05;
+    --color-green-700: #023502;
+    --color-green-800: #052505;
+    --color-green-900: #031a03; /* Darkest */
+    --color-green-950: #021402;
+
+    /* Yellow - Warning colors based on Fluent 2, from light to dark */
+    --color-yellow-50: #fff9e6; /* Lightest */
+    --color-yellow-100: #fff4cc;
+    --color-yellow-200: #fde300;
+    --color-yellow-300: #d9bc00;
+    --color-yellow-400: #8a7700;
+    --color-yellow-500: #817400;
+    --color-yellow-600: #4c4400;
+    --color-yellow-700: #463100;
+    --color-yellow-800: #3a2800;
+    --color-yellow-900: #2e1f00; /* Darkest */
+    --color-yellow-950: #231700;
+
+    /* Red - Error colors based on Fluent 2, from light to dark */
+    --color-red-50: #fde6e6; /* Lightest */
+    --color-red-100: #fcd9d9;
+    --color-red-200: #f1bbbc;
+    --color-red-300: #e37d80;
+    --color-red-400: #d13438;
+    --color-red-500: #c50f1f;
+    --color-red-600: #a30a18;
+    --color-red-700: #750712;
+    --color-red-800: #5c050e;
+    --color-red-900: #430309; /* Darkest */
+    --color-red-950: #2a0206;
+
+    /* Brand colors - 使用 Fluent UI 的品牌色 */
+    --color-brand-50: #e9f1fb;
+    --color-brand-100: #cee0f5;
+    --color-brand-200: #9dc3eb;
+    --color-brand-300: #62a0e1;
+    --color-brand-400: #3484d7;
+    --color-brand-500: #0f6cbd;
+    --color-brand-600: #0c5aa0;
+    --color-brand-700: #094884;
+    --color-brand-800: #063768;
+    --color-brand-900: #032546;
+    --color-brand-950: #001325;
+
+    /* Neutral - 基于 Fluent 2 的中性色，从浅到深 */
+    --color-neutral-50: #ffffff; /* White */
+    --color-neutral-100: #faf9f8; /* Grey98 */
+    --color-neutral-200: #f3f2f1; /* Grey96 */
+    --color-neutral-300: #edebe9; /* Grey94 */
+    --color-neutral-400: #e1dfdd; /* Grey90 */
+    --color-neutral-500: #c8c6c4; /* Grey80 */
+    --color-neutral-600: #a19f9d; /* Grey70 */
+    --color-neutral-700: #605e5c; /* Grey40 */
+    --color-neutral-800: #323130; /* Grey20 */
+    --color-neutral-900: #201f1e; /* Grey10 */
+    --color-neutral-950: #000000; /* Black */
   }
 
-  /* Dark theme variables */
+  /* Dark theme overrides can stay as they are */
   .dark {
-    --color-neutral-base: 32 31 30;
-    --color-neutral-1: 50 49 48;
-    --color-neutral-2: 68 67 66;
-    --color-neutral-3: 138 136 134;
-    --color-neutral-4: 161 159 157;
-    --color-neutral-5: 200 198 196;
-    --color-neutral-text: 255 255 255;
+    /* Gray - Dark Theme, from light to dark */
+    --color-gray-50: #f5f5f5; /* Lightest */
+    --color-gray-100: #e6e6e6;
+    --color-gray-200: #d6d6d6;
+    --color-gray-300: #adadad;
+    --color-gray-400: #757575;
+    --color-gray-500: #666666;
+    --color-gray-600: #3d3d3d;
+    --color-gray-700: #333333;
+    --color-gray-800: #1f1f1f;
+    --color-gray-900: #292929; /* Darkest */
+    --color-gray-950: #141414;
 
-    --color-primary: 96 205 255;
-    --color-primary-light: 157 224 255;
-    --color-accent: 118 118 118;
+    /* Blue - Dark Theme, from light to dark */
+    --color-blue-50: #ebf3fc; /* Lightest */
+    --color-blue-100: #cfe4fa;
+    --color-blue-200: #96c6fa;
+    --color-blue-300: #62abf5;
+    --color-blue-400: #479ef5;
+    --color-blue-500: #2886de;
+    --color-blue-600: #0f6cbd;
+    --color-blue-700: #115ea3;
+    --color-blue-800: #0f548c;
+    --color-blue-900: #0c3b5e; /* Darkest */
+    --color-blue-950: #082338;
+
+    /* 状态色 - 成功 */
+    --color-green-50: #052505;
+    --color-green-100: #094509;
+    --color-green-200: #107c10;
+    --color-green-300: #13a10e;
+    --color-green-400: #3db838;
+    --color-green-500: #54b054;
+    --color-green-600: #9fd89f;
+    --color-green-700: #a7e3a5;
+    --color-green-800: #bdd99b;
+    --color-green-900: #9ad29a;
+    --color-green-950: #9fd89f;
+
+    /* 状态色 - 警告 */
+    --color-orange-50: #411200;
+    --color-orange-100: #4a1e04;
+    --color-orange-200: #712d09;
+    --color-orange-300: #8a3707;
+    --color-orange-400: #f7630c;
+    --color-orange-500: #f98845;
+    --color-orange-600: #faa06b;
+    --color-orange-700: #df8e64;
+    --color-orange-800: #efc4ad;
+    --color-orange-900: #fdcfb4;
+    --color-orange-950: #ffddb3;
+
+    /* 状态色 - 危险 */
+    --color-red-50: #3b0509;
+    --color-red-100: #3f1011;
+    --color-red-200: #590815;
+    --color-red-300: #6e0811;
+    --color-red-400: #c50f1f;
+    --color-red-500: #dc626d;
+    --color-red-600: #e37d80;
+    --color-red-700: #d69ca5;
+    --color-red-800: #eeacb2;
+    --color-red-900: #f1bbbc;
+    --color-red-950: #f4bfab;
+
+    /* 文本和背景 */
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #d6d6d6;
+    --color-text-tertiary: #adadad;
+    --color-text-disabled: #5c5c5c;
+    --color-background-primary: #292929;
+    --color-background-secondary: #1f1f1f;
+    --color-background-tertiary: #141414;
+
+    /* 边框 */
+    --color-border-primary: #666666;
+    --color-border-secondary: #525252;
+    --color-border-tertiary: #3d3d3d;
+
+    /* 其他颜色系列也需要类似处理... */
+    --color-indigo-50: #001665;
+    --color-indigo-100: #002c4e;
+    --color-indigo-200: #004377;
+    --color-indigo-300: #115ea3;
+    --color-indigo-400: #0f6cbd;
+    --color-indigo-500: #2886de;
+    --color-indigo-600: #479ef5;
+    --color-indigo-700: #62abf5;
+    --color-indigo-800: #96c6fa;
+    --color-indigo-900: #cfe4fa;
+    --color-indigo-950: #ebf3fc;
+
+    /* Neutral - Dark Theme，从浅到深 */
+    --color-neutral-50: #ffffff; /* White */
+    --color-neutral-100: #f5f5f5; /* Grey96 */
+    --color-neutral-200: #e6e6e6; /* Grey90 */
+    --color-neutral-300: #d6d6d6; /* Grey84 */
+    --color-neutral-400: #adadad; /* Grey68 */
+    --color-neutral-500: #757575; /* Grey46 */
+    --color-neutral-600: #666666; /* Grey40 */
+    --color-neutral-700: #3d3d3d; /* Grey24 */
+    --color-neutral-800: #333333; /* Grey20 */
+    --color-neutral-900: #1f1f1f; /* Grey14 */
+    --color-neutral-950: #000000; /* Black */
   }
 }
 
@@ -67,8 +295,7 @@
   .prose {
     @apply max-w-none;
 
-    @apply 
-      prose-pre:bg-gray-50 
+    @apply prose-pre:bg-gray-50 
       prose-pre:dark:bg-gray-800
       prose-pre:border
       prose-pre:border-gray-200 
@@ -87,7 +314,7 @@
              px-1.5
              py-0.5;
     }
-    
+
     :is(code, blockquote) {
       @apply !font-normal;
     }
@@ -96,8 +323,7 @@
   /* Dark mode styles */
   .dark .prose {
     @apply prose-invert;
-    @apply 
-      prose-code:text-gray-100
+    @apply prose-code:text-gray-100
       prose-pre:bg-gray-800
       prose-pre:text-gray-100;
 
@@ -132,7 +358,34 @@ body {
          antialiased;
 }
 
-
-fluent-tab::before, fluent-tab::after {
+fluent-tab::before,
+fluent-tab::after {
   @apply mt-auto;
+}
+
+.tooltip {
+  @apply invisible absolute;
+}
+
+.has-tooltip:hover .tooltip {
+  @apply visible z-50;
+}
+
+:root {
+  --pagefind-ui-primary: var(--color-brand-500) !important;
+  --pagefind-ui-text: var(--color-neutral-900) !important;
+  --pagefind-ui-background: var(--color-neutral-50) !important;
+  --pagefind-ui-border: var(--color-neutral-200) !important;
+  --pagefind-ui-tag: var(--color-neutral-200) !important;
+  --pagefind-ui-font: var(--font-family-base) !important;
+  --pagefind-ui-border-width: var(--spacing) !important;
+  --pagefind-ui-image-border-radius: var(--radius-md) !important;
+}
+
+.dark {
+  --pagefind-ui-primary: var(--color-brand-500) !important;
+  --pagefind-ui-text: var(--color-neutral-50) !important;
+  --pagefind-ui-background: var(--color-neutral-900) !important;
+  --pagefind-ui-border: var(--color-neutral-800) !important;
+  --pagefind-ui-tag: var(--color-neutral-800) !important;
 }
