@@ -103,10 +103,15 @@ params:
   toc:
     disabled: false
 
+  relatedPosts:
+    disabled: false
+    disableByType:
+      - page
+
   # Comment
   comment:
     disabled: false
-    disableCommentByType:
+    disableByType:
       - page
     thirdParty: |
       your comment script will be loaded here

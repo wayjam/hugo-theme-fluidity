@@ -1,6 +1,7 @@
 ---
 title: "Markdown Syntax"
 date: "2024-11-01"
+author: Hugo Authors
 description: "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
 tags: [
     "markdown",

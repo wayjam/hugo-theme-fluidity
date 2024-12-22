@@ -1,6 +1,6 @@
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-  {{ $related := .Site.RegularPages.Related . | first 3 }}
-  {{ range $related }}
+  {{- $related := .Site.RegularPages.Related . | first 3 -}}
+  {{- range $related -}}
     <div
       class="p-4 bg-white dark:bg-gray-900 rounded-xl 
                     border border-gray-200 dark:border-gray-700 
@@ -14,8 +14,8 @@
         </a>
       </h3>
       <p class="text-gray-700 dark:text-gray-300 mb-4">
-        {{ .Summary | plainify | truncate 80 }}
+        {{- .Summary | plainify | truncate 80 -}}
       </p>
     </div>
-  {{ end }}
+  {{- end -}}
 </div>

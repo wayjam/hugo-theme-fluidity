@@ -1,22 +1,22 @@
-{{ define "main" }}
+{{- define "main" -}}
   <div class="container mx-auto px-4 py-8 space-y-8">
     <!-- Header section -->
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
         <span class="inline-block mr-1">{{ partial "utils/icon.html" (dict "icon" "collection") }}</span>
-        {{ .Title }}
+        {{- .Title -}}
       </h1>
       <p class="text-base text-neutral-600 dark:text-neutral-400">
-        {{ len .Pages }}
-        {{ i18n "article" | default "articles" }}
+        {{- len .Pages -}}
+        {{- i18n "article" | default "articles" -}}
       </p>
     </div>
 
     <!-- Article list -->
     <div class="space-y-4">
-      {{ $pageSize := site.Params.pageSize.list | default 10 }}
-      {{ $paginator := .Paginate .Pages $pageSize }}
-      {{ if $paginator }}
+      {{- $pageSize := site.Params.pageSize.list | default 10 -}}
+      {{- $paginator := .Paginate .Pages $pageSize -}}
+      {{- if $paginator -}}
         <div
           class="bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-800 rounded-xl divide-y divide-neutral-200 dark:divide-neutral-700">
           {{- range $paginator.Pages }}
@@ -27,6 +27,6 @@
     </div>
 
     <!-- Pagination -->
-    {{ partial "paginator.html" . }}
+    {{- partial "paginator.html" . -}}
   </div>
-{{ end }}
+{{- end -}}

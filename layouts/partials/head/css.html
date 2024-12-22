@@ -1,25 +1,25 @@
-{{ $data := (dict "res" . )}}
+{{- $data := (dict "res" . ) -}}
 
-{{ with (templates.Defer (dict "key" $data.res.Name "data" $data)) }}
-{{ $t := debug.Timer "tailwindcss" }}
-{{ with .res }}
-  {{ $opts := dict
+{{- with (templates.Defer (dict "key" $data.res.Name "data" $data)) -}}
+{{- $t := debug.Timer "tailwindcss" -}}
+{{- with .res -}}
+  {{- $opts := dict
     "inlineImports" true
     "optimize" (not hugo.IsDevelopment)
-  }}
-  {{ with . | css.TailwindCSS $opts }}
-    {{ if hugo.IsDevelopment }}
+  -}}
+  {{- with . | css.TailwindCSS $opts -}}
+    {{- if hugo.IsDevelopment -}}
       <link rel="stylesheet" href="{{ .RelPermalink }}" />
-    {{ else }}
-      {{ with . | minify | fingerprint }}
+    {{- else -}}
+      {{- with . | minify | fingerprint -}}
         <link
           rel="stylesheet"
           href="{{ .RelPermalink }}"
           integrity="{{ .Data.Integrity }}"
           crossorigin="anonymous" />
-      {{ end }}
-    {{ end }}
-  {{ end }}
-{{ end }}
-{{ $t.Stop }}
-{{ end }}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $t.Stop -}}
+{{- end -}}

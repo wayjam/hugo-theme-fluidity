@@ -1,36 +1,36 @@
-{{ define "main" }}
+{{- define "main" -}}
   <div class="container mt-1 mx-auto px-4 py-8 min-h-screen">
     <!-- Article Header -->
     <header class="mb-8">
-      {{ $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $dateHuman := .Date | time.Format ":date_long" }}
-      {{ $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" }}
-      {{ $lastmodHuman := .Lastmod | time.Format ":date_long" }}
+      {{- $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" -}}
+      {{- $dateHuman := .Date | time.Format ":date_long" -}}
+      {{- $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" -}}
+      {{- $lastmodHuman := .Lastmod | time.Format ":date_long" -}}
       <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-6">{{ .Title }}</h1>
 
       <div
         class="p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg transition-colors duration-200">
         <div class="flex flex-wrap items-center gap-4">
-          {{ with .Params.author }}
+          {{- with .Params.author -}}
             <div class="flex items-center gap-3">
               <div>
-                <div class="font-medium text-neutral-900 dark:text-white">{{ . }}</div>
-                {{ with $.Params.role }}
+                <div class="font-medium text-neutral-700 dark:text-white">{{ . }}</div>
+                {{- with $.Params.role -}}
                   <div class="text-sm text-neutral-600 dark:text-neutral-400">{{ . }}</div>
-                {{ end }}
+                {{- end -}}
               </div>
             </div>
-          {{ end }}
-          <div class="flex items-center gap-4 text-neutral-600 dark:text-neutral-400">
+          {{- end -}}
+          <div class="flex items-center gap-4 text-neutral-700 dark:text-neutral-400">
             <div class="flex items-center gap-1.5">
-              {{ partial "utils/icon.html" (dict "icon" "calendar") }}
+              {{- partial "utils/icon.html" (dict "icon" "calendar") -}}
               <time datetime="{{ $dateMachine }}" title="{{ i18n "published" | default "Published" }}" class="text-sm">
                 {{ $dateHuman }}
               </time>
             </div>
             {{ if ne ($lastmodHuman) ($dateHuman) }}
               <div class="flex items-center gap-1.5">
-                {{ partial "utils/icon.html" (dict "icon" "calendar-edit") }}
+                {{- partial "utils/icon.html" (dict "icon" "calendar-edit") -}}
                 <time
                   datetime="{{ $lastmodMachine }}"
                   title="{{ i18n "lastModified" | default "Last modified" }}"
@@ -40,37 +40,37 @@
               </div>
             {{ end }}
             <div class="flex items-center gap-1.5">
-              {{ partial "utils/icon.html" (dict "icon" "timer") }}
+              {{- partial "utils/icon.html" (dict "icon" "timer") -}}
               <span class="text-sm">{{ i18n "readingTime" .ReadingTime }}</span>
             </div>
 
-            {{ if .Params.categories }}
+            {{- if .Params.categories -}}
               <div class="flex items-center gap-1.5">
-                {{ partial "utils/icon.html" (dict "icon" "folder") }}
-                {{ range .Params.categories }}
+                {{- partial "utils/icon.html" (dict "icon" "folder") -}}
+                {{- range .Params.categories -}}
                   <a
                     href="{{ (site.GetPage (printf "/categories/%s" (. | urlize))).RelPermalink }}"
                     class="text-sm py-1 px-2 rounded bg-blue-50 text-blue-600 dark:bg-blue-900/30 dark:text-blue-300 
                       hover:bg-blue-100 dark:hover:bg-blue-800/40 transition-colors duration-200">
                     {{ . }}
                   </a>
-                {{ end }}
+                {{- end -}}
               </div>
-            {{ end }}
+            {{- end -}}
           </div>
         </div>
 
-        {{- if .GetTerms "tags" }}
+        {{- if .GetTerms "tags" -}}
           <div class="mt-3 pt-3 border-t border-neutral-200 dark:border-neutral-800">
-            {{ partial "terms.html" (dict "taxonomy" "tags" "page" .) }}
+            {{- partial "terms.html" (dict "taxonomy" "tags" "page" .) -}}
           </div>
-        {{- end }}
+        {{- end -}}
       </div>
     </header>
 
     <!-- Main Content -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      <div class="col-span-1 md:col-span-2">
+      <div id="main-content" class="col-span-1 md:col-span-2 order-2 md:order-1">
         <div
           class="p-6 bg-white dark:bg-neutral-900 rounded-lg border border-neutral-200 dark:border-neutral-800 transition-colors duration-200">
           <article
@@ -85,97 +85,109 @@
         </div>
       </div>
 
-      <div class="hidden md:block md:col-span-1">
+      <aside id="sidebar" class="md:block md:col-span-1 order-1 md:order-2">
         <div
+          id="sidebar-content"
           class="sticky top-1 space-y-6 p-4 bg-white dark:bg-neutral-900 rounded-lg 
           border border-neutral-200 dark:border-neutral-800 transition-colors duration-200">
-          {{ $enableToc := and (gt .WordCount 400) (and (not (eq .Params.toc false)) (not .Site.Params.toc.disabled)) }}
-          {{ $enableToc = not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") }}
-          {{ $enableShare := not (in .Site.Params.social.disableShareByType .Type) }}
+          {{- $enableToc := and (gt .WordCount 400) (and (not (eq .Params.toc false)) (not .Site.Params.toc.disabled)) -}}
+          {{- $enableToc = not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") -}}
+          {{- $enableShare := not (in .Site.Params.social.disableShareByType .Type) -}}
 
-          {{ if and $enableToc }}
-            {{ partial "toc.html" . }}
-          {{ end }}
+          {{- if and $enableToc -}}
+            {{- partial "toc.html" . -}}
+          {{- end -}}
 
-          {{ if and $enableToc $enableShare }}
+          {{- if and $enableToc $enableShare -}}
             <div class="border-b border-neutral-200 dark:border-neutral-700 my-2"></div>
-          {{ end }}
+          {{- end -}}
 
-          {{ if $enableShare }}
-            {{ partial "utils/share.html" . }}
-          {{ end }}
+          {{- if $enableShare -}}
+            {{- partial "utils/share.html" . -}}
+          {{- end -}}
 
-          {{ if or $enableToc $enableShare }}
-            <div class="border-b border-neutral-200 dark:border-neutral-700 my-2"></div>
-          {{ end }}
+          {{- if or $enableToc $enableShare -}}
+            <div class="border-b border-neutral-200 dark:border-neutral-700 my-2 hidden md:block"></div>
+          {{- end -}}
 
 
-          <div class="flex gap-2 justify-between text-sm text-neutral-700 dark:text-neutral-400">
+          <div class="flex gap-2 justify-between text-sm text-neutral-700 dark:text-neutral-400 hidden md:flex">
             <button
               onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
               class="inline-flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors duration-200 cursor-pointer">
-              {{ partial "utils/icon.html" (dict "icon" "arrow-export-up") }}
+              {{- partial "utils/icon.html" (dict "icon" "arrow-export-up") -}}
               <span>{{ i18n "backToTop" | default "Back to Top" }}</span>
             </button>
 
             <button
               onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
               class="inline-flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors duration-200 cursor-pointer">
-              {{ partial "utils/icon.html" (dict "icon" "comments") }}
+              {{- partial "utils/icon.html" (dict "icon" "comments") -}}
               <span>{{ i18n "jumpToComments" | default "Jump to Comments" }}</span>
+            </button>
+
+            <button
+              id="toggle-sidebar"
+              class="inline-flex items-center gap-1.5 hover:text-neutral-900 dark:hover:text-neutral-300 transition-colors duration-200 cursor-pointer">
+              {{- partial "utils/icon.html" (dict "icon" "slide-hide") -}}
+              <span>{{ i18n "hide" | default "Hide" | title }}</span>
             </button>
           </div>
         </div>
-      </div>
+      </aside>
     </div>
 
     <aside class="mt-12">
-      {{ $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableCommentByType .Type)) }}
-      {{ $activeTab := "comments" }}
-      {{ if not $enableComments }}
-        {{ $activeTab = "related" }}
-      {{ end }}
-
+      {{- $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableByType .Type)) -}}
+      {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) -}}
+      {{- $activeTab := "comments" -}}
+      {{- if not $enableComments -}}
+        {{- $activeTab = "related" -}}
+      {{- end -}}
+      {{- if not $enableRelated -}}
+        {{- $activeTab = "" -}}
+      {{- end -}}
 
       <div class="hidden sm:block w-fit">
         <nav class="flex gap-6" aria-label="Tabs">
-          {{ if $enableComments }}
-            {{ partial "inline/single/tab-button.html" (dict "Name" "comments" "Title" (i18n "comment" | strings.Title) "ActiveTab" $activeTab) }}
-          {{ end }}
-          {{ partial "inline/single/tab-button.html" (dict "Name" "related" "Title" (i18n "relatedArticles" | strings.Title) "ActiveTab" $activeTab) }}
+          {{- if $enableComments -}}
+            {{- partial "inline/single/tab-button.html" (dict "Name" "comments" "Title" (i18n "comment" | strings.Title) "ActiveTab" $activeTab) -}}
+          {{- end -}}
+          {{- if $enableRelated -}}
+            {{- partial "inline/single/tab-button.html" (dict "Name" "related" "Title" (i18n "relatedArticles" | strings.Title) "ActiveTab" $activeTab) -}}
+          {{- end -}}
         </nav>
       </div>
 
       <div class="mt-4">
         {{ if $enableComments }}
           <div id="comments" class="tab-content hidden" role="tabpanel">
-            {{ partial "comment.html" . }}
+            {{- partial "comment.html" . -}}
           </div>
-        {{ end }}
-        <div id="related" class="tab-content hidden" role="tabpanel">
-          {{ if .Site.RegularPages.Related . }}
-            {{ partial "related-article.html" . }}
-          {{ end }}
-        </div>
+        {{- end -}}
+        {{- if $enableRelated -}}
+          <div id="related" class="tab-content hidden" role="tabpanel">
+            {{- if .Site.RegularPages.Related . -}}
+              {{- partial "related-article.html" . -}}
+            {{- end -}}
+          </div>
+        {{- end -}}
       </div>
     </aside>
   </div>
-{{ end }}
+{{- end -}}
 
-{{- define "partials/inline/single/tab-button.html" }}
+{{- define "partials/inline/single/tab-button.html" -}}
   <button
     data-tab="{{ .Name }}"
+    aria-label="{{ .Title }}"
     class="tab-button border-b-4 px-1 pb-2 text-base font-medium
       text-neutral-600 dark:text-neutral-400 
       border-transparent cursor-pointer
       hover:border-blue-500
       hover:text-neutral-900 dark:hover:text-neutral-300
       transition-colors duration-200"
-    aria-selected="{{ if eq .Name .ActiveTab }}
-      true
-    {{ else }}
-      false
-    {{ end }}">
+    aria-selected="{{- if eq .Name .ActiveTab -}}true{{- else -}}false{{- end -}}">
     {{ .Title }}
   </button>
-{{ end }}
+{{- end -}}

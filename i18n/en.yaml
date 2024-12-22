@@ -71,3 +71,5 @@ post:
   other: posts
 search:
   other: search
+hide:
+  other: hide

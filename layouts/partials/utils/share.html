@@ -1,34 +1,34 @@
 <div id="share">
   <h2 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
-    {{ i18n "shareWith" | strings.Title }}
+    {{- i18n "shareWith" | strings.Title -}}
   </h2>
   <div class="flex justify-between">
-    {{ $tag_list := "" }}
-    {{ with .Params.Tags }}
-      {{ $tag_list = delimit . "," }}
-    {{ end }}
+    {{- $tag_list := "" -}}
+    {{- with .Params.Tags -}}
+      {{- $tag_list = delimit . "," -}}
+    {{- end -}}
 
-    {{ partial "inline/share/item.html"
-      (dict "Name" "Reddit"  "Title" .Title "URL" "https://reddit.com/submit?url={{ .Permalink | relURL }}&title={{ .Title }}")
-    }}
-    {{ partial "inline/share/item.html"
-      (dict "Name" "X.com"  "Title" .Title "URL" "https://x.com/intent/tweet/?text={{ .Title }}&amp;url={{ .Permalink | relURL }}&amp;hashtags={{ $tag_list }") }}
-    {{ partial "inline/share/item.html"
-      (dict "Name" "Facebook"  "Title" .Title "URL" "https://facebook.com/sharer/sharer.php?u={{ .Permalink | relURL }}")
-    }}
-    {{ partial "inline/share/item.html"
-      (dict "Name" "Google"  "Title" .Title "URL" "https://www.google.com/bookmarks/mark?op=edit&bkmk={{ .Permalink | relURL }}&title={{ .Title }}")
-    }}
-    {{ partial "inline/share/item.html"
-      (dict "Name" "Telegram"  "Title" .Title "URL" "https://telegram.me/share/url?url={{ .Permalink | relURL }}&text={{ .Title }}") }}
+    {{- partial "inline/share/item.html"
+      (dict "Name" "Reddit"  "Title" .Title "URL" "https://reddit.com/submit?url={{- .Permalink | relURL -}}&title={{- .Title -}}")
+    -}}
+    {{- partial "inline/share/item.html"
+      (dict "Name" "X.com"  "Title" .Title "URL" "https://x.com/intent/tweet/?text={{- .Title -}}&amp;url={{- .Permalink | relURL -}}&amp;hashtags={{- $tag_list }") -}}
+    {{- partial "inline/share/item.html"
+      (dict "Name" "Facebook"  "Title" .Title "URL" "https://facebook.com/sharer/sharer.php?u={{- .Permalink | relURL -}}")
+    -}}
+    {{- partial "inline/share/item.html"
+      (dict "Name" "Google"  "Title" .Title "URL" "https://www.google.com/bookmarks/mark?op=edit&bkmk={{- .Permalink | relURL -}}&title={{- .Title -}}")
+    -}}
+    {{- partial "inline/share/item.html"
+      (dict "Name" "Telegram"  "Title" .Title "URL" "https://telegram.me/share/url?url={{- .Permalink | relURL -}}&text={{- .Title -}}") -}}
   </div>
 </div>
 
-{{- define "partials/inline/share/item.html" }}
+{{- define "partials/inline/share/item.html" -}}
   <a
-    href="{{ .URL }}"
+    href="{{- .URL -}}"
     class="inline-flex items-center px-0.5 py-1 font-mono text-gray-600 dark:text-gray-300 text-sm border-b border-blue-600 hover:bg-blue-600 hover:text-white"
-    aria-label="share {{ .Title | plainify }} on {{ .Name }}">
-    {{ .Name }}
+    aria-label="share {{- .Title | plainify -}} on {{- .Name -}}">
+    {{- .Name -}}
   </a>
-{{ end }}
+{{- end -}}

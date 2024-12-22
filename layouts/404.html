@@ -1,4 +1,4 @@
-{{ define "main" }}
+{{- define "main" -}}
   <div class="container mx-auto px-4 py-8 space-y-8">
     <div class="min-h-screen px-4 py-16 sm:px-6 sm:py-24 flex items-center justify-center">
       <div class="max-w-max mx-auto text-center">
@@ -26,7 +26,7 @@
             bg-blue-600 dark:bg-blue-700 text-white hover:bg-blue-700 dark:hover:bg-blue-600
             focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
             transition-colors duration-200">
-            <span class="mr-2 text-white">{{ partial "utils/icon.html" (dict "icon" "home") }}</span>
+            <span class="mr-2 text-white">{{- partial "utils/icon.html" (dict "icon" "home") -}}</span>
             Go to homepage
           </a>
           <button
@@ -37,11 +37,11 @@
             ring-1 ring-neutral-300 dark:ring-neutral-700
             focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
             transition-colors duration-200 cursor-pointer">
-            <span class="mr-2">{{ partial "utils/icon.html" (dict "icon" "arrow-left") }}</span>
+            <span class="mr-2">{{- partial "utils/icon.html" (dict "icon" "arrow-left") -}}</span>
             Go back
           </button>
         </div>
       </div>
     </div>
   </div>
-{{ end }}
+{{- end -}}

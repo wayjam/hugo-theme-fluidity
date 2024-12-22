@@ -1,25 +1,25 @@
-{{ define "main" }}
+{{- define "main" -}}
   <div class="container mx-auto px-4 py-8 space-y-8">
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-        <span class="inline-block mr-1">{{ partial "utils/icon.html" (dict "icon" "archives") }}</span>
-        {{ i18n "archive" | strings.Title }}
+        <span class="inline-block mr-1">{{- partial "utils/icon.html" (dict "icon" "archives") -}}</span>
+        {{- i18n "archive" | strings.Title -}}
       </h1>
       <p class="text-base text-neutral-600 dark:text-neutral-400">
-        {{ len (where site.RegularPages "Section" "in" site.Params.mainSections) }}
-        {{ i18n "totalArticles" }}
+        {{- len (where site.RegularPages "Section" "in" site.Params.mainSections) -}}
+        {{- i18n "totalArticles" -}}
       </p>
     </div>
 
     <!-- Archive List -->
     <div class="space-y-4">
-      {{ $pageSize := site.Params.pageSize.archives | default 20 }}
-      {{ $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize }}
-      {{ if $paginator }}
+      {{- $pageSize := site.Params.pageSize.archives | default 20 -}}
+      {{- $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize -}}
+      {{- if $paginator -}}
         <div
           class="bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-800 rounded-xl divide-y divide-neutral-200 dark:divide-neutral-700">
-          {{ range $paginator.Pages.GroupByPublishDate "January 2006" }}
-            {{ if ne .Key "January 0001" }}
+          {{- range $paginator.Pages.GroupByPublishDate "January 2006" -}}
+            {{- if ne .Key "January 0001" -}}
               <div>
                 <!-- Header -->
                 <div class="p-4 bg-neutral-100/50 dark:bg-neutral-900">
@@ -31,8 +31,8 @@
                       class="flex items-center space-x-1 text-xs px-2 py-1 bg-blue-500 rounded-full">
                       <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-200 rounded-full"></div>
                       <div class="text-white">
-                        {{ len .Pages }}
-                        {{ i18n "article" | default "articles" }}
+                        {{- len .Pages -}}
+                        {{- i18n "article" | default "articles" -}}
                       </div>
                     </div>
                   </div>
@@ -41,21 +41,21 @@
                 <!-- Content -->
                 <div class="border-t border-neutral-200 dark:border-neutral-700 bg-neutral-50 dark:bg-neutral-900">
                   <div class="divide-y divide-neutral-200 dark:divide-neutral-800">
-                    {{- range .Pages }}
-                      {{- if eq .Kind "page" }}
-                        {{- partial "partials/archive-article.html" . }}
-                      {{- end }}
-                    {{- end }}
+                    {{- range .Pages -}}
+                      {{- if eq .Kind "page" -}}
+                        {{- partial "partials/archive-article.html" . -}}
+                      {{- end -}}
+                    {{- end -}}
                   </div>
                 </div>
               </div>
-            {{ end }}
-          {{ end }}
+            {{- end -}}
+          {{- end -}}
         </div>
-      {{ end }}
+      {{- end -}}
     </div>
 
     <!-- Paginator -->
-    {{ partial "paginator.html" . }}
+    {{- partial "paginator.html" . -}}
   </div>
-{{ end }}
+{{- end -}}

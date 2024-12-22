@@ -1,20 +1,20 @@
-{{ define "main" }}
+{{- define "main" -}}
   <div class="container mx-auto px-4 py-8 space-y-8">
     <!-- Header section with updated styling -->
     <div class="mb-8">
       <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-        {{ partial "utils/icon.html" (dict "icon" "search") }}
-        {{ .Title }}
+        {{- partial "utils/icon.html" (dict "icon" "search") -}}
+        {{- .Title -}}
       </h1>
     </div>
 
     <div class="space-y-6">
-      {{ if site.Params.search.disabled }}
+      {{- if site.Params.search.disabled -}}
         <div class="bg-white dark:bg-neutral-900 rounded-lg shadow-sm">
           <p class="text-gray-700 dark:text-gray-300 font-semibold py-4 px-6">Search is disabled.</p>
         </div>
-      {{ else }}
-        {{ if site.Params.search.provider | eq "pagefind" }}
+      {{- else -}}
+        {{- if eq site.Params.search.provider "pagefind" -}}
           <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
           <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
           <div id="search" class="py-2"></div>
@@ -26,9 +26,9 @@
               })
             })
           </script>
-        {{ end }}
+        {{- end -}}
 
-        {{ if site.Params.search.provider | eq "google" }}
+        {{- if eq site.Params.search.provider "google" -}}
           <div>
             <form id="search" onsubmit="google_search(); return false;">
               <div class="relative">
@@ -50,8 +50,8 @@
                 );
             }
           </script>
-        {{ end }}
-      {{ end }}
+        {{- end -}}
+      {{- end -}}
     </div>
   </div>
-{{ end }}
+{{- end -}}

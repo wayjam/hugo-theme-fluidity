@@ -1,75 +1,75 @@
-{{- $article := . }}
+{{- $article := . -}}
 <div
   class="hover:bg-neutral-100/80 dark:hover:bg-neutral-700/60 transition-all duration-300 ease-out border-b border-neutral-200 dark:border-neutral-700 last:border-b-0">
-  <a href="{{ .Permalink | relURL }}" class="block">
+  <a href="{{- .Permalink | relURL -}}" class="block">
     <div class="px-6 py-3">
       <div class="flex justify-between items-center gap-4">
         <!-- Left content -->
         <div class="space-y-2 flex-grow">
           <h3
             class="text-base font-medium text-neutral-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
-            {{ .Title }}
+            {{- .Title -}}
           </h3>
           <div class="flex items-center flex-wrap gap-x-3 gap-y-1">
             <!-- Categories -->
-            {{ with $article.Params.categories }}
-              {{ range first 1 . }}
+            {{- with $article.Params.categories -}}
+              {{- range first 1 . -}}
                 <span
-                  aria-label="Category: {{ . }}"
+                  aria-label="Category: {{- . -}}"
                   class="inline-flex py-1 px-2 rounded bg-blue-50 text-blue-500 dark:bg-blue-950 dark:text-blue-100 text-sm tracking-widest">
-                  {{ . }}
+                  {{- . -}}
                 </span>
-              {{ end }}
-              {{ if $article.Params.tags }}
+              {{- end -}}
+              {{- if $article.Params.tags -}}
                 <span class="h-3 w-px bg-neutral-300 dark:bg-neutral-600"></span>
-              {{ end }}
-            {{ end }}
+              {{- end -}}
+            {{- end -}}
 
 
             <!-- Tags -->
-            {{ with $article.Params.tags }}
+            {{- with $article.Params.tags -}}
               <div class="flex flex-wrap gap-1.5">
-                {{ range first 3 . }}
+                {{- range first 3 . -}}
                   <span
-                    aria-label="Tag: {{ . }}"
+                    aria-label="Tag: {{- . -}}"
                     class="inline-flex items-center px-2 py-1 rounded-full text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-gray-700">
-                    {{ . }}
+                    {{- . -}}
                   </span>
-                {{ end }}
-                {{ if gt (len .) 3 }}
+                {{- end -}}
+                {{- if gt (len .) 3 -}}
                   <div class="relative group">
                     <div class="text-xs text-neutral-600 dark:text-neutral-400 cursor-help">
-                      +{{ sub (len .) 3 }}
+                      +{{- sub (len .) 3 -}}
                     </div>
                     <div class="absolute bottom-full left-0 mb-2 hidden group-hover:block z-10">
                       <div
                         class="bg-white dark:bg-neutral-900 rounded-lg shadow-sm ring-1 ring-neutral-200 dark:ring-neutral-700 px-2 py-1">
                         <span class="text-sm text-neutral-700 dark:text-neutral-300 whitespace-nowrap">
-                          {{ delimit . ", " }}
+                          {{- delimit . ", " -}}
                         </span>
                       </div>
                     </div>
                   </div>
-                {{ end }}
+                {{- end -}}
               </div>
-              {{ if $article.ReadingTime }}
+              {{- if $article.ReadingTime -}}
                 <span class="h-3 w-px bg-neutral-300 dark:bg-neutral-600"></span>
-              {{ end }}
-            {{ end }}
+              {{- end -}}
+            {{- end -}}
 
 
             <!-- Reading time -->
-            {{ if $article.ReadingTime }}
-              <span class="text-sm text-neutral-700 dark:text-neutral-400">{{ $article.ReadingTime }} min read</span>
-            {{ end }}
+            {{- if $article.ReadingTime -}}
+              <span class="text-sm text-neutral-700 dark:text-neutral-400">{{- $article.ReadingTime -}} min read</span>
+            {{- end -}}
           </div>
         </div>
 
         <!-- Right date -->
         <time
-          datetime="{{ .PublishDate.Format "2006-01-02" }}"
+          datetime="{{- .PublishDate.Format "2006-01-02" -}}"
           class="text-base font-normal text-neutral-700 dark:text-neutral-400 whitespace-nowrap italic">
-          {{ .PublishDate.Format "January 02, 2006" }}
+          {{- .PublishDate.Format "January 02, 2006" -}}
         </time>
       </div>
     </div>

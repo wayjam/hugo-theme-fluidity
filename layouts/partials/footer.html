@@ -1,60 +1,60 @@
-<footer class="mt-16 border-t border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 backdrop-blur-sm">
+<div class="mt-16 border-t border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-900 backdrop-blur-sm">
   <div class="max-w-6xl mx-auto px-4 py-12">
     <div class="grid md:grid-cols-4 gap-8">
       <!-- About Section -->
       <div class="col-span-2">
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          {{ if (where .Site.RegularPages "Layout" "==" "about") }}
+          {{- if (where .Site.RegularPages "Layout" "==" "about") -}}
             <a
               href="{{ "about" | relURL }}"
               class="inline-flex items-center underline text-primary-600 hover:text-primary-500 dark:text-primary-400 dark:hover:text-primary-300 transition-colors duration-200">
-              {{ i18n "about" | strings.Title }}
+              {{- i18n "about" | strings.Title -}}
             </a>
-          {{ else }}
-            {{ i18n "about" | strings.Title }}
-          {{ end }}
+          {{- else -}}
+            {{- i18n "about" | strings.Title -}}
+          {{- end -}}
         </h3>
         <p class="text-gray-700 dark:text-gray-300 mb-4 italic">
-          {{ .Site.Params.description | default "" }}
+          {{- .Site.Params.description | default "" -}}
         </p>
       </div>
 
       <!-- Categories Section -->
       <div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          {{ i18n "sections" | strings.Title }}
+          {{- i18n "sections" | strings.Title -}}
         </h3>
-        {{ $sections := slice }}
-        {{ range .Site.Sections }}
-          {{ $section := . }}
-          {{ $count := len $section.Pages }}
-          {{ if gt $count 0 }}
-            {{ $sections = $sections | append (dict "Title" .Title "Count" $count "URL" .RelPermalink) }}
-          {{ end }}
-        {{ end }}
+        {{- $sections := slice -}}
+        {{- range .Site.Sections -}}
+          {{- $section := . -}}
+          {{- $count := len $section.Pages -}}
+          {{- if gt $count 0 -}}
+            {{- $sections = $sections | append (dict "Title" .Title "Count" $count "URL" .RelPermalink) -}}
+          {{- end -}}
+        {{- end -}}
 
-        {{ $sortedSections := sort $sections "Count" "desc" }}
+        {{- $sortedSections := sort $sections "Count" "desc" -}}
         <ul class="space-y-2 text-gray-600 dark:text-gray-300">
-          {{ range first 5 $sortedSections }}
+          {{- range first 5 $sortedSections -}}
             <li>
               <a
                 href="{{ .URL }}"
                 class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center group">
-                {{ .Title }}
+                {{- .Title -}}
                 <span
-                  class="text-gray-400 dark:text-gray-500 text-sm ml-2 group-hover:translate-x-1 transition-transform duration-200">
+                  class="text-gray-600 dark:text-gray-400 text-sm ml-2 group-hover:translate-x-1 transition-transform duration-200">
                   ({{ .Count }})
                 </span>
               </a>
             </li>
-          {{ end }}
+          {{- end -}}
         </ul>
       </div>
 
       <!-- Connect Section -->
       <div>
         <h3 class="text-lg font-semibold text-gray-900 dark:text-white mb-4">
-          {{ i18n "connect" | strings.Title }}
+          {{- i18n "connect" | strings.Title -}}
         </h3>
         <ul class="space-y-2 text-gray-600 dark:text-gray-300">
           <li>
@@ -63,23 +63,23 @@
               target="_blank"
               rel="noopener noreferrer"
               class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
-              <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "rss") }}</span>
+              <span class="inline-block mr-1">{{- partial "utils/icon" (dict "icon" "rss") -}}</span>
               RSS Feed
             </a>
           </li>
-          {{ with .Site.Params.social.twitter }}
+          {{- with .Site.Params.social.twitter -}}
             <li>
               <a
                 href="https://x.com/{{ . }}"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
-                <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "xcom") }}</span>
+                <span class="inline-block mr-1">{{- partial "utils/icon" (dict "icon" "xcom") -}}</span>
                 X.com
               </a>
             </li>
-          {{ end }}
-          {{ with .Site.Params.social.github }}
+          {{- end -}}
+          {{- with .Site.Params.social.github -}}
             <li>
               <a
                 href="https://github.com/{{ . }}"
@@ -87,38 +87,38 @@
                 rel="noopener noreferrer"
                 class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
                 <span class="inline-block mr-1 dark:text-gray-500">
-                  {{ partial "utils/icon" (dict "icon" "github") }}
+                  {{- partial "utils/icon" (dict "icon" "github") -}}
                 </span>
                 GitHub
               </a>
             </li>
-          {{ end }}
-          {{ with .Site.Params.social.linkedin }}
+          {{- end -}}
+          {{- with .Site.Params.social.linkedin -}}
             <li>
               <a
                 href="https://linkedin.com/in/{{ . }}"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="hover:text-gray-900 dark:hover:text-white transition-colors duration-200 flex items-center">
-                <span class="inline-block mr-1">{{ partial "utils/icon" (dict "icon" "linkedin") }}</span>
+                <span class="inline-block mr-1">{{- partial "utils/icon" (dict "icon" "linkedin") -}}</span>
                 LinkedIn
               </a>
             </li>
-          {{ end }}
+          {{- end -}}
         </ul>
       </div>
     </div>
 
-    <span class="relative flex justify-center my-4">
+    <div class="relative flex justify-center my-4">
       <div
-        class="absolute inset-x-0 top-1/2 h-[1px] -translate-y-1/2 bg-gradient-to-r from-transparent via-gray-200 dark:via-gray-600 to-transparent opacity-90 blur-[0.5px]"></div>
+        class="absolute inset-x-0 top-1/2 h-[1px] -translate-y-1/2 bg-gradient-to-r from-transparent via-gray-300 dark:via-gray-500 to-transparent opacity-90 blur-[0.5px]"></div>
 
       <span
-        class="relative z-10 bg-white dark:bg-gray-800 px-6 text-gray-400 dark:text-gray-500 text-xs font-mono italic backdrop-blur-sm">
+        class="relative z-10 bg-white dark:bg-gray-900 px-6 text-gray-600 dark:text-gray-300 text-xs font-mono italic backdrop-blur-sm">
         Site built with
         <a
           rel="nofollow"
-          class="underline decoration-blue-500[.33]"
+          class="underline decoration-gray-300 hover:text-gray-700 dark:decoration-gray-300 dark:hover:text-blue-300 transition-colors"
           target="_blank"
           href="https://gohugo.io"
           title="Built with hugo">
@@ -126,7 +126,7 @@
         </a>
         &&
         <a
-          class="underline decoration-blue-500[.33]"
+          class="underline decoration-gray-300 hover:text-blue-700 dark:decoration-gray-300 dark:hover:text-blue-300 transition-colors"
           rel="nofollow"
           target="_blank"
           href="https://github.com/wayjam/hugo-theme-fluidity"
@@ -134,14 +134,14 @@
           Theme Fludity
         </a>
       </span>
-    </span>
+    </div>
 
     <!-- Copyright -->
-    <div class="">
-      <p class="text-center text-gray-600 dark:text-gray-400 font-sans">
+    <div class="text-center text-gray-700 dark:text-gray-300 font-sans">
+      <p>
         &copy; {{ now.Year }} {{ .Site.Title }}.
-        {{ i18n "allRightsReserved" | default "All rights reserved." | title }}
+        {{- i18n "allRightsReserved" | default "All rights reserved." | title -}}
       </p>
     </div>
   </div>
-</footer>
+</div>

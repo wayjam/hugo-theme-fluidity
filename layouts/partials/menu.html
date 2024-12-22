@@ -7,61 +7,61 @@
   @example: {{ partial "menu.html" (dict "menuID" "main" "page" .)
 }}
 */}}
-{{- $page := .page }}
-{{- $menuID := .menuID }}
+{{- $page := .page -}}
+{{- $menuID := .menuID -}}
 
-{{- with index site.Menus $menuID }}
+{{- with index site.Menus $menuID -}}
   <nav class="hidden md:block">
     <ul class="flex items-center gap-1">
-      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+      {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
     </ul>
   </nav>
-{{- end }}
+{{- end -}}
 
-{{- define "partials/inline/menu/walk.html" }}
-  {{- $page := .page }}
-  {{- range .menuEntries }}
-    {{- $attrs := dict "href" ( .URL | relLangURL ) }}
-    {{- if $page.IsMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") }}
-    {{- else if $page.HasMenuCurrent .Menu . }}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") }}
-    {{- end }}
+{{- define "partials/inline/menu/walk.html" -}}
+  {{- $page := .page -}}
+  {{- range .menuEntries -}}
+    {{- $attrs := dict "href" ( .URL | relLangURL ) -}}
+    {{- if $page.IsMenuCurrent .Menu . -}}
+      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") -}}
+    {{- else if $page.HasMenuCurrent .Menu . -}}
+      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") -}}
+    {{- end -}}
 
-    {{- $name := .Name }}
-    {{- if .Identifier }}
-      {{- $name = i18n .Identifier | default $name | default .Identifier | title }}
-    {{- end }}
+    {{- $name := .Name -}}
+    {{- if .Identifier -}}
+      {{- $name = i18n .Identifier | default $name | default .Identifier | title -}}
+    {{- end -}}
 
 
     <li class="relative group">
       <a
         class="
-           inline-flex items-center px-4 py-2 rounded-md
-           text-base font-medium
-           text-neutral-700 dark:text-neutral-200
-           hover:text-neutral-900 dark:hover:text-white
-           hover:bg-neutral-300 dark:hover:bg-neutral-800/70
-           transition-all duration-200 ease-out
-           relative
-           after:absolute after:bottom-0 after:left-2 after:right-2
-           after:h-0.5 after:rounded-full
-           after:bg-primary-500 dark:after:bg-primary-400
-           after:origin-left after:scale-x-0
-           hover:after:scale-x-100
-           after:transition-transform after:duration-200
-           {{ if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
+          inline-flex items-center px-4 py-2 rounded-md
+          text-base font-medium
+          text-neutral-700 dark:text-neutral-200
+          hover:text-neutral-900 dark:hover:text-white
+          hover:bg-neutral-300 dark:hover:bg-neutral-800/70
+          transition-all duration-200 ease-out
+          relative
+          after:absolute after:bottom-0 after:left-2 after:right-2
+          after:h-0.5 after:rounded-full
+          after:bg-primary-500 dark:after:bg-primary-400
+          after:origin-left after:scale-x-0
+          hover:after:scale-x-100
+          after:transition-transform after:duration-200
+          {{- if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
           text-primary-600 dark:text-primary-400 after:scale-x-100
-        {{ end }}"
-        {{- range $k, $v := $attrs }}
-          {{- with $v }}
-            {{- printf " %s=%q" $k $v | safeHTMLAttr }}
-          {{- end }}
+          {{ end -}}"
+        {{- range $k, $v := $attrs -}}
+          {{- with $v -}}
+            {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
+          {{- end -}}
         {{- end -}}>
-        <span class="relative">{{ $name }}</span>
+        <span class="relative">{{ $name -}}</span>
       </a>
 
-      {{- with .Children }}
+      {{- with .Children -}}
         <ul
           class="
             absolute top-full left-0 mt-1
@@ -74,9 +74,9 @@
             transform -translate-y-2
             transition-all duration-200 ease-out
             group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) }}
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
         </ul>
-      {{- end }}
+      {{- end -}}
     </li>
-  {{- end }}
-{{- end }}
+  {{- end -}}
+{{- end -}}

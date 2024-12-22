@@ -1,90 +1,90 @@
-{{ $pag := .Paginator }}
-{{ if $pag }}
-  {{ if gt $pag.TotalPages 1 }}
+{{- $pag := .Paginator -}}
+{{- if $pag -}}
+  {{- if gt $pag.TotalPages 1 -}}
     <div id="pagination">
       <nav class="mt-8 flex justify-center items-center gap-3" aria-label="Pagination">
         <!-- Previous button -->
         <a
           aria-label="{{ i18n "previous" }}"
-          {{ if $pag.HasPrev }}
+          {{- if $pag.HasPrev }}
             href="{{ $pag.Prev.URL }}"
-          {{ else }}
+          {{- else }}
             disabled
-          {{ end }}
+          {{ end -}}
           class="inline-flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200
-            {{ if $pag.HasPrev }}
+          {{- if $pag.HasPrev }}
             bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
             dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
-          {{ else }}
+          {{- else }}
             bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed
-          {{ end }} 
+          {{ end -}} 
             ">
-          {{ partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") }}
+          {{- partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") -}}
         </a>
 
         <!-- Page numbers -->
         <div class="flex items-center gap-1">
-          {{ $ellipsed := false }}
-          {{ $shouldEllipse := false }}
-          {{ range $pag.Pagers }}
-            {{ $right := sub .TotalPages .PageNumber }}
-            {{ $showNumber := or (le .PageNumber 3) (eq $right 0) }}
-            {{ $showNumber := or $showNumber (and (gt .PageNumber (sub $pag.PageNumber 2)) (lt .PageNumber (add $pag.PageNumber 2))) }}
-            {{ $isCurrent := eq . $pag }}
+          {{- $ellipsed := false -}}
+          {{- $shouldEllipse := false -}}
+          {{- range $pag.Pagers -}}
+            {{- $right := sub .TotalPages .PageNumber -}}
+            {{- $showNumber := or (le .PageNumber 3) (eq $right 0) -}}
+            {{- $showNumber := or $showNumber (and (gt .PageNumber (sub $pag.PageNumber 2)) (lt .PageNumber (add $pag.PageNumber 2))) -}}
+            {{- $isCurrent := eq . $pag -}}
 
-            {{ if $showNumber }}
-              {{ $ellipsed = false }}
-              {{ $shouldEllipse = false }}
-            {{ else }}
-              {{ $shouldEllipse = not $ellipsed }}
-              {{ $ellipsed = true }}
-            {{ end }}
+            {{- if $showNumber -}}
+              {{- $ellipsed = false -}}
+              {{- $shouldEllipse = false -}}
+            {{- else -}}
+              {{- $shouldEllipse = not $ellipsed -}}
+              {{- $ellipsed = true -}}
+            {{- end -}}
 
-            {{ if $showNumber }}
+            {{- if $showNumber -}}
               <a
-                href="{{ .URL }}"
-                {{ if $isCurrent }}
-                  aria-current="page" aria-label="Current Page {{ .PageNumber }}"
-                {{ else }}
-                  aria-label="Go to Page {{ .PageNumber }}"
-                {{ end }}
+                href="{{- .URL -}}"
+                {{- if $isCurrent }}
+                  aria-current="page" aria-label="Current Page {{- .PageNumber -}}"
+                {{- else }}
+                  aria-label="Go to Page {{- .PageNumber -}}"
+                {{ end -}}
                 class="inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 rounded-lg transition-colors duration-200
-                  {{ if $isCurrent }}
+                {{- if $isCurrent }}
                   bg-blue-600 dark:bg-blue-700 text-white dark:text-white font-medium
-                {{ else }}
+                {{- else }}
                   bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
                   dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
-                {{ end }}
+                {{ end -}}
                   ">
-                {{ .PageNumber }}
+                {{- .PageNumber -}}
               </a>
-            {{ else if $shouldEllipse }}
+            {{- else if $shouldEllipse -}}
               <span class="inline-flex items-center justify-center px-3 text-neutral-600 dark:text-neutral-400">
                 &hellip;
               </span>
-            {{ end }}
-          {{ end }}
+            {{- end -}}
+          {{- end -}}
         </div>
 
         <!-- Next button -->
         <a
           aria-label="{{ i18n "next" }}"
-          {{ if $pag.HasNext }}
+          {{- if $pag.HasNext }}
             href="{{ $pag.Next.URL }}"
-          {{ else }}
+          {{- else }}
             disabled
-          {{ end }}
+          {{ end -}}
           class="inline-flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200
-          {{ if $pag.HasNext }}
+          {{- if $pag.HasNext }}
             bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
             dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
-          {{ else }}
+          {{- else }}
             bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed
-          {{ end }} 
+          {{ end -}} 
             ">
-          {{ partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") }}
+          {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
         </a>
       </nav>
     </div>
-  {{ end }}
-{{ end }}
+  {{- end -}}
+{{- end -}}

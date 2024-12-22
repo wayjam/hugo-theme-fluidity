@@ -1,35 +1,35 @@
-{{ define "main" }}
+{{- define "main" -}}
   <div class="container mx-auto px-4 py-8 space-y-8">
     <div class="mb-8">
-      {{ if eq .Title "Tags" }}
+      {{- if eq .Title "Tags" -}}
         <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-          <span class="inline-block mr-1">{{ partial "utils/icon.html" (dict "icon" "tags") }}</span>
-          {{ i18n "tag" | strings.Title }}
+          <span class="inline-block mr-1">{{- partial "utils/icon.html" (dict "icon" "tags") -}}</span>
+          {{- i18n "tag" | strings.Title -}}
         </h1>
-      {{ else }}
+      {{- else -}}
         <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-          {{ .Title | strings.Title }}
+          {{- .Title | strings.Title -}}
         </h1>
-      {{ end }}
+      {{- end -}}
     </div>
 
     <div class="bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg p-6">
       <div class="flex flex-wrap gap-3">
-        {{ range sort .Data.Terms.Alphabetical "Count" "desc" }}
-          {{ if ne .Page.Title "" }}
-            {{ $tagClass := "" }}
-            {{ if ge .Count 12 }}
-              {{ $tagClass = "px-3 py-1.5 text-lg font-medium" }}
-            {{ else if ge .Count 9 }}
-              {{ $tagClass = "px-2.5 py-1 text-base font-medium" }}
-            {{ else if ge .Count 6 }}
-              {{ $tagClass = "px-2 py-0.5 text-base" }}
-            {{ else }}
-              {{ $tagClass = "px-2 py-0.5 text-sm" }}
-            {{ end }}
+        {{- range sort .Data.Terms.Alphabetical "Count" "desc" -}}
+          {{- if ne .Page.Title "" -}}
+            {{- $tagClass := "" -}}
+            {{- if ge .Count 12 -}}
+              {{- $tagClass = "px-3 py-1.5 text-lg font-medium" -}}
+            {{- else if ge .Count 9 -}}
+              {{- $tagClass = "px-2.5 py-1 text-base font-medium" -}}
+            {{- else if ge .Count 6 -}}
+              {{- $tagClass = "px-2 py-0.5 text-base" -}}
+            {{- else -}}
+              {{- $tagClass = "px-2 py-0.5 text-sm" -}}
+            {{- end -}}
 
             <a
-              href="{{ .Page.Permalink | relURL }}"
+              href="{{- .Page.Permalink | relURL -}}"
               class="group inline-flex items-center gap-1.5 rounded-md {{ $tagClass }}
                 bg-neutral-50 dark:bg-neutral-800 
                 text-neutral-900 dark:text-neutral-300
@@ -38,19 +38,19 @@
                 ring-1 ring-neutral-400/50 dark:ring-neutral-700
                 hover:ring-blue-500/50 dark:hover:ring-blue-400/30
                 transition-all duration-200">
-              <span>{{ .Page.Title }}</span>
+              <span>{{- .Page.Title -}}</span>
               <span class="inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs
                 bg-neutral-100 dark:bg-neutral-700
                 text-neutral-600 dark:text-neutral-400
                 group-hover:bg-blue-100 dark:group-hover:bg-blue-800
                 group-hover:text-blue-700 dark:group-hover:text-blue-300
                 transition-colors duration-200">
-                {{ .Count }}
+                {{- .Count -}}
               </span>
             </a>
-          {{ end }}
-        {{ end }}
+          {{- end -}}
+        {{- end -}}
       </div>
     </div>
   </div>
-{{ end }}
+{{- end -}}

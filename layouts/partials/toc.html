@@ -1,7 +1,7 @@
 <div id="toc">
   <div class="flex items-center justify-between mb-4">
     <h2 class="text-lg font-semibold text-neutral-900 dark:text-white">
-      {{ i18n "toc" | strings.Title | default "Table of Contents" }}
+      {{- i18n "toc" | strings.Title | default "Table of Contents" -}}
     </h2>
     <button
       id="toc-toggle"
@@ -15,10 +15,10 @@
         focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
         transition-colors duration-200">
       <span class="toc-expand hidden">
-        {{ partial "utils/icon.html" (dict "icon" "arrow-expand-all" "class" "w-5 h-5") }}
+        {{- partial "utils/icon.html" (dict "icon" "arrow-expand-all" "class" "w-5 h-5") -}}
       </span>
       <span class="toc-collapse">
-        {{ partial "utils/icon.html" (dict "icon" "arrow-collapse-all" "class" "w-5 h-5") }}
+        {{- partial "utils/icon.html" (dict "icon" "arrow-collapse-all" "class" "w-5 h-5") -}}
       </span>
     </button>
   </div>
@@ -27,11 +27,11 @@
   {{ if not (eq $toc "<nav id=\"TableOfContents\"></nav>") }}
     <div class="toc-content transition-all duration-200">
       <nav>
-        {{ $toc := replaceRE "<nav>" "<nav class='space-y-2'>" .TableOfContents }}
-        {{ $toc := replaceRE "<ul>" "<ul class='space-y-1 ml-4'>" $toc }}
-        {{ $toc := replaceRE "<li>" "<li class='py-0.5'>" $toc }}
-        {{ $toc := replaceRE "<a " "<a class='block text-sm text-neutral-700 dark:text-neutral-400  hover:text-blue-600 dark:hover:text-blue-400  hover:translate-x-1 transition-all duration-200' " $toc }}
-        {{ $toc | safeHTML }}
+        {{- $toc := replaceRE "<nav>" "<nav class='space-y-2'>" .TableOfContents -}}
+        {{- $toc := replaceRE "<ul>" "<ul class='space-y-1 ml-2'>" $toc -}}
+        {{- $toc := replaceRE "<li>" "<li class='py-0.5'>" $toc -}}
+        {{- $toc := replaceRE "<a " "<a class='block text-sm text-neutral-700 dark:text-neutral-400  hover:text-blue-600 dark:hover:text-blue-400  hover:translate-x-1 transition-all duration-200' " $toc -}}
+        {{- $toc | safeHTML -}}
       </nav>
     </div>
   {{ end }}

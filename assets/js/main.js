@@ -50,6 +50,9 @@ function setupToc() {
 	const plusIcon = toc.querySelector('.toc-collapse')
 
 	if (tocToggle) {
+		/*
+		hidden 
+		*/
 		tocToggle.addEventListener('click', function () {
 			tocContent.classList.toggle('hidden')
 			minusIcon.classList.toggle('hidden')
@@ -94,7 +97,6 @@ function setupTabs() {
 			text-blue-600 dark:text-blue-400
 			text-neutral-600 dark:text-neutral-400
 			text-neutral-900 dark:text-neutral-300
-			hover:border-blue-500 hover:text-neutral-900 dark:hover:text-neutral-300
   			*/
 			button.classList.remove(
 				'border-blue-500',
@@ -141,10 +143,28 @@ function setupTabs() {
 	}
 }
 
+function setupSidebar() {
+	const toggleButton = document.getElementById('toggle-sidebar')
+	const sidebar = document.getElementById('sidebar')
+	const mainContent = document.getElementById('main-content')
+	if (!toggleButton || !sidebar || !mainContent) return
+	
+	toggleButton.addEventListener('click', () => {
+		/*
+		md:hidden 
+		md:col-span-full
+		*/
+		sidebar.classList.add('md:hidden')
+		mainContent.classList.remove('md:col-span-2')
+		mainContent.classList.add('md:col-span-full')
+	})
+}
+
 function init() {
 	setupTheme()
 	setupToc()
 	setupTabs()
+	setupSidebar()
 }
 
 // Initialize theme when DOM is loaded

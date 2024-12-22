@@ -1,54 +1,56 @@
-{{ define "main" }}
-  {{ $pageSize := site.Params.pageSize.home | default 5 }}
-  {{ $showSection := false }}
-  {{ if gt (len site.Params.mainSections) 1 }}{{ $showSection = true }}{{ end }}
-  {{ $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize }}
+{{- define "main" -}}
+  {{- $pageSize := site.Params.pageSize.home | default 5 -}}
+  {{- $showSection := false -}}
+  {{- if gt (len site.Params.mainSections) 1 }}{{ $showSection = true }}{{ end -}}
+  {{- $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize -}}
 
 
   <div class="container mx-auto px-4 py-8">
-    {{ if $paginator.Pages }}
-      {{ if eq $paginator.PageNumber 1 }}
-        {{ with (index $paginator.Pages 0) }}
+    {{- if $paginator.Pages -}}
+      {{- if eq $paginator.PageNumber 1 -}}
+        {{- with (index $paginator.Pages 0) -}}
           {{- partial "inline/home/article.html" (dict "item" . "showSection" $showSection "isFirst" true) }}
-        {{ end }}
+        {{- end -}}
 
-        {{ if gt (len $paginator.Pages) 1 }}
+        {{- if gt (len $paginator.Pages) 1 -}}
           <div class="columns-1 md:columns-2 gap-8 space-y-8 [&>*:first-child]:mt-0">
-            {{ range $index, $item := after 1 $paginator.Pages }}
-              {{ $index := add $index 1 }}
+            {{- range $index, $item := after 1 $paginator.Pages -}}
+              {{- $index := add $index 1 -}}
               {{- partial "inline/home/article.html" (dict "item" $item "showSection" $showSection "isFirst" false) }}
-            {{ end }}
+            {{- end -}}
           </div>
-        {{ end }}
-      {{ else }}
+        {{- end -}}
+      {{- else -}}
         <div class="columns-1 md:columns-2 gap-8 space-y-8 [&>*:first-child]:mt-0">
-          {{ range $paginator.Pages }}
+          {{- range $paginator.Pages -}}
             {{- partial "inline/home/article.html" (dict "item" . "showSection" $showSection "isFirst" false) }}
-          {{ end }}
+          {{- end -}}
         </div>
-      {{ end }}
-    {{ else }}
+      {{- end -}}
+    {{- else -}}
       <div class="text-center text-neutral-600 dark:text-neutral-400">
-        {{ i18n "noPostsFound" | default "No posts found." }}
+        {{- i18n "noPostsFound" | default "No posts found." -}}
       </div>
-    {{ end }}
-    {{ partial "paginator.html" . }}
+    {{- end -}}
+    {{- partial "paginator.html" . -}}
   </div>
-{{ end }}
+{{- end -}}
 
 {{- define "partials/inline/home/article.html" }}
-  {{ $item := .item }}
-  {{ $isFirst := .isFirst }}
-  {{ $showSection := .showSection }}
+  {{- $item := .item -}}
+  {{- $isFirst := .isFirst -}}
+  {{- $showSection := .showSection -}}
   <div
     class="break-inside-avoid mb-6 last:mb-0
       bg-white dark:bg-neutral-900 rounded-lg p-6 
       border 
-      {{ if $isFirst }}
-      mb-12 border-neutral-400 dark:border-neutral-700 hover:shadow-md hover:-translate-y-1 motion-safe:hover:scale-[1.01]
-    {{ else }}
-      border-neutral-400/50 dark:border-neutral-800 hover:shadow-sm hover:-translate-y-0.5 motion-safe:hover:scale-[1.005]
-    {{ end }}
+      {{- if $isFirst }}
+      mb-12 border-neutral-400 dark:border-neutral-700 hover:shadow-md hover:-translate-y-1
+      motion-safe:hover:scale-[1.01]
+      {{ else }}
+      border-neutral-400/50 dark:border-neutral-800 hover:shadow-sm hover:-translate-y-0.5
+      motion-safe:hover:scale-[1.005]
+      {{ end -}}
       hover:bg-neutral-50 dark:hover:bg-neutral-800/60
       transition-all duration-300 ease-out">
     <article class="flex flex-col gap-4">
@@ -58,7 +60,7 @@
           class="text-sm text-neutral-600 dark:text-neutral-400">
           {{ $item.Date.Format "January 02, 2006" }}
         </time>
-        {{ if $showSection }}
+        {{- if $showSection -}}
           <a
             href="{{ $item.Section | relURL }}"
             class="inline-flex items-center px-2 py-1 rounded-md
@@ -69,7 +71,7 @@
               transition-colors duration-200">
             {{ $item.Section }}
           </a>
-        {{ end }}
+        {{- end -}}
       </div>
 
       <h3
@@ -90,27 +92,23 @@
         </a>
       </h3>
 
-      <div
-        class="
-        text-neutral-700 dark:text-neutral-300 
-        leading-relaxed
-        text-base">
-        {{ $item.Summary | safeHTML }}
-        {{ if $item.Truncated }}
+      <div class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
+        {{- $item.Summary | safeHTML -}}
+        {{- if $item.Truncated -}}
           <span class="hellip">&hellip;</span>
-        {{ end }}
+        {{- end -}}
       </div>
 
       <div class="mt-2">
         <a
           href="{{ $item.Permalink | relURL }}"
           class="inline-flex items-center justify-center px-4 h-9 text-sm font-medium rounded-lg
-            {{ if $isFirst }}
+            {{- if $isFirst }}
             bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500
-          {{ else }}
+            {{ else }}
             bg-white text-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300
             dark:hover:bg-neutral-700 ring-1 ring-neutral-300 dark:ring-neutral-600
-          {{ end }}
+            {{ end -}}
             focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
             transition-colors duration-200">
           {{ i18n "readMore" | strings.Title }}
@@ -118,4 +116,4 @@
       </div>
     </article>
   </div>
-{{- end }}
+{{- end -}}
