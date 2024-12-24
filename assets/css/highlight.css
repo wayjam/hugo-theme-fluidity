@@ -4,13 +4,13 @@
     --highlight-color-text: var(--color-neutral-800);
     --highlight-color-text-1: var(--color-neutral-700);
     --highlight-color-text-2: var(--color-neutral-600);
-    
+
     /* Semantic colors */
     --highlight-color-err: var(--color-red-500);
     --highlight-color-warning: var(--color-yellow-400);
     --highlight-color-success: var(--color-green-500);
     --highlight-color-info: var(--color-blue-600);
-    
+
     /* Primary colors */
     --highlight-color-primary: var(--color-blue-600);
     --highlight-color-primary-light: var(--color-blue-500);
@@ -21,12 +21,12 @@
     --highlight-color-text: var(--color-neutral-200);
     --highlight-color-text-1: var(--color-neutral-300);
     --highlight-color-text-2: var(--color-neutral-400);
-    
+
     --highlight-color-err: var(--color-red-400);
     --highlight-color-warning: var(--color-yellow-300);
     --highlight-color-success: var(--color-green-400);
     --highlight-color-info: var(--color-blue-400);
-    
+
     --highlight-color-primary: var(--color-blue-400);
     --highlight-color-primary-light: var(--color-blue-300);
   }
@@ -74,7 +74,6 @@
 .chroma .lnt,
 .chroma .ln {
   @apply select-none
-         mr-4
          px-4
          py-0
          whitespace-pre;
@@ -85,7 +84,21 @@
 }
 
 .highlight > .chroma .lntd:first-child {
-  width: 48px;
+  width: 32px;
+}
+
+.chroma .lntd pre.chroma {
+  @apply px-1;
+}
+
+.chroma .lntd:first-child pre.chroma {
+  @apply border-r-0;
+  @apply rounded-none;
+  @apply rounded-l-md;
+}
+.chroma .lntd:last-child pre.chroma {
+  @apply rounded-none;
+  @apply rounded-r-md;
 }
 
 /* Names - Fluent Design 2 style */

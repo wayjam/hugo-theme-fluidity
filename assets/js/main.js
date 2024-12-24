@@ -150,13 +150,8 @@ function setupSidebar() {
 	if (!toggleButton || !sidebar || !mainContent) return
 	
 	toggleButton.addEventListener('click', () => {
-		/*
-		md:hidden 
-		md:col-span-full
-		*/
-		sidebar.classList.add('md:hidden')
-		mainContent.classList.remove('md:col-span-2')
-		mainContent.classList.add('md:col-span-full')
+		sidebar.remove()
+		mainContent.parentNode.classList.remove('md:grid-cols-3')
 	})
 }
 

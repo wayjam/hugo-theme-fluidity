@@ -2,7 +2,7 @@
   <h2 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
     {{- i18n "shareWith" | strings.Title -}}
   </h2>
-  <div class="flex justify-between">
+  <div class="flex flex-wrap gap-1 justify-between">
     {{- $tag_list := "" -}}
     {{- with .Params.Tags -}}
       {{- $tag_list = delimit . "," -}}

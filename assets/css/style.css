@@ -10,7 +10,8 @@
 @layer base {
   :root {
     /* Font Family */
-    --font-family-base: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    --font-family-base: 'Segoe UI', 'Segoe UI Web (West European)',
+      -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
     --font-family-mono: Consolas, 'Courier New', Courier, monospace;
 
     /* Font Sizes */
@@ -210,7 +211,7 @@
     --color-blue-900: #0c3b5e; /* Darkest */
     --color-blue-950: #082338;
 
-    /* 状态色 - 成功 */
+    /* Status - Success */
     --color-green-50: #052505;
     --color-green-100: #094509;
     --color-green-200: #107c10;
@@ -223,7 +224,7 @@
     --color-green-900: #9ad29a;
     --color-green-950: #9fd89f;
 
-    /* 状态色 - 警告 */
+    /* Status - Warning */
     --color-orange-50: #411200;
     --color-orange-100: #4a1e04;
     --color-orange-200: #712d09;
@@ -236,7 +237,7 @@
     --color-orange-900: #fdcfb4;
     --color-orange-950: #ffddb3;
 
-    /* 状态色 - 危险 */
+    /* Status - Danger */
     --color-red-50: #3b0509;
     --color-red-100: #3f1011;
     --color-red-200: #590815;
@@ -249,7 +250,7 @@
     --color-red-900: #f1bbbc;
     --color-red-950: #f4bfab;
 
-    /* 文本和背景 */
+    /* Text and Background */
     --color-text-primary: #ffffff;
     --color-text-secondary: #d6d6d6;
     --color-text-tertiary: #adadad;
@@ -258,12 +259,12 @@
     --color-background-secondary: #1f1f1f;
     --color-background-tertiary: #141414;
 
-    /* 边框 */
+    /* Border */
     --color-border-primary: #666666;
     --color-border-secondary: #525252;
     --color-border-tertiary: #3d3d3d;
 
-    /* 其他颜色系列也需要类似处理... */
+    /*  Color Series... */
     --color-indigo-50: #001665;
     --color-indigo-100: #002c4e;
     --color-indigo-200: #004377;
@@ -276,7 +277,7 @@
     --color-indigo-900: #cfe4fa;
     --color-indigo-950: #ebf3fc;
 
-    /* Neutral - Dark Theme，从浅到深 */
+    /* Neutral - Dark Theme, from light to dark */
     --color-neutral-50: #ffffff; /* White */
     --color-neutral-100: #f5f5f5; /* Grey96 */
     --color-neutral-200: #e6e6e6; /* Grey90 */
@@ -292,61 +293,88 @@
 }
 
 @layer components {
+}
+
+@layer utilities {
   .prose {
     @apply max-w-none;
 
-    @apply prose-pre:bg-gray-50 
-      prose-pre:dark:bg-gray-800
-      prose-pre:border
-      prose-pre:border-gray-200 
-      prose-pre:dark:border-gray-700
-      prose-blockquote:border-l-4
-      prose-blockquote:border-gray-800
-      prose-blockquote:dark:border-gray-700;
+    /* Title Style */
+    @apply prose-headings:text-neutral-900
+           prose-headings:dark:text-neutral-100
+           prose-headings:font-semibold
+           prose-headings:leading-tight;
 
-    :not(pre) > code {
-      @apply bg-gray-100 
-             dark:bg-gray-800
-             border
-             border-gray-200 
-             dark:border-gray-700
-             rounded-md
-             px-1.5
-             py-0.5;
-    }
+    /* Paragraph Style */
+    @apply prose-p:text-neutral-800
+           prose-p:dark:text-neutral-200
+           prose-p:leading-normal;
 
-    :is(code, blockquote) {
-      @apply !font-normal;
-    }
+    /* List Style */
+    @apply prose-ul:text-neutral-800
+           prose-ul:dark:text-neutral-200
+           prose-ol:text-neutral-800
+           prose-ol:dark:text-neutral-200;
+
+    /* Link Style */
+    @apply prose-a:text-blue-600
+           prose-a:dark:text-blue-400
+           prose-a:no-underline
+           prose-a:font-medium
+           hover:prose-a:text-blue-700
+           hover:prose-a:dark:text-blue-300;
+
+    /* Table Style */
+    @apply prose-table:border-neutral-200
+           prose-table:dark:border-neutral-800
+           prose-th:text-neutral-900
+           prose-th:dark:text-neutral-100
+           prose-th:font-semibold
+           prose-td:text-neutral-800
+           prose-td:dark:text-neutral-200;
+
+    /* Horizontal Line Style */
+    @apply prose-hr:border-neutral-200
+           prose-hr:dark:border-neutral-800;
+
+    /* Emphasized Text Style */
+    @apply prose-strong:text-neutral-900
+           prose-strong:dark:text-neutral-100
+           prose-strong:font-semibold
+           prose-em:text-neutral-900
+           prose-em:dark:text-neutral-100;
+
+    /* Image Style */
+    @apply prose-img:rounded-md
+           prose-img:border
+           prose-img:border-neutral-200
+           prose-img:dark:border-neutral-800;
+
+    /* List Marker Style */
+    @apply prose-li:marker:text-neutral-500
+           prose-li:marker:dark:text-neutral-500;
+
+    /* Code Block Style */
+    @apply prose-pre:font-normal
+           prose-pre:bg-neutral-50
+           prose-pre:dark:bg-neutral-900
+           prose-pre:border-neutral-200
+           prose-pre:border
+           prose-pre:dark:border-neutral-800;
+    @apply prose-code:font-normal
+           prose-code:text-blue-600
+           prose-code:dark:text-blue-400;
+
+    /* Blockquote Style */
+    @apply prose-blockquote:font-normal
+           prose-blockquote:border-l-4
+           prose-blockquote:border-indigo-800
+           prose-blockquote:dark:border-indigo-700;
   }
 
   /* Dark mode styles */
   .dark .prose {
     @apply prose-invert;
-    @apply prose-code:text-gray-100
-      prose-pre:bg-gray-800
-      prose-pre:text-gray-100;
-
-    pre {
-      @apply border-gray-700;
-    }
-
-    :not(pre) > code {
-      @apply bg-gray-800
-             border-gray-700;
-    }
-  }
-}
-
-@layer utilities {
-  .elevation-1 {
-    @apply shadow-[var(--shadow-depth-1)];
-  }
-  .elevation-2 {
-    @apply shadow-[var(--shadow-depth-2)];
-  }
-  .elevation-3 {
-    @apply shadow-[var(--shadow-depth-3)];
   }
 }
 

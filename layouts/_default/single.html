@@ -12,13 +12,12 @@
         class="p-4 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-lg transition-colors duration-200">
         <div class="flex flex-wrap items-center gap-4">
           {{- with .Params.author -}}
-            <div class="flex items-center gap-3">
-              <div>
-                <div class="font-medium text-neutral-700 dark:text-white">{{ . }}</div>
-                {{- with $.Params.role -}}
-                  <div class="text-sm text-neutral-600 dark:text-neutral-400">{{ . }}</div>
-                {{- end -}}
-              </div>
+            <div class="flex items-center gap-1.5 text-neutral-700 dark:text-neutral-400">
+              {{- partial "utils/icon.html" (dict "icon" "user-star") -}}
+              <span class="font-medium text-neutral-700 dark:text-white">{{ . }}</span>
+              {{- with $.Params.role -}}
+                <span class="text-sm text-neutral-600 dark:text-neutral-400">[{{ . }}]</span>
+              {{- end -}}
             </div>
           {{- end -}}
           <div class="flex items-center gap-4 text-neutral-700 dark:text-neutral-400">
@@ -148,7 +147,8 @@
         {{- $activeTab = "" -}}
       {{- end -}}
 
-      <div class="hidden sm:block w-fit">
+
+      <div class="w-fit">
         <nav class="flex gap-6" aria-label="Tabs">
           {{- if $enableComments -}}
             {{- partial "inline/single/tab-button.html" (dict "Name" "comments" "Title" (i18n "comment" | strings.Title) "ActiveTab" $activeTab) -}}
@@ -176,6 +176,7 @@
     </aside>
   </div>
 {{- end -}}
+
 
 {{- define "partials/inline/single/tab-button.html" -}}
   <button
