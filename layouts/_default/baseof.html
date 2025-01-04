@@ -4,11 +4,11 @@
   {{- partial "head.html" . -}}
 </head>
 <body>
-  <div class="min-h-screen bg-neutral-100/50 dark:bg-neutral-950">
+  <div class="bg-neutral-100/50 dark:bg-neutral-950">
     <header>
       {{- partial "header.html" . -}}
     </header>
-    <main>
+    <main class="min-h-[30vh]">
       {{- block "main" . -}}{{- end -}}
     </main>
     <footer>
