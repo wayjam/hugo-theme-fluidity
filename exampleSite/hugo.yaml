@@ -134,3 +134,6 @@ params:
   # Math Typesetting Support
   math: false
   mathEngine: mathJax # mathJax | katex
+
+  enableEmoji: true
+

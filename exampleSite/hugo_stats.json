@@ -417,6 +417,7 @@
       "code-blocks",
       "comments",
       "enclosed-cjk-letters-and-months",
+      "example",
       "fn:1",
       "fnref:1",
       "gist-shortcode",
