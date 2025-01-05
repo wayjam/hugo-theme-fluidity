@@ -50,6 +50,16 @@ ignoreLogs:
   - warning-goldmark-raw-html
 markup:
   defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ["$$", "$$"]
+            - ["\\[", "\\]"]
+          inline:
+            - ["\\(", "\\)"]
 
 build:
   buildStats:
@@ -121,3 +131,6 @@ params:
     disabled: false
     provider: pagefind #available: google, pagefind
 
+  # Math Typesetting Support
+  math: false
+  mathEngine: mathJax # mathJax | katex

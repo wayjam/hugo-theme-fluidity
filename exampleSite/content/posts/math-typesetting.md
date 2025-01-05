@@ -2,48 +2,71 @@
 author: Hugo Authors
 title: Math Typesetting
 date: 2024-08-02
-description: A brief guide to setup KaTeX
-math: true
+description: A brief guide to setup Math Typesetting
+params:
+  math: true
 ---
 
 Mathematical notation in a Hugo project can be enabled by using third party JavaScript libraries.
 <!--more-->
 
-In this example we will be using [KaTeX](https://katex.org/)
+\begin{aligned}
+KL(\hat{y} || y) &= \sum_{c=1}^{M}\hat{y}_c \log{\frac{\hat{y}_c}{y_c}} \\
+JS(\hat{y} || y) &= \frac{1}{2}(KL(y||\frac{y+\hat{y}}{2}) + KL(\hat{y}||\frac{y+\hat{y}}{2}))
+\end{aligned}
 
-- Create a partial under `/layouts/partials/math.html`
-- Within this partial reference the [Auto-render Extension](https://katex.org/docs/autorender.html) or host these scripts locally.
-- Include the partial in your templates like so:  
+> Check out [Hugo Math Typesetting](https://gohugo.io/content-management/mathematics/) for more details.
 
-```bash
-{{ if or .Params.math .Site.Params.math }}
-{{ partial "math.html" . }}
-{{ end }}
+- To enable Math Typesetting globally set the parameter `math` to `true` in a project's configuration
+- To enable Math Typesetting on a per page basis include the parameter `math: true` in content files
+
+Configure the `hugo.yaml` file to setup goldmark to support Math Typesetting:
+
+```yaml
+markup:
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ["$$", "$$"]
+            - ["\\[", "\\]"]
+          inline:
+            - ["\\(", "\\)"]
 ```
 
-- To enable KaTex globally set the parameter `math` to `true` in a project's configuration
-- To enable KaTex on a per page basis include the parameter `math: true` in content files
+Note: You can also set the parameter `math.engine` to `katex` to use [KaTeX](https://katex.org/) instead of MathJax.
 
-**Note:** Use the online reference of [Supported TeX Functions](https://katex.org/docs/supported.html)
+### Math
 
-{{< math.inline >}}
-{{ if or .Page.Params.math .Site.Params.math }}
-<!-- KaTeX -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
-{{ end }}
-{{</ math.inline >}}
+This is an inline \(a^*=x-b^*\) equation.
 
-### Examples
+These are block equations:
 
-{{< math.inline >}}
-<p>
-Inline math: \(\varphi = \dfrac{1+\sqrt5}{2}= 1.6180339887…\)
-</p>
-{{</ math.inline >}}
+\[a^*=x-b^*\]
 
-Block math:
+\[ a^*=x-b^* \]
+
+\[
+a^*=x-b^*
+\]
+
+These are also block equations:
+
+$$a^*=x-b^*$$
+
+$$a^*=x-b^*$$
+
 $$
- \varphi = 1+\frac{1} {1+\frac{1} {1+\frac{1} {1+\cdots} } } 
+a^*=x-b^*
 $$
+
+When \(a \ne 0\), there are two solutions to \(ax^2 + bx + c = 0\) and they are
+$$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+
+
+### Chemistry
+
+$$C_p[\ce{H2O(l)}] = \pu{75.3 J // mol K}$$

@@ -1,6 +1,6 @@
 # Theme Fluidity
 
-A fluid and responsive Hugo theme
+A fluid and responsive Hugo theme.
 
 ## Features
 

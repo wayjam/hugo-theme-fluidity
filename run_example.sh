@@ -1,6 +1,6 @@
 hugo server \
 --source exampleSite \
---theme fluidity \
+--theme hugo-theme-fluidity \
 --themesDir ../.. \
 --printI18nWarnings \
 --templateMetrics \
