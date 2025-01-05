@@ -4,12 +4,14 @@ A fluid and responsive Hugo theme
 
 ## Features
 
-- Fluent Design
+- Fluent Design mixed with [Tailwind CSS](https://tailwindcss.com/)
 - Search Support
 - Code Highlight
 - Dark Mode
 - Responsive
 - Archive Page
+
+Checkout [demo](https://wayjam.github.io/hugo-theme-fluidity/) now.
 
 ## Installation
 
@@ -86,11 +88,6 @@ params:
 3. Install pagefind: `npm i pagefind`
 
 4. Run pagefind before every build: `npx pagefind`
-
-## Credits
-
-- [fluent web components](https://www.fluentui.com/components/web)
-- [tailwindcss](https://tailwindcss.com/)
 
 ## License
 
