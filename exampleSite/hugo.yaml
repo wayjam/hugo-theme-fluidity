@@ -2,7 +2,7 @@ baseURL: https://wayjam.github.io/hugo-theme-fluidity/
 languageCode: en
 defaultContentLanguage: en
 title: Example Site
-theme: fluidity
+theme: hugo-theme-fluidity
 enableRobotsTXT: true
 summaryLength: 100 # Configure how long the post summary should be on the homepage.
 hasCJKLanguage: false
