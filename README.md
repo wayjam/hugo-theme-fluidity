@@ -1,5 +1,10 @@
 # Theme Fluidity
 
+[![hugo-theme-fluidity](https://img.shields.io/badge/Hugo%20Theme-%40Fluidity-blue)](https://themes.gohugo.io/hugo-theme-fluidity/)
+[![Hugo](https://img.shields.io/badge/Hugo-%5E0.128.0-orange)](https://gohugo.io/)
+![GitHub](https://img.shields.io/github/license/wayjam/hugo-theme-fluidity)
+![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/wayjam/hugo-theme-fluidity)
+
 A fluid and responsive Hugo theme.
 
 ## Features
