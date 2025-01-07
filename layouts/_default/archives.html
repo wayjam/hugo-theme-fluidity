@@ -22,17 +22,16 @@
             {{- if ne .Key "January 0001" -}}
               <div>
                 <!-- Header -->
-                <div class="p-4 bg-neutral-100/50 dark:bg-neutral-900">
+                <div class="p-4 bg-neutral-100 dark:bg-neutral-900">
                   <div class="flex items-center gap-3">
-                    <span class="text-xl font-semibold text-neutral-900 dark:text-white">
+                    <h2 class="text-xl font-semibold text-neutral-900 dark:text-white">
                       {{- replace .Key "January 0001" "" }}
-                    </span>
+                    </h2>
                     <div
                       class="flex items-center space-x-1 text-xs px-2 py-1 bg-blue-500 rounded-full">
                       <div style="width: 0.4rem; height: 0.4rem" class="bg-gray-200 rounded-full"></div>
                       <div class="text-white">
-                        {{- len .Pages -}}
-                        {{- i18n "article" | default "articles" -}}
+                        {{- len .Pages }} {{ i18n "article" | default "articles" -}}
                       </div>
                     </div>
                   </div>

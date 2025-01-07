@@ -47,10 +47,10 @@
       {{- if $isFirst }}
       mb-12 border-neutral-400 dark:border-neutral-700 hover:shadow-md hover:-translate-y-1
       motion-safe:hover:scale-[1.01]
-      {{ else }}
+    {{ else }}
       border-neutral-400/50 dark:border-neutral-800 hover:shadow-sm hover:-translate-y-0.5
       motion-safe:hover:scale-[1.005]
-      {{ end -}}
+    {{ end -}}
       hover:bg-neutral-50 dark:hover:bg-neutral-800/60
       transition-all duration-300 ease-out">
     <article class="flex flex-col gap-4">
@@ -102,16 +102,18 @@
       <div class="mt-2">
         <a
           href="{{ $item.Permalink | relURL }}"
+          aria-label="{{- i18n "readMore" | strings.Title }} about {{ $item.Title -}}"
           class="inline-flex items-center justify-center px-4 h-9 text-sm font-medium rounded-lg
             {{- if $isFirst }}
             bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500
-            {{ else }}
+          {{ else }}
             bg-white text-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300
             dark:hover:bg-neutral-700 ring-1 ring-neutral-300 dark:ring-neutral-600
-            {{ end -}}
+          {{ end -}}
             focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
             transition-colors duration-200">
-          {{ i18n "readMore" | strings.Title }}
+          {{- i18n "readMore" | strings.Title }}
+          <span class="sr-only"> about {{ $item.Title }}</span>
         </a>
       </div>
     </article>

@@ -7,13 +7,13 @@
         {{- .Title -}}
       </h1>
       <p class="text-base text-neutral-600 dark:text-neutral-400">
-        {{- len .Pages -}}
-        {{- i18n "article" | default "articles" -}}
+        {{- len .Pages }} {{ i18n "article" | default "articles" -}}
       </p>
     </div>
 
     <!-- Article list -->
     <div class="space-y-4">
+      <h2 class="sr-only">{{- .Title }} total {{ len .Pages }} {{ i18n "article" | default "articles" -}}</h2>
       {{- $pageSize := site.Params.pageSize.list | default 10 -}}
       {{- $paginator := .Paginate .Pages $pageSize -}}
       {{- if $paginator -}}

@@ -15,14 +15,18 @@
         </div>
       {{- else -}}
         {{- if eq site.Params.search.provider "pagefind" -}}
-          <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-          <script src="/pagefind/pagefind-ui.js" type="text/javascript"></script>
+          <link href="{{ "pagefind/pagefind-ui.css" | absURL }}" rel="stylesheet" />
+          <script src="{{ "pagefind/pagefind-ui.js" | absURL }}" type="text/javascript"></script>
           <div id="search" class="py-2"></div>
           <script>
             window.addEventListener('DOMContentLoaded', event => {
               new PagefindUI({
                 element: '#search',
-                autofocus: true
+                autofocus: true,
+                translations: {
+                  placeholder: "enter keyword and hit enter",
+                  zero_results: "Couldn't find [SEARCH_TERM]"
+              }
               })
             })
           </script>

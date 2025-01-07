@@ -148,7 +148,7 @@
 
 
       <div class="w-fit">
-        <nav class="flex gap-6" aria-label="Tabs">
+        <nav class="flex gap-6" aria-label="Tabs" role="tablist">
           {{- if $enableComments -}}
             {{- partial "inline/single/tab-button.html" (dict "Name" "comments" "Title" (i18n "comment" | strings.Title) "ActiveTab" $activeTab) -}}
           {{- end -}}
@@ -180,6 +180,7 @@
 {{- define "partials/inline/single/tab-button.html" -}}
   <button
     data-tab="{{ .Name }}"
+    role="tab"
     aria-label="{{ .Title }}"
     class="tab-button border-b-4 px-1 pb-2 text-base font-medium
       text-neutral-600 dark:text-neutral-400 
