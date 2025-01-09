@@ -45,8 +45,8 @@ lastModified:
 article:
   one: 篇文章
   other: 篇文章
-totalArticles:
-  other: 篇文章
+total:
+  other: 总共
 toggleToc:
   other: 切换目录
 relatedArticles:

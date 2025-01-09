@@ -7,13 +7,14 @@
       id="toc-toggle"
       aria-label="{{ i18n "toggleToc" }}"
       class="inline-flex items-center justify-center w-8 h-8 rounded-lg
-        bg-white dark:bg-neutral-900 
-        text-neutral-700 dark:text-neutral-300
-        hover:bg-neutral-100 dark:hover:bg-neutral-800
-        ring-1 ring-neutral-300 dark:ring-neutral-700
+        bg-blue-50/90 dark:bg-blue-900/30 
+        text-blue-600 dark:text-blue-300
+        hover:bg-cyan-50/90 dark:hover:bg-cyan-900/30
+        hover:text-cyan-600 dark:hover:text-cyan-300
+        ring-1 ring-blue-100 dark:ring-blue-900/50
         cursor-pointer
-        focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
-        transition-colors duration-200">
+        focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400 dark:focus-visible:ring-cyan-500
+        transition-all duration-200">
       <span class="toc-expand hidden">
         {{- partial "utils/icon.html" (dict "icon" "arrow-expand-all" "class" "w-5 h-5") -}}
       </span>
@@ -30,7 +31,7 @@
         {{- $toc := replaceRE "<nav>" "<nav class='space-y-2'>" .TableOfContents -}}
         {{- $toc := replaceRE "<ul>" "<ul class='space-y-1 ml-2'>" $toc -}}
         {{- $toc := replaceRE "<li>" "<li class='py-0.5'>" $toc -}}
-        {{- $toc := replaceRE "<a " "<a class='block text-sm text-neutral-700 dark:text-neutral-400  hover:text-blue-600 dark:hover:text-blue-400  hover:translate-x-1 transition-all duration-200' " $toc -}}
+        {{- $toc := replaceRE "<a " "<a class='block text-sm text-neutral-700 dark:text-neutral-400 hover:text-cyan-600 dark:hover:text-cyan-400 hover:translate-x-1 transition-all duration-200' " $toc -}}
         {{- $toc | safeHTML -}}
       </nav>
     </div>

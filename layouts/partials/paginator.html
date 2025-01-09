@@ -12,14 +12,23 @@
             href="#"
             disabled
           {{ end -}}
-          class="inline-flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg 
+            transition-all duration-300 ease-out
           {{- if $pag.HasPrev }}
-            bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
-            dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
+            bg-blue-50/90 dark:bg-blue-900/30
+            text-blue-600 dark:text-blue-300
+            hover:bg-cyan-50/90 dark:hover:bg-cyan-900/30
+            hover:text-cyan-600 dark:hover:text-cyan-300
+            hover:-translate-y-0.5
+            backdrop-blur-sm
+            ring-1 ring-blue-100 dark:ring-blue-900/50
+            shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30
           {{- else }}
-            bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed
-          {{ end -}} 
-            ">
+            bg-neutral-100/80 dark:bg-neutral-800/80
+            text-neutral-400 dark:text-neutral-600
+            cursor-not-allowed
+            backdrop-blur-sm
+          {{ end -}}">
           {{- partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") -}}
         </a>
 
@@ -45,18 +54,25 @@
               <a
                 href="{{- .URL -}}"
                 {{- if $isCurrent }}
-                  aria-current="page" aria-label="Current Page {{- .PageNumber -}}"
-                {{- else }}
-                  aria-label="Go to Page {{- .PageNumber -}}"
-                {{ end -}}
-                class="inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 rounded-lg transition-colors duration-200
+                  aria-current="page"
+                {{- end -}}
+                class="inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 rounded-lg 
+                  transition-all duration-300 ease-out
                 {{- if $isCurrent }}
-                  bg-blue-600 dark:bg-blue-700 text-white dark:text-white font-medium
+                  bg-blue-600 dark:bg-blue-700
+                  text-white
+                  font-medium
+                  shadow-xs shadow-blue-200/50 dark:shadow-blue-900/30
                 {{- else }}
-                  bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
-                  dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
-                {{ end -}}
-                  ">
+                   bg-white/80 dark:bg-neutral-900/80
+                    text-blue-700 dark:text-blue-300
+                  hover:bg-cyan-50/90 dark:hover:bg-cyan-900/30
+                  hover:text-cyan-600 dark:hover:text-cyan-300
+                  hover:-translate-y-0.5
+                  backdrop-blur-sm
+                  ring-1 ring-blue-100 dark:ring-blue-900/50
+                  shadow-xs shadow-blue-100/50 dark:shadow-blue-900/30
+                {{ end -}}">
                 {{- .PageNumber -}}
               </a>
             {{- else if $shouldEllipse -}}
@@ -75,14 +91,21 @@
           {{- else }}
             disabled
           {{ end -}}
-          class="inline-flex items-center justify-center w-10 h-10 rounded-lg transition-colors duration-200
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg 
+            transition-all duration-200 ease-out
           {{- if $pag.HasNext }}
-            bg-white dark:bg-neutral-900 text-neutral-700 dark:text-neutral-300 hover:bg-neutral-100
-            dark:hover:bg-neutral-800 ring-1 ring-neutral-300 dark:ring-neutral-700
+            bg-white/80 dark:bg-neutral-900/80
+            text-blue-700 dark:text-blue-300
+            hover:bg-blue-50 dark:hover:bg-blue-900/40
+            hover:-translate-y-0.5
+            backdrop-blur-sm
+            ring-1 ring-blue-100 dark:ring-blue-900/50
           {{- else }}
-            bg-neutral-100 dark:bg-neutral-800 text-neutral-400 dark:text-neutral-600 cursor-not-allowed
-          {{ end -}} 
-            ">
+            bg-neutral-100/80 dark:bg-neutral-800/80
+            text-neutral-400 dark:text-neutral-600
+            cursor-not-allowed
+            backdrop-blur-sm
+          {{ end -}}">
           {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
         </a>
       </nav>

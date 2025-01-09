@@ -2,20 +2,70 @@
   {{- $related := .Site.RegularPages.Related . | first 3 -}}
   {{- range $related -}}
     <div
-      class="p-4 bg-white dark:bg-gray-900 rounded-xl 
-                    border border-gray-200 dark:border-gray-700 
-                    transition-all duration-200 
-                    hover:bg-gray-50 dark:hover:bg-gray-700/50">
-      <h3 class="text-lg font-semibold mb-2">
-        <a
-          href="{{ .RelPermalink }}"
-          class="text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 transition-colors duration-200">
-          {{ .Title }}
-        </a>
-      </h3>
-      <p class="text-gray-700 dark:text-gray-300 mb-4">
-        {{- .Summary | plainify | truncate 80 -}}
-      </p>
+      class="relative overflow-hidden
+                p-5
+                bg-gradient-to-br from-white/95 to-neutral-50/90
+                dark:from-neutral-900/95 dark:to-neutral-800/90
+                rounded-xl
+                border border-neutral-200/80 dark:border-neutral-700/80
+                backdrop-blur-md
+                shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
+                transition-all duration-300 ease-out
+                hover:-translate-y-1
+                motion-safe:hover:scale-[1.02]
+                group">
+      <!-- Decorative elements -->
+      <div
+        class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+                  translate-x-[-200%] group-hover:translate-x-[200%]
+                  transition-transform duration-1000 ease-out"></div>
+
+      <div
+        class="absolute bottom-0 left-0 right-0 h-0.5
+                  bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
+                  dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40
+                  transform origin-left scale-x-0 group-hover:scale-x-100
+                  transition-transform duration-300 ease-out"></div>
+
+      <!-- Content -->
+      <div class="relative space-y-3">
+        <h3 class="text-lg font-semibold">
+          <a
+            href="{{ .RelPermalink }}"
+            class="relative inline-block
+                    text-neutral-900 dark:text-white 
+                    group-hover:text-sky-600 dark:group-hover:text-sky-400 
+                    transition-colors duration-300">
+            <span class="relative">
+              {{ .Title }}
+              <span
+                class="absolute bottom-0 left-0 right-0 h-px
+                         bg-gradient-to-r from-sky-400 to-blue-500
+                         dark:from-sky-500 dark:to-blue-400
+                         transform origin-left scale-x-0 group-hover:scale-x-100
+                         transition-transform duration-300 ease-out"></span>
+            </span>
+          </a>
+        </h3>
+
+        <p
+          class="text-neutral-600 dark:text-neutral-300
+                  transform transition-transform duration-300 ease-out
+                  group-hover:translate-x-0.5">
+          {{- .Summary | plainify | truncate 80 -}}
+        </p>
+
+        <!-- Read more link -->
+        <div
+          class="flex items-center gap-1 pt-1
+                    text-sky-600 dark:text-sky-400
+                    opacity-0 group-hover:opacity-100
+                    transform -translate-x-2 group-hover:translate-x-0
+                    transition-all duration-300 ease-out">
+          <span class="text-sm font-medium">Read more</span>
+          {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
+        </div>
+      </div>
     </div>
   {{- end -}}
 </div>

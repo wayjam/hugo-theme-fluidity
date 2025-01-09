@@ -2,12 +2,22 @@
   <div class="container mx-auto px-4 py-8 space-y-8">
     <!-- Header section -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2">
-        <span class="inline-block mr-1">{{ partial "utils/icon.html" (dict "icon" "collection") }}</span>
-        {{- .Title -}}
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2 
+                 flex items-center gap-2 group">
+        <span class="inline-block text-cyan-600 dark:text-cyan-400 
+                     group-hover:rotate-12 transition-transform duration-300">
+          {{- partial "utils/icon.html" (dict "icon" "collection") -}}
+        </span>
+        <span class="relative">
+          {{- .Title -}}
+          <span class="absolute -bottom-1 left-0 right-0 h-0.5 
+                       bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-400
+                       transform origin-left scale-x-0 group-hover:scale-x-100
+                       transition-transform duration-300 ease-out"></span>
+        </span>
       </h1>
       <p class="text-base text-neutral-600 dark:text-neutral-400">
-        {{- len .Pages }} {{ i18n "article" | default "articles" -}}
+        {{- i18n "total" | default "Total" | title }} {{ len .Pages }} {{ i18n "article" | default "articles" -}}
       </p>
     </div>
 
@@ -17,8 +27,11 @@
       {{- $pageSize := site.Params.pageSize.list | default 10 -}}
       {{- $paginator := .Paginate .Pages $pageSize -}}
       {{- if $paginator -}}
-        <div
-          class="bg-white dark:bg-neutral-900 border border-neutral-400 dark:border-neutral-800 rounded-xl divide-y divide-neutral-200 dark:divide-neutral-700">
+        <div class="bg-white/80 dark:bg-neutral-900/80 
+                    border border-neutral-400/80 dark:border-neutral-800/80
+                    rounded-xl divide-y divide-blue-100 dark:divide-blue-900/50 
+                    backdrop-blur-sm
+                    shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30">
           {{- range $paginator.Pages }}
             {{- partial "partials/archive-article.html" . }}
           {{ end }}

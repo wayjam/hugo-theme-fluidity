@@ -300,15 +300,29 @@
     @apply max-w-none;
 
     /* Title Style */
-    @apply prose-headings:text-neutral-900
+    @apply prose-headings:relative
+           prose-headings:text-neutral-900
            prose-headings:dark:text-neutral-100
            prose-headings:font-semibold
            prose-headings:leading-tight;
 
+    /* Heading */
+    @apply prose-h2:text-2xl
+           prose-h2:font-bold
+           prose-h2:mt-8
+           prose-h2:mb-4
+           prose-h3:text-xl
+           prose-h3:font-semibold
+           prose-h3:mt-6
+           prose-h3:mb-3;
+
     /* Paragraph Style */
     @apply prose-p:text-neutral-800
            prose-p:dark:text-neutral-200
-           prose-p:leading-normal;
+           prose-p:leading-relaxed
+           prose-p:text-justify
+           prose-p:text-neutral-800
+           dark:prose-p:text-neutral-200;
 
     /* List Style */
     @apply prose-ul:text-neutral-800
@@ -321,8 +335,9 @@
            prose-a:dark:text-blue-400
            prose-a:no-underline
            prose-a:font-medium
-           hover:prose-a:text-blue-700
-           hover:prose-a:dark:text-blue-300;
+           hover:prose-a:text-blue-700 hover:prose-a:dark:text-blue-300
+           dark:prose-a:text-blue-400 dark:hover:prose-a:text-blue-300
+           prose-a:transition-all prose-a:duration-200;
 
     /* Table Style */
     @apply prose-table:border-neutral-200
@@ -335,20 +350,18 @@
 
     /* Horizontal Line Style */
     @apply prose-hr:border-neutral-200
-           prose-hr:dark:border-neutral-800;
+           prose-hr:dark:border-neutral-700;
 
     /* Emphasized Text Style */
     @apply prose-strong:text-neutral-900
            prose-strong:dark:text-neutral-100
            prose-strong:font-semibold
-           prose-em:text-neutral-900
-           prose-em:dark:text-neutral-100;
+           prose-em:text-neutral-800
+           prose-em:dark:text-neutral-200;
 
     /* Image Style */
     @apply prose-img:rounded-md
-           prose-img:border
-           prose-img:border-neutral-200
-           prose-img:dark:border-neutral-800;
+           prose-img:shadow-md;
 
     /* List Marker Style */
     @apply prose-li:marker:text-neutral-500
@@ -362,14 +375,18 @@
            prose-pre:border
            prose-pre:dark:border-neutral-800;
     @apply prose-code:font-normal
-           prose-code:text-blue-600
-           prose-code:dark:text-blue-400;
+           prose-code:text-sky-600
+           prose-code:dark:text-sky-400
+           prose-code:bg-neutral-100 dark:prose-code:bg-neutral-800
+           prose-code:before:content-none prose-code:after:content-none
+           prose-code:px-1.5 prose-code:rounded-md;
 
     /* Blockquote Style */
     @apply prose-blockquote:font-normal
            prose-blockquote:border-l-4
-           prose-blockquote:border-indigo-800
-           prose-blockquote:dark:border-indigo-700;
+           prose-blockquote:border-blue-500 dark:prose-blockquote:border-blue-600
+           prose-blockquote:bg-blue-50/50 dark:prose-blockquote:bg-blue-900/20
+           prose-blockquote:rounded-r-lg prose-blockquote:py-1;
   }
 
   /* Dark mode styles */

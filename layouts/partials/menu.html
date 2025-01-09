@@ -12,7 +12,7 @@
 
 {{- with index site.Menus $menuID -}}
   <nav class="hidden md:block">
-    <ul class="flex items-center gap-1">
+    <ul class="flex items-center gap-2">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
     </ul>
   </nav>
@@ -37,21 +37,28 @@
     <li class="relative group">
       <a
         class="
-          inline-flex items-center px-4 py-2 rounded-md
+          inline-flex items-center px-4 py-2.5 rounded-lg
           text-base font-medium
+          bg-transparent
           text-neutral-700 dark:text-neutral-200
-          hover:text-neutral-900 dark:hover:text-white
-          hover:bg-neutral-300 dark:hover:bg-neutral-800/70
-          transition-all duration-200 ease-out
+          hover:text-sky-600 dark:hover:text-sky-300
+          hover:bg-sky-50/80 dark:hover:bg-sky-900/20
+          active:bg-sky-100 dark:active:bg-sky-900/30
+          transform-gpu 
+          transition-all duration-300 ease-in-out
+          motion-safe:hover:scale-[1.02]
           relative
-          after:absolute after:bottom-0 after:left-2 after:right-2
-          after:h-0.5 after:rounded-full
-          after:bg-primary-500 dark:after:bg-primary-400
-          after:origin-left after:scale-x-0
-          hover:after:scale-x-100
-          after:transition-transform after:duration-200
+          before:absolute before:inset-0 
+          before:rounded-lg
+          before:bg-gradient-to-br
+          before:from-transparent before:to-transparent
+          before:opacity-0
+          hover:before:from-sky-50/50 hover:before:to-sky-100/50 
+          dark:hover:before:from-sky-900/30 dark:hover:before:to-sky-800/30
+          before:transition-opacity before:duration-300
           {{- if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
-          text-primary-600 dark:text-primary-400 after:scale-x-100
+          text-sky-600 dark:text-sky-300 font-semibold
+          before:opacity-100
           {{ end -}}"
         {{- range $k, $v := $attrs -}}
           {{- with $v -}}
@@ -60,20 +67,24 @@
         {{- end -}}>
         <span class="relative">{{ $name -}}</span>
       </a>
-
       {{- with .Children -}}
         <ul
           class="
-            absolute top-full left-0 mt-1
-            min-w-[200px]
-            bg-white dark:bg-neutral-900
-            shadow-lg shadow-neutral-200/50 dark:shadow-neutral-900/50
-            rounded-lg
-            border border-neutral-200/80 dark:border-neutral-800
+            absolute top-full left-0 mt-2
+            min-w-[220px]
+            bg-white/95 dark:bg-neutral-900/95
+            shadow-lg shadow-sky-100/20 dark:shadow-sky-900/30
+            rounded-xl
+            border border-sky-100/50 dark:border-sky-800/50
+            backdrop-blur-md
             opacity-0 invisible
-            transform -translate-y-2
-            transition-all duration-200 ease-out
-            group-hover:opacity-100 group-hover:visible group-hover:translate-y-0">
+            transform -translate-y-1 scale-95
+            transition-all duration-300 ease-out
+            origin-top-left
+            motion-safe:group-hover:scale-100
+            group-hover:opacity-100 
+            group-hover:visible 
+            group-hover:translate-y-0">
           {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
         </ul>
       {{- end -}}

@@ -33,7 +33,10 @@
 }
 
 .chroma {
-  background-color: transparent;
+}
+
+pre code {
+  @apply bg-transparent;
 }
 
 /* Basic elements */

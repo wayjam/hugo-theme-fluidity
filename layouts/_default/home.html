@@ -42,17 +42,30 @@
   {{- $showSection := .showSection -}}
   <div
     class="break-inside-avoid mb-6 last:mb-0
-      bg-white dark:bg-neutral-900 rounded-lg p-6 
-      border 
-      {{- if $isFirst }}
-      mb-12 border-neutral-400 dark:border-neutral-700 hover:shadow-md hover:-translate-y-1
-      motion-safe:hover:scale-[1.01]
+    relative overflow-hidden
+    bg-gradient-to-br from-white/90 to-neutral-50/85
+    dark:from-neutral-900/90 dark:to-neutral-800/85
+    rounded-xl p-6
+    border border-neutral-400/80 dark:border-neutral-800/80
+    backdrop-blur-md
+    transform-gpu
+    {{- if $isFirst }}
+      mb-12 hover:shadow-lg hover:shadow-sky-100/20 dark:hover:shadow-sky-900/10 hover:-translate-y-1.5
+      motion-safe:hover:scale-[1.02] hover:from-white/95 hover:to-sky-50/80 dark:hover:from-neutral-900/95
+      dark:hover:to-sky-900/80
     {{ else }}
-      border-neutral-400/50 dark:border-neutral-800 hover:shadow-sm hover:-translate-y-0.5
-      motion-safe:hover:scale-[1.005]
+      hover:shadow-md hover:shadow-sky-100/10 dark:hover:shadow-sky-900/5 hover:-translate-y-1
+      motion-safe:hover:scale-[1.01] hover:from-white/95 hover:to-sky-50/90 dark:hover:from-neutral-900/95
+      dark:hover:to-sky-900/90
     {{ end -}}
-      hover:bg-neutral-50 dark:hover:bg-neutral-800/60
-      transition-all duration-300 ease-out">
+    before:absolute before:inset-0 
+    before:bg-gradient-to-br before:from-transparent before:to-transparent
+    before:opacity-0 
+    hover:before:opacity-100
+    before:transition-all before:duration-500
+    hover:before:from-sky-100/20 hover:before:to-blue-100/30 hover:border-sky-500/20
+    dark:hover:before:from-sky-800/20 dark:hover:before:to-blue-900/30 dark:hover:border-sky-500/40
+    transition-all duration-300 ease-out">
     <article class="flex flex-col gap-4">
       <div class="flex justify-between items-center">
         <time
@@ -65,9 +78,9 @@
             href="{{ $item.Section | relURL }}"
             class="inline-flex items-center px-2 py-1 rounded-md
               text-xs font-medium 
-              bg-blue-50 dark:bg-blue-900/30 
+              bg-blue-50/80 dark:bg-blue-900/30
               text-blue-600 dark:text-blue-300
-              hover:bg-blue-100 dark:hover:bg-blue-800/40 
+              hover:bg-blue-100/80 dark:hover:bg-blue-800/40 
               transition-colors duration-200">
             {{ $item.Section }}
           </a>
@@ -87,7 +100,7 @@
         leading-tight">
         <a
           href="{{ $item.Permalink | relURL }}"
-          class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200">
+          class="hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
           {{ $item.Title }}
         </a>
       </h3>
@@ -103,17 +116,32 @@
         <a
           href="{{ $item.Permalink | relURL }}"
           aria-label="{{- i18n "readMore" | strings.Title }} about {{ $item.Title -}}"
-          class="inline-flex items-center justify-center px-4 h-9 text-sm font-medium rounded-lg
-            {{- if $isFirst }}
-            bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-500
+          class="inline-flex items-center justify-center gap-1.5 
+               px-4 h-9 text-sm font-medium rounded-lg
+               transition-all duration-200 ease-out
+               backdrop-blur-[2px]
+               {{- if $isFirst }}
+            bg-gradient-to-r from-sky-500/95 via-sky-500/95 to-blue-400/95 dark:from-sky-600/95 dark:via-sky-600/95
+            dark:to-blue-700/95 text-white dark:text-white hover:from-sky-600/95 hover:via-sky-600/95
+            hover:to-blue-700/95 dark:hover:from-sky-500/95 dark:hover:via-sky-500/95 dark:hover:to-blue-600/95 border
+            border-white/20 dark:border-white/10 shadow-sm shadow-sky-200/30 dark:shadow-sky-900/20 hover:shadow-md
+            hover:shadow-sky-200/40 dark:hover:shadow-sky-900/30 hover:-translate-y-0.5 hover:scale-[1.02]
           {{ else }}
-            bg-white text-neutral-700 hover:bg-neutral-100 dark:bg-neutral-800 dark:text-neutral-300
-            dark:hover:bg-neutral-700 ring-1 ring-neutral-300 dark:ring-neutral-600
-          {{ end -}}
-            focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 dark:focus-visible:ring-blue-400
-            transition-colors duration-200">
-          {{- i18n "readMore" | strings.Title }}
-          <span class="sr-only"> about {{ $item.Title }}</span>
+            bg-gradient-to-r from-white/60 via-sky-50/60 to-blue-50/60 dark:from-slate-800/60 dark:via-sky-900/30
+            dark:to-blue-900/30 text-sky-700 dark:text-sky-300 hover:from-sky-50/70 hover:via-sky-50/70
+            hover:to-blue-50/70 dark:hover:from-sky-800/40 dark:hover:via-sky-800/40 dark:hover:to-blue-800/40 border
+            border-slate-200/50 dark:border-slate-700/50 hover:border-sky-200/50 dark:hover:border-sky-700/50 shadow-sm
+            shadow-slate-200/20 dark:shadow-slate-900/20 hover:shadow-md hover:shadow-sky-100/30
+            dark:hover:shadow-sky-900/30 hover:-translate-y-0.5 hover:scale-[1.01]
+          {{ end -}}">
+          <span class="relative">
+            {{- i18n "readMore" | strings.Title }}
+            <span
+              class="absolute bottom-0 left-0 w-full h-px 
+                     bg-gradient-to-r from-transparent via-current to-transparent 
+                     opacity-0 group-hover:opacity-30 transition-opacity duration-200"></span>
+          </span>
+          <span class="sr-only">about {{ $item.Title }}</span>
         </a>
       </div>
     </article>

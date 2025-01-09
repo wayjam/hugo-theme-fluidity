@@ -43,8 +43,8 @@ lastModified:
 article:
   one: article
   other: articles
-totalArticles:
-  other: articles in total
+total:
+  other: total
 toggleToc:
   other: toggle table of contents
 relatedArticles:

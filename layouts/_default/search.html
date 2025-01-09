@@ -1,57 +1,90 @@
 {{- define "main" -}}
   <div class="container mx-auto px-4 py-8 space-y-8">
-    <!-- Header section with updated styling -->
+    <!-- Header section -->
     <div class="mb-8">
-      <h1 class="text-3xl font-bold text-gray-900 dark:text-white mb-4 flex items-center gap-2">
-        {{- partial "utils/icon.html" (dict "icon" "search") -}}
+      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-4 
+                 flex items-center gap-2 group">
+        <span class="inline-block text-cyan-600 dark:text-cyan-400 
+                     group-hover:rotate-12 transition-transform duration-300">
+          {{- partial "utils/icon.html" (dict "icon" "search") -}}
+        </span>
         {{- .Title -}}
       </h1>
     </div>
 
     <div class="space-y-6">
       {{- if site.Params.search.disabled -}}
-        <div class="bg-white dark:bg-neutral-900 rounded-lg shadow-sm">
-          <p class="text-gray-700 dark:text-gray-300 font-semibold py-4 px-6">Search is disabled.</p>
+        <div class="p-6 bg-white/80 dark:bg-neutral-900/80 
+                    rounded-lg border border-neutral-400/80 dark:border-neutral-800/80
+                    backdrop-blur-sm
+                    shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30">
+          <p class="text-neutral-700 dark:text-neutral-300 font-medium">
+            Search is disabled.
+          </p>
         </div>
       {{- else -}}
         {{- if eq site.Params.search.provider "pagefind" -}}
           <link href="{{ "pagefind/pagefind-ui.css" | absURL }}" rel="stylesheet" />
           <script src="{{ "pagefind/pagefind-ui.js" | absURL }}" type="text/javascript"></script>
-          <div id="search" class="py-2"></div>
+          <div class="p-6 bg-white/80 dark:bg-neutral-900/80 
+          rounded-lg border border-neutral-400/80 dark:border-neutral-800/80
+          backdrop-blur-sm
+          shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30">
+          <div id="search" class="py-2">
+          </div>
+          </div>
           <script>
             window.addEventListener('DOMContentLoaded', event => {
               new PagefindUI({
                 element: '#search',
                 autofocus: true,
                 translations: {
-                  placeholder: "enter keyword and hit enter",
-                  zero_results: "Couldn't find [SEARCH_TERM]"
-              }
+                  placeholder: "Enter keyword and hit enter...",
+                  zero_results: "No results found for [SEARCH_TERM]"
+                }
               })
             })
           </script>
         {{- end -}}
 
         {{- if eq site.Params.search.provider "google" -}}
-          <div>
+          <div class="p-6 bg-white/80 dark:bg-neutral-900/80 
+                      rounded-lg border border-neutral-400/80 dark:border-neutral-800/80
+                      backdrop-blur-sm
+                      shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30">
             <form id="search" onsubmit="google_search(); return false;">
-              <div class="relative">
+              <div class="relative group">
                 <input
                   type="text"
-                  class="bg-white dark:bg-neutral-900 w-full px-4 py-3 rounded-lg border border-gray-400 dark:border-gray-600 
-                         text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400
-                         focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-colors duration-200"
                   id="google-search"
-                  placeholder="Enter search term and hit enter" />
+                  placeholder="Enter search term and hit enter..."
+                  class="w-full px-4 py-3 rounded-lg
+                         bg-white/90 dark:bg-neutral-800/90
+                         text-neutral-900 dark:text-white 
+                         placeholder-neutral-500 dark:placeholder-neutral-400
+                         border border-blue-100 dark:border-blue-900/50
+                         focus:border-sky-500 dark:focus:border-sky-500
+                         focus:ring-2 focus:ring-sky-400/50 dark:focus:ring-sky-500/50
+                         focus:outline-none
+                         transition-all duration-200
+                         backdrop-blur-sm
+                         group-hover:border-sky-300 dark:group-hover:border-sky-700" />
+                
+                <div class="absolute right-3 top-1/2 -translate-y-1/2
+                            text-neutral-400 dark:text-neutral-500
+                            group-hover:text-blue-500 dark:group-hover:text-blue-400
+                            transition-colors duration-200">
+                  {{- partial "utils/icon.html" (dict "icon" "search") -}}
+                </div>
               </div>
             </form>
           </div>
           <script language="Javascript" type="text/javascript">
             function google_search() {
-                var query = document.getElementById('google-search').value;
-                window.open(
+              var query = document.getElementById('google-search').value;
+              window.open(
                 'https://www.google.com/search?q=site:' + '{{ .Site.BaseURL | absLangURL }} ' + query
-                );
+              );
             }
           </script>
         {{- end -}}

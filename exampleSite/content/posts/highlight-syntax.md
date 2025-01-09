@@ -167,3 +167,7 @@ By `{{</* highlight go-html-template "linenos=table,hl_lines=1 3-7,linenostart=1
   </div>
 </section>
 {{< / highlight >}}
+
+This is the inline code: `footer` and `header`.
+
+Now this is a example site running on `hugo server`.

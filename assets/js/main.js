@@ -69,10 +69,14 @@ function setupToc() {
 	}
 }
 
-function setupTabs() {
-	const tabButtons = document.querySelectorAll('.tab-button')
-	const tabContents = document.querySelectorAll('.tab-content')
-	const tabSelect = document.querySelector('select#Tab')
+function setupArticleAsideTabs() {
+	const articleAside = document.getElementById('article-aside')
+
+	if (!articleAside) return
+
+	const tabButtons = articleAside.querySelectorAll('.tab-button')
+	const tabContents = articleAside.querySelectorAll('.tab-content')
+	const tabSelect = articleAside.querySelector('select#Tab')
 
 	function switchTab(tabId) {
 		// Hide all tab contents
@@ -81,7 +85,7 @@ function setupTabs() {
 		})
 
 		// Show selected tab content
-		const selectedContent = document.getElementById(tabId)
+		const selectedContent = articleAside.querySelector(`#${tabId}`)
 		if (selectedContent) {
 			selectedContent.classList.remove('hidden')
 		}
@@ -92,12 +96,6 @@ function setupTabs() {
 			button.setAttribute('aria-selected', isSelected)
 
 			// Remove all state classes first
-			/* for tailwind
-			border-blue-500 border-transparent
-			text-blue-600 dark:text-blue-400
-			text-neutral-600 dark:text-neutral-400
-			text-neutral-900 dark:text-neutral-300
-  			*/
 			button.classList.remove(
 				'border-blue-500',
 				'border-transparent',
@@ -143,12 +141,12 @@ function setupTabs() {
 	}
 }
 
-function setupSidebar() {
+function setupArticleSidebar() {
 	const toggleButton = document.getElementById('toggle-sidebar')
 	const sidebar = document.getElementById('sidebar')
 	const mainContent = document.getElementById('main-content')
 	if (!toggleButton || !sidebar || !mainContent) return
-	
+
 	toggleButton.addEventListener('click', () => {
 		sidebar.remove()
 		mainContent.parentNode.classList.remove('md:grid-cols-3')
@@ -158,8 +156,8 @@ function setupSidebar() {
 function init() {
 	setupTheme()
 	setupToc()
-	setupTabs()
-	setupSidebar()
+	setupArticleAsideTabs()
+	setupArticleAsideTabs()
 }
 
 // Initialize theme when DOM is loaded

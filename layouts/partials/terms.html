@@ -12,20 +12,20 @@
 
 {{- with $page.GetTerms $taxonomy -}}
   <div class="flex flex-wrap gap-2 items-center">
-    <span class="text-neutral-600 dark:text-neutral-400">
+    <span class="text-sky-600 dark:text-sky-400">
       {{- partial "utils/icon.html" (dict "icon" "tags") -}}
     </span>
     {{- range . -}}
-      <a
-        href="{{ .RelPermalink }}"
-        class="group inline-flex items-center rounded-md px-2 py-0.5 text-sm
-          bg-neutral-50 dark:bg-neutral-800 
-          text-neutral-900 dark:text-neutral-300
-          hover:bg-blue-50 dark:hover:bg-blue-900/30
-          hover:text-blue-600 dark:hover:text-blue-300
-          ring-1 ring-neutral-400/50 dark:ring-neutral-700
-          hover:ring-blue-500/50 dark:hover:ring-blue-400/30
-          transition-all duration-200">
+      <a href="{{ .RelPermalink }}"
+         class="group inline-flex items-center rounded-md px-2 py-0.5 text-sm
+                bg-blue-50/90 dark:bg-blue-900/30 
+                text-blue-600 dark:text-blue-300
+                hover:bg-sky-50/90 dark:hover:bg-sky-900/30
+                hover:text-sky-600 dark:hover:text-sky-300
+                ring-1 ring-blue-100 dark:ring-blue-900/50
+                hover:ring-sky-200 dark:hover:ring-sky-800
+                backdrop-blur-sm
+                transition-all duration-200">
         {{ .LinkTitle }}
       </a>
     {{- end -}}

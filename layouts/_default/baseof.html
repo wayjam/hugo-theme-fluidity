@@ -3,12 +3,12 @@
 <head>
   {{- partial "head.html" . -}}
 </head>
-<body>
-  <div class="bg-neutral-100 dark:bg-neutral-950">
+<body class="min-h-screen">
+  <div class="bg-blue-50/30 dark:bg-neutral-950 min-h-screen flex flex-col">
     <header>
       {{- partial "header.html" . -}}
     </header>
-    <main class="min-h-[30vh]">
+    <main class="flex-1">
       {{- block "main" . -}}{{- end -}}
     </main>
     <footer>
