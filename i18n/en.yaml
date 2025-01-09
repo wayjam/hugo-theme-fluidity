@@ -73,3 +73,7 @@ search:
   other: search
 hide:
   other: hide
+backToTop:
+  other: back to top
+jumpToComments:
+  other: jump to comments
