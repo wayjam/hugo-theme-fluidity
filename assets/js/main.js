@@ -143,6 +143,7 @@ function setupArticleAsideTabs() {
 
 function setupArticleSidebar() {
 	const toggleButton = document.getElementById('toggle-sidebar')
+
 	const sidebar = document.getElementById('sidebar')
 	const mainContent = document.getElementById('main-content')
 	if (!toggleButton || !sidebar || !mainContent) return
@@ -156,7 +157,7 @@ function setupArticleSidebar() {
 function init() {
 	setupTheme()
 	setupToc()
-	setupArticleAsideTabs()
+	setupArticleSidebar()
 	setupArticleAsideTabs()
 }
 
