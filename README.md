@@ -7,6 +7,8 @@
 
 A fluid and responsive Hugo theme.
 
+![screenshot](https://raw.githubusercontent.com/wayjam/hugo-theme-fluidity/main/images/screenshot.png)
+
 ## Features
 
 - Fluent Design mixed with [Tailwind CSS](https://tailwindcss.com/)
