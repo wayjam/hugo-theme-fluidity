@@ -2,7 +2,7 @@
 {{- if $pag -}}
   {{- if gt $pag.TotalPages 1 -}}
     <div id="pagination">
-      <nav class="mt-8 flex justify-center items-center gap-3" aria-label="Pagination">
+      <nav class="mt-8 flex justify-center items-center gap-2" aria-label="Pagination">
         <!-- Previous button -->
         <a
           aria-label="{{ i18n "previous" }}"
@@ -12,28 +12,29 @@
             href="#"
             disabled
           {{ end -}}
-          class="inline-flex items-center justify-center w-10 h-10 rounded-lg 
-            transition-all duration-300 ease-out
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg
           {{- if $pag.HasPrev }}
-            bg-blue-50/90 dark:bg-blue-900/30
-            text-blue-600 dark:text-blue-300
-            hover:bg-cyan-50/90 dark:hover:bg-cyan-900/30
-            hover:text-cyan-600 dark:hover:text-cyan-300
-            hover:-translate-y-0.5
-            backdrop-blur-sm
-            ring-1 ring-blue-100 dark:ring-blue-900/50
-            shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30
+            bg-white/80 dark:bg-neutral-800/80
+            text-neutral-700 dark:text-neutral-200
+            border border-neutral-200/50 dark:border-neutral-700/50
+            hover:bg-blue-50/90 dark:hover:bg-blue-900/30
+            hover:border-blue-200 dark:hover:border-blue-800
+            hover:text-blue-700 dark:hover:text-blue-200
+            hover:scale-105
+            focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800
+            transform-gpu transition-all duration-200 ease-out
+            shadow-sm
           {{- else }}
-            bg-neutral-100/80 dark:bg-neutral-800/80
-            text-neutral-400 dark:text-neutral-600
+            bg-neutral-50/80 dark:bg-neutral-800/80
+            text-neutral-300 dark:text-neutral-600
+            border border-neutral-200/50 dark:border-neutral-700/50
             cursor-not-allowed
-            backdrop-blur-sm
           {{ end -}}">
           {{- partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") -}}
         </a>
 
         <!-- Page numbers -->
-        <div class="flex items-center gap-1">
+        <div class="flex items-center gap-1.5">
           {{- $ellipsed := false -}}
           {{- $shouldEllipse := false -}}
           {{- range $pag.Pagers -}}
@@ -56,27 +57,29 @@
                 {{- if $isCurrent }}
                   aria-current="page"
                 {{- end -}}
-                class="inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 rounded-lg 
-                  transition-all duration-300 ease-out
+                class="inline-flex items-center justify-center min-w-[2.5rem] h-10 px-3 rounded-lg
+                  text-sm font-medium
+                  transform-gpu transition-all duration-200 ease-out
                 {{- if $isCurrent }}
-                  bg-blue-600 dark:bg-blue-700
-                  text-white
-                  font-medium
-                  shadow-xs shadow-blue-200/50 dark:shadow-blue-900/30
+                  bg-blue-500/90 dark:bg-blue-600/90
+                  text-white dark:text-white
+                  border border-blue-400 dark:border-blue-500
+                  shadow-md shadow-blue-200/20 dark:shadow-blue-900/30
+                  scale-105
                 {{- else }}
-                   bg-white/80 dark:bg-neutral-900/80
-                    text-blue-700 dark:text-blue-300
-                  hover:bg-cyan-50/90 dark:hover:bg-cyan-900/30
-                  hover:text-cyan-600 dark:hover:text-cyan-300
-                  hover:-translate-y-0.5
-                  backdrop-blur-sm
-                  ring-1 ring-blue-100 dark:ring-blue-900/50
-                  shadow-xs shadow-blue-100/50 dark:shadow-blue-900/30
+                  bg-white/80 dark:bg-neutral-800/80
+                  text-neutral-700 dark:text-neutral-200
+                  border border-neutral-200/50 dark:border-neutral-700/50
+                  hover:bg-blue-50/90 dark:hover:bg-blue-900/30
+                  hover:border-blue-200 dark:hover:border-blue-800
+                  hover:text-blue-700 dark:hover:text-blue-200
+                  hover:scale-105
+                  shadow-sm
                 {{ end -}}">
                 {{- .PageNumber -}}
               </a>
             {{- else if $shouldEllipse -}}
-              <span class="inline-flex items-center justify-center px-3 text-neutral-600 dark:text-neutral-400">
+              <span class="inline-flex items-center justify-center w-8 text-sm text-neutral-500 dark:text-neutral-400">
                 &hellip;
               </span>
             {{- end -}}
@@ -91,20 +94,23 @@
           {{- else }}
             disabled
           {{ end -}}
-          class="inline-flex items-center justify-center w-10 h-10 rounded-lg 
-            transition-all duration-200 ease-out
+          class="inline-flex items-center justify-center w-10 h-10 rounded-lg
           {{- if $pag.HasNext }}
-            bg-white/80 dark:bg-neutral-900/80
-            text-blue-700 dark:text-blue-300
-            hover:bg-blue-50 dark:hover:bg-blue-900/40
-            hover:-translate-y-0.5
-            backdrop-blur-sm
-            ring-1 ring-blue-100 dark:ring-blue-900/50
+            bg-white/80 dark:bg-neutral-800/80
+            text-neutral-700 dark:text-neutral-200
+            border border-neutral-200/50 dark:border-neutral-700/50
+            hover:bg-blue-50/90 dark:hover:bg-blue-900/30
+            hover:border-blue-200 dark:hover:border-blue-800
+            hover:text-blue-700 dark:hover:text-blue-200
+            hover:scale-105
+            focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800
+            transform-gpu transition-all duration-200 ease-out
+            shadow-sm
           {{- else }}
-            bg-neutral-100/80 dark:bg-neutral-800/80
-            text-neutral-400 dark:text-neutral-600
+            bg-neutral-50/80 dark:bg-neutral-800/80
+            text-neutral-300 dark:text-neutral-600
+            border border-neutral-200/50 dark:border-neutral-700/50
             cursor-not-allowed
-            backdrop-blur-sm
           {{ end -}}">
           {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
         </a>

@@ -29,7 +29,6 @@
                   rounded-xl p-6
                   backdrop-blur-md
                   shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
-                  motion-safe:hover:scale-[1.002]
                   transition-all duration-300 ease-out">
         <!-- Article metadata -->
         <div class="flex flex-wrap gap-6">
@@ -40,7 +39,7 @@
                            group-hover:scale-110 group-hover:rotate-12">
                 {{- partial "utils/icon.html" (dict "icon" "user-star") -}}
               </span>
-              <span class="font-medium text-neutral-900 dark:text-white">{{ . }}</span>
+              <span class="font-medium text-neutral-700 dark:text-neutral-300">{{ . }}</span>
               {{- with $.Params.role -}}
                 <span class="text-sm text-neutral-600 dark:text-neutral-400 italic">[{{ . }}]</span>
               {{- end -}}
@@ -92,13 +91,14 @@
               <span
                 class="text-sm group-hover:text-sky-600 dark:group-hover:text-sky-400
                            transition-colors duration-200">
-                {{ i18n "readingTime" .ReadingTime }}
+                {{ i18n "readingTime" .ReadingTime | strings.FirstUpper }}
               </span>
             </div>
 
             {{- if .Params.categories -}}
               <div class="flex items-center gap-2 group">
-                <span class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
+                <span
+                  class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
                            group-hover:scale-110">
                   {{- partial "utils/icon.html" (dict "icon" "folder") -}}
                 </span>
@@ -119,9 +119,13 @@
 
         <!-- Tags -->
         {{- if .GetTerms "tags" -}}
-          <div
-            class="mt-4 pt-4 
-                      border-t border-neutral-200/80 dark:border-neutral-700/80">
+          <div class="mt-4 pt-4 border-t border-neutral-200/80 dark:border-neutral-700/80"></div>
+          <div class="flex flex-wrap gap-2 items-center group">
+            <span
+              class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
+                                               group-hover:scale-110 group-hover:rotate-12">
+              {{- partial "utils/icon.html" (dict "icon" "tags") -}}
+            </span>
             {{- partial "terms.html" (dict "taxonomy" "tags" "page" .) -}}
           </div>
         {{- end -}}
@@ -170,14 +174,7 @@
                     border border-neutral-200/80 dark:border-neutral-700/80
                     backdrop-blur-md
                     shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
-                    motion-safe:hover:scale-[1.002]
-                    transition-all duration-300 ease-out
-                    before:absolute before:inset-0 
-                    before:bg-gradient-to-br before:from-transparent before:to-transparent
-                    before:opacity-0 hover:before:opacity-100
-                    before:transition-all before:duration-500
-                    hover:before:from-sky-100/20 hover:before:to-blue-100/30
-                    dark:hover:before:from-sky-800/20 dark:hover:before:to-blue-900/30">
+                    transition-all duration-300 ease-out">
           {{- $enableToc := and (gt .WordCount 400) (and (not (eq .Params.toc false)) (not .Site.Params.toc.disabled)) -}}
           {{- $enableToc = not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") -}}
           {{- $enableShare := not (in .Site.Params.social.disableShareByType .Type) -}}
@@ -209,7 +206,6 @@
               onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
               class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
                      hover:text-sky-600 dark:hover:text-sky-400
-                     hover:bg-sky-50/80 dark:hover:bg-sky-900/30
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
               <span
@@ -224,7 +220,6 @@
               onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
               class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
                      hover:text-sky-600 dark:hover:text-sky-400
-                     hover:bg-sky-50/80 dark:hover:bg-sky-900/30
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
               <span
@@ -239,7 +234,6 @@
               id="toggle-sidebar"
               class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
                      hover:text-sky-600 dark:hover:text-sky-400
-                     hover:bg-sky-50/80 dark:hover:bg-sky-900/30
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
               <span

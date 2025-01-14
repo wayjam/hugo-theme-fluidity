@@ -11,13 +11,10 @@
 {{- $taxonomy := .taxonomy -}}
 
 {{- with $page.GetTerms $taxonomy -}}
-  <div class="flex flex-wrap gap-2 items-center">
-    <span class="text-sky-600 dark:text-sky-400">
-      {{- partial "utils/icon.html" (dict "icon" "tags") -}}
-    </span>
-    {{- range . -}}
-      <a href="{{ .RelPermalink }}"
-         class="group inline-flex items-center rounded-md px-2 py-0.5 text-sm
+  {{- range . -}}
+    <a
+      href="{{ .RelPermalink }}"
+      class="inline-flex items-center rounded-md px-2 py-0.5 text-sm
                 bg-blue-50/90 dark:bg-blue-900/30 
                 text-blue-600 dark:text-blue-300
                 hover:bg-sky-50/90 dark:hover:bg-sky-900/30
@@ -26,8 +23,7 @@
                 hover:ring-sky-200 dark:hover:ring-sky-800
                 backdrop-blur-sm
                 transition-all duration-200">
-        {{ .LinkTitle }}
-      </a>
-    {{- end -}}
-  </div>
+      {{ .LinkTitle }}
+    </a>
+  {{- end -}}
 {{- end -}}

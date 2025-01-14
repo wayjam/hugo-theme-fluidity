@@ -376,8 +376,8 @@
            prose-pre:dark:border-neutral-800;
     @apply prose-code:font-normal
            prose-code:text-sky-600
-           prose-code:dark:text-sky-400
-           prose-code:bg-neutral-100 dark:prose-code:bg-neutral-800
+           prose-code:dark:text-sky-500
+           prose-code:bg-neutral-200/80 dark:prose-code:bg-neutral-800/60
            prose-code:before:content-none prose-code:after:content-none
            prose-code:px-1.5 prose-code:rounded-md;
 

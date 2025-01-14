@@ -1,33 +1,68 @@
-<div id="share">
-  <h2 class="text-lg font-semibold text-neutral-700 dark:text-neutral-300 mb-4">
+<!-- Main share component -->
+<div id="share" class="rounded-xl bg-white/80 dark:bg-neutral-900/80">
+  <h2 class="text-lg font-medium text-neutral-800 dark:text-neutral-200 mb-4">
     {{- i18n "shareWith" | strings.Title -}}
   </h2>
-  <div class="flex flex-wrap gap-1 justify-between">
+  <div class="flex flex-wrap gap-1 justify-center items-center">
     {{- $tag_list := "" -}}
     {{- with .Params.Tags -}}
       {{- $tag_list = delimit . "," -}}
     {{- end -}}
-
     {{- partial "inline/share/item.html"
-      (dict "Name" "Reddit"  "Title" .Title "URL" "https://reddit.com/submit?url={{- .Permalink | relURL -}}&title={{- .Title -}}")
+      (dict 
+        "Name" "Reddit" 
+        "Icon" "reddit"
+        "Title" .Title 
+        "URL" "https://reddit.com/submit?url={{- .Permalink | relURL -}}&title={{- .Title -}}")
     -}}
     {{- partial "inline/share/item.html"
-      (dict "Name" "X.com"  "Title" .Title "URL" "https://x.com/intent/tweet/?text={{- .Title -}}&amp;url={{- .Permalink | relURL -}}&amp;hashtags={{- $tag_list }") -}}
-    {{- partial "inline/share/item.html"
-      (dict "Name" "Facebook"  "Title" .Title "URL" "https://facebook.com/sharer/sharer.php?u={{- .Permalink | relURL -}}")
+      (dict 
+        "Name" "X.com" 
+        "Icon" "twitter"
+        "Title" .Title 
+        "URL" "https://x.com/intent/tweet/?text={{- .Title -}}&amp;url={{- .Permalink | relURL -}}&amp;hashtags={{- $tag_list }}")
     -}}
     {{- partial "inline/share/item.html"
-      (dict "Name" "Google"  "Title" .Title "URL" "https://www.google.com/bookmarks/mark?op=edit&bkmk={{- .Permalink | relURL -}}&title={{- .Title -}}")
+      (dict 
+        "Name" "Facebook" 
+        "Icon" "facebook"
+        "Title" .Title 
+        "URL" "https://facebook.com/sharer/sharer.php?u={{- .Permalink | relURL -}}")
     -}}
     {{- partial "inline/share/item.html"
-      (dict "Name" "Telegram"  "Title" .Title "URL" "https://telegram.me/share/url?url={{- .Permalink | relURL -}}&text={{- .Title -}}") -}}
+      (dict 
+        "Name" "Google" 
+        "Icon" "google"
+        "Title" .Title 
+        "URL" "https://www.google.com/bookmarks/mark?op=edit&bkmk={{- .Permalink | relURL -}}&title={{- .Title -}}")
+    -}}
+    {{- partial "inline/share/item.html"
+      (dict 
+        "Name" "Telegram" 
+        "Icon" "telegram"
+        "Title" .Title 
+        "URL" "https://telegram.me/share/url?url={{- .Permalink | relURL -}}&text={{- .Title -}}")
+    -}}
   </div>
 </div>
 
 {{- define "partials/inline/share/item.html" -}}
   <a
     href="{{- .URL -}}"
-    class="inline-flex items-center px-0.5 py-1 font-mono text-gray-600 dark:text-gray-300 text-sm border-b border-blue-600 hover:bg-blue-600 hover:text-white"
+    target="_blank"
+    rel="noopener noreferrer"
+    class="inline px-2 py-1 rounded-lg
+    text-sm font-medium
+      bg-white/60 dark:bg-neutral-800/60
+      text-neutral-700 dark:text-neutral-300
+      border border-neutral-200/50 dark:border-neutral-700/50
+      hover:bg-blue-50/90 dark:hover:bg-blue-900/30
+      hover:border-blue-200 dark:hover:border-blue-800
+      hover:text-blue-700 dark:hover:text-blue-200
+      hover:scale-105
+      focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800
+      transform-gpu transition-all duration-200 ease-out
+      shadow-sm"
     aria-label="share {{- .Title | plainify -}} on {{- .Name -}}">
     {{- .Name -}}
   </a>

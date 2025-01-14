@@ -41,31 +41,18 @@
   {{- $isFirst := .isFirst -}}
   {{- $showSection := .showSection -}}
   <div
-    class="break-inside-avoid mb-6 last:mb-0
-    relative overflow-hidden
-    bg-gradient-to-br from-white/90 to-neutral-50/85
-    dark:from-neutral-900/90 dark:to-neutral-800/85
-    rounded-xl p-6
-    border border-neutral-400/80 dark:border-neutral-800/80
-    backdrop-blur-md
-    transform-gpu
-    {{- if $isFirst }}
-      mb-12 hover:shadow-lg hover:shadow-sky-100/20 dark:hover:shadow-sky-900/10 hover:-translate-y-1.5
-      motion-safe:hover:scale-[1.02] hover:from-white/95 hover:to-sky-50/80 dark:hover:from-neutral-900/95
-      dark:hover:to-sky-900/80
-    {{ else }}
-      hover:shadow-md hover:shadow-sky-100/10 dark:hover:shadow-sky-900/5 hover:-translate-y-1
-      motion-safe:hover:scale-[1.01] hover:from-white/95 hover:to-sky-50/90 dark:hover:from-neutral-900/95
-      dark:hover:to-sky-900/90
-    {{ end -}}
-    before:absolute before:inset-0 
-    before:bg-gradient-to-br before:from-transparent before:to-transparent
-    before:opacity-0 
-    hover:before:opacity-100
-    before:transition-all before:duration-500
-    hover:before:from-sky-100/20 hover:before:to-blue-100/30 hover:border-sky-500/20
-    dark:hover:before:from-sky-800/20 dark:hover:before:to-blue-900/30 dark:hover:border-sky-500/40
-    transition-all duration-300 ease-out">
+    class="relative overflow-hidden break-inside-avoid mb-6 last:mb-0
+           bg-white/95 dark:bg-neutral-900
+           hover:bg-gradient-to-br hover:from-white hover:to-blue-50/95
+           dark:hover:from-neutral-900 dark:hover:to-neutral-800/95
+           rounded-xl p-6
+           border border-neutral-200 dark:border-neutral-800
+           shadow-sm
+           backdrop-blur-md
+           transition-all duration-200
+           hover:border-sky-500/20 dark:hover:border-sky-500/30
+           hover:ring-1 hover:ring-sky-200 dark:hover:ring-sky-800
+           hover:-translate-y-0.5">
     <article class="flex flex-col gap-4">
       <div class="flex justify-between items-center">
         <time
@@ -88,20 +75,27 @@
       </div>
 
       <h3
-        class="
-        {{ if $isFirst }}
-          text-2xl md:text-3xl
-        {{ else }}
-          text-xl md:text-2xl
-        {{ end }}
-        font-bold
-        text-neutral-900 dark:text-white
+        class="font-bold
         tracking-tight
-        leading-tight">
+        leading-tight
+        {{- if $isFirst }}
+          text-2xl md:text-3xl
+        {{- else }}
+          text-xl md:text-2xl
+        {{ end -}}">
         <a
           href="{{ $item.Permalink | relURL }}"
-          class="hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-200">
+          class="relative inline-block
+                    text-neutral-900 dark:text-white 
+                    group-hover:text-sky-600 dark:group-hover:text-sky-400 
+                    transition-colors duration-300">
           {{ $item.Title }}
+          <span
+            class="absolute bottom-0 left-0 right-0 h-px
+                   bg-gradient-to-r from-sky-400 to-blue-500
+                   dark:from-sky-500 dark:to-blue-400
+                   transform origin-left scale-x-0 group-hover:scale-x-100
+                   transition-transform duration-300 ease-out"></span>
         </a>
       </h3>
 
@@ -136,10 +130,6 @@
           {{ end -}}">
           <span class="relative">
             {{- i18n "readMore" | strings.Title }}
-            <span
-              class="absolute bottom-0 left-0 w-full h-px 
-                     bg-gradient-to-r from-transparent via-current to-transparent 
-                     opacity-0 group-hover:opacity-30 transition-opacity duration-200"></span>
           </span>
           <span class="sr-only">about {{ $item.Title }}</span>
         </a>
