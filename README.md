@@ -7,7 +7,7 @@
 
 A fluid and responsive Hugo theme.
 
-![screenshot](https://raw.githubusercontent.com/wayjam/hugo-theme-fluidity/main/images/screenshot.png)
+![screenshot](https://raw.githubusercontent.com/wayjam/hugo-theme-fluidity/main/images/tn.png)
 
 ## Features
 

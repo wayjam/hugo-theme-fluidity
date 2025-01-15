@@ -379,7 +379,7 @@
            prose-code:dark:text-sky-500
            prose-code:bg-neutral-200/80 dark:prose-code:bg-neutral-800/60
            prose-code:before:content-none prose-code:after:content-none
-           prose-code:px-1.5 prose-code:rounded-md;
+           prose-code:px-1.5 prose-code:py-0.5 prose-code:rounded-md;
 
     /* Blockquote Style */
     @apply prose-blockquote:font-normal
