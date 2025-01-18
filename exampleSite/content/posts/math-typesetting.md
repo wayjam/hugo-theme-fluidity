@@ -3,6 +3,8 @@ author: Hugo Authors
 title: Math Typesetting
 date: 2024-08-02
 description: A brief guide to setup Math Typesetting
+tags:
+  - math
 params:
   math: true
 ---

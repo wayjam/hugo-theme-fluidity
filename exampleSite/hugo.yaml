@@ -129,10 +129,10 @@ params:
   # Search
   search:
     disabled: false
-    provider: pagefind #available: google, pagefind
+    provider: pagefind # available: google, pagefind
 
   # Math Typesetting Support
-  math: false
+  math: false # global
   mathEngine: mathJax # mathJax | katex
 
   enableEmoji: true

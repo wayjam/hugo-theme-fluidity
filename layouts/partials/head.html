@@ -64,5 +64,5 @@
 {{- "<!-- Script -->" | safeHTML -}}
 {{- partialCached "head/js.html" (resources.Get "js/main.js") "main.js" -}}{{- "<!-- Components -->" | safeHTML -}}
 {{- if .Param "math" -}}
-{{- partialCached "math.html" . -}}
+{{- partialCached "utils/math.html" . -}}
 {{- end }}
