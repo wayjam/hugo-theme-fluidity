@@ -3,7 +3,7 @@
   <h2 class="text-lg font-medium text-neutral-800 dark:text-neutral-200 mb-4">
     {{- i18n "shareWith" | strings.Title -}}
   </h2>
-  <div class="flex flex-wrap justify-between items-center">
+  <div class="flex flex-wrap justify-between gap-1 items-center space-y-1">
     {{- $tag_list := "" -}}
     {{- with .Params.Tags -}}
       {{- $tag_list = delimit . "," -}}

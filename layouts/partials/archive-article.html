@@ -3,40 +3,39 @@
   <a href="{{- .Permalink | relURL -}}" class="block relative">
     <div
       class="
-      px-6 py-4
-      border-b border-neutral-200/80 dark:border-neutral-800/80
-      transition-all duration-300 ease-out
-      hover:bg-gradient-to-r from-sky-50/50 via-blue-50/40 to-neutral-50/30
-      dark:hover:bg-gradient-to-r dark:from-sky-900/30 dark:via-blue-900/20 dark:to-neutral-900/10
-      last:border-b-0
-      before:absolute before:inset-0 
-      before:bg-gradient-to-r before:from-transparent
-      before:opacity-0 group-hover:before:opacity-100
-      before:transition-all before:duration-500">
-      <div class="flex justify-between items-center gap-6">
+        px-4 py-2 lg:px-6 lg:py-4 
+        border-b border-neutral-200/80 dark:border-neutral-800/80
+        transition-all duration-300 ease-out
+        hover:bg-gradient-to-r from-sky-50/50 via-blue-50/40 to-neutral-50/30
+        dark:hover:bg-gradient-to-r dark:from-sky-900/30 dark:via-blue-900/20 dark:to-neutral-900/10
+        last:border-b-0
+        before:absolute before:inset-0 
+        before:bg-gradient-to-r before:from-transparent
+        before:opacity-0 group-hover:before:opacity-100
+        before:transition-all before:duration-500">
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-3 lg:gap-6">
         <!-- Left content -->
-        <div class="space-y-3 flex-grow">
+        <div class="space-y-2 md:space-y-3 flex-grow">
           <h3
             class="
-            text-lg font-medium 
-            text-neutral-900 dark:text-neutral-100
-            group-hover:text-sky-600 dark:group-hover:text-sky-300
-            transform transition-all duration-300 ease-out">
+              text-lg font-medium inline-block lg:block
+              text-neutral-900 dark:text-neutral-100
+              group-hover:text-sky-600 dark:group-hover:text-sky-300
+              transform transition-all duration-300 ease-out
+            ">
             {{- .Title -}}
           </h3>
-          <div class="flex items-center flex-wrap gap-x-3 gap-y-2">
+          <div class="flex flex-col sm:flex-row items-start sm:items-center flex-wrap gap-x-3 gap-y-2">
             <!-- Categories -->
             {{- with $article.Params.categories -}}
               {{- range first 1 . -}}
                 <span
                   class="
-                  inline-flex py-1.5 px-3 rounded-lg text-sm
-                  bg-sky-100/60 dark:bg-sky-900/30
+                  inline-flex py-1.5 px-1 text-sm
                   text-sky-700 dark:text-sky-300
-                  ring-1 ring-sky-200/50 dark:ring-sky-700/50
-                  backdrop-blur-sm
+                  underline underline-offset-4 decoration-sky-700
                   transform transition-all duration-300
-                  group-hover:bg-sky-100/80 dark:group-hover:bg-sky-800/40">
+                  group-hover:decoration-double">
                   {{- . -}}
                 </span>
               {{- end -}}
@@ -46,14 +45,7 @@
               <div class="flex flex-wrap gap-2">
                 {{- range first 3 . -}}
                   <span
-                    class="
-                    inline-flex items-center px-3 py-1 rounded-full text-sm
-                    bg-blue-50/60 dark:bg-blue-900/30
-                    text-blue-600 dark:text-blue-300
-                    ring-1 ring-blue-200/50 dark:ring-blue-700/50
-                    backdrop-blur-sm
-                    transform transition-all duration-300
-                    group-hover:bg-blue-100/70 dark:group-hover:bg-blue-800/40">
+                    class="fluidity-tag inline-flex items-center text-sm">
                     {{- . -}}
                   </span>
                 {{- end -}}
@@ -64,12 +56,12 @@
         <!-- Date -->
         <time
           datetime="{{- .PublishDate.Format "2006-01-02" -}}"
-          class="
-                text-base font-normal 
+          class="text-base font-normal 
                 text-neutral-500 dark:text-neutral-400
                 whitespace-nowrap italic
                 group-hover:text-sky-600 dark:group-hover:text-sky-400
-                transform transition-all duration-300">
+                transform transition-all duration-300
+                ">
           {{- .PublishDate.Format "January 02, 2006" -}}
         </time>
       </div>

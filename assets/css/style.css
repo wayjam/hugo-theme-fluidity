@@ -434,3 +434,60 @@ fluent-tab::after {
   --pagefind-ui-border: var(--color-neutral-800) !important;
   --pagefind-ui-tag: var(--color-neutral-800) !important;
 }
+
+@layer fluidity {
+  .decorative-gradient-line {
+    @apply absolute bottom-0 left-0 right-0 h-0.5
+    bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
+    dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40;
+  }
+
+  .fluidity-page-title {
+    @apply font-bold text-neutral-900 dark:text-white mb-2 md:mb-4 lg:mb-8 relative;
+  }
+
+  .fluidity-page-title-line {
+    @apply absolute -bottom-1 left-0 right-0 h-0.5 
+           bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-400
+           transform origin-left scale-x-0 group-hover:scale-x-100
+           transition-transform duration-300 ease-out;
+  }
+
+  .fluidity-page-title-icon {
+    @apply inline-block text-cyan-600 dark:text-cyan-400 group-hover:rotate-12 transition-transform duration-300;
+  }
+
+  .fluidity-page-desc {
+    @apply text-base text-neutral-600 dark:text-neutral-400;
+  }
+
+  .fluidity-tag {
+    @apply rounded-md px-2 py-0.5 text-sm
+           bg-blue-50/90 dark:bg-blue-900/30 
+           text-blue-600 dark:text-blue-300
+           hover:bg-sky-50/90 dark:hover:bg-sky-900/30
+           hover:text-sky-600 dark:hover:text-sky-300
+           ring-1 ring-blue-100 dark:ring-blue-900/50
+           hover:ring-sky-200 dark:hover:ring-sky-800
+           backdrop-blur-sm
+           transition-all duration-200;
+  }
+
+  .fluidity-header-icon {
+       @apply p-2 rounded-lg text-sky-700 dark:text-sky-400 
+       hover:bg-sky-50 dark:hover:bg-sky-900/40 
+       transition-colors duration-200 cursor-pointer;
+  }
+
+  .fluidity-container-1 {
+    @apply container mx-auto px-2 lg:px-4 py-4 lg:py-8 space-y-4 lg:space-y-8;
+  }
+
+  .fluidity-box-1 {
+    @apply bg-white/80 dark:bg-neutral-900/80 
+    border border-neutral-400/80 dark:border-neutral-800/80
+    rounded-xl divide-y divide-blue-100 dark:divide-blue-900/50 
+    backdrop-blur-sm
+    shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30;
+  }
+}

@@ -1,4 +1,5 @@
-<div class="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border-b border-blue-100 dark:border-blue-950 shadow-sm">
+<div
+  class="bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border-b border-blue-100 dark:border-blue-950 shadow-sm">
   <div class="container mx-auto">
     <div class="flex justify-between items-center py-5 px-4">
       <div class="text-2xl">
@@ -7,7 +8,8 @@
             <img src="{{ .Site.Params.logo }}" alt="{{ .Site.Title }}" class="w-8 h-8" />
           {{- end -}}
           <span class="font-semibold relative group">
-            <span class="bg-clip-text text-transparent bg-gradient-to-r 
+            <span
+              class="bg-clip-text text-transparent bg-gradient-to-r 
               from-blue-600 via-cyan-500 to-blue-500
               dark:from-blue-400 dark:via-cyan-400 dark:to-blue-300
               hover:from-blue-500 hover:via-cyan-400 hover:to-blue-400
@@ -15,7 +17,8 @@
               transition-all duration-300">
               {{- .Site.Title -}}
             </span>
-            <span class="absolute -bottom-0.5 left-0 w-full h-[4px] 
+            <span
+              class="absolute -bottom-0.5 left-0 w-full h-[4px] 
               bg-gradient-to-r from-transparent via-cyan-400/40 to-transparent
               dark:via-cyan-400/20
               transform scale-x-0 group-hover:scale-x-100
@@ -25,14 +28,12 @@
         </a>
       </div>
 
-      <div class="flex items-center gap-4">
+      <div class="flex relative items-center gap-0.5">
         {{- partial "menu.html" (dict "menuID" "main" "page" .) -}}
-        <button
-          id="theme-toggle"
-          aria-label="Toggle theme"
-          class="p-2 rounded-lg text-sky-700 dark:text-sky-400 
-                 hover:bg-sky-50 dark:hover:bg-sky-900/40 
-                 transition-colors duration-200 cursor-pointer">
+        <button id="mobile-menu-button" class="fluidity-header-icon block md:hidden" aria-label="Toggle menu" aria-expanded="false">
+          {{- partial "utils/icon.html" (dict "icon" "menu") -}}
+        </button>
+        <button id="theme-toggle" aria-label="Toggle theme" class="fluidity-header-icon">
           <div id="theme-toggle-dark-icon" class="hidden">
             {{- partial "utils/icon.html" (dict "icon" "moon") -}}
           </div>

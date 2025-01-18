@@ -3,11 +3,11 @@
             bg-gradient-to-b from-white/80 via-sky-50/30 to-blue-50/20
             dark:from-neutral-900/90 dark:via-neutral-900/50 dark:to-neutral-800/30 
             backdrop-blur-md">
-  <div class="max-w-6xl mx-auto px-4 py-12">
-    <div class="grid md:grid-cols-4 gap-8">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 lg:py-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 lg:gap-8">
       <!-- About Section -->
-      <div class="col-span-2">
-        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+      <div class="col-span-1 md:col-span-2">
+        <h3 class="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
           {{- if (where .Site.RegularPages "Layout" "==" "about") -}}
             <a
               href="{{ "about" | relURL }}"
@@ -21,14 +21,14 @@
             {{- i18n "about" | strings.Title -}}
           {{- end -}}
         </h3>
-        <p class="text-slate-600 dark:text-slate-300 mb-4 italic">
+        <p class="text-slate-600 dark:text-slate-300 italic text-sm sm:text-base">
           {{- .Site.Params.description | default "" -}}
         </p>
       </div>
 
       <!-- Categories Section -->
       <div>
-        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+        <h3 class="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
           {{- i18n "sections" | strings.Title -}}
         </h3>
         {{- $sections := slice -}}
@@ -40,7 +40,7 @@
           {{- end -}}
         {{- end -}}
         {{- $sortedSections := sort $sections "Count" "desc" -}}
-        <ul class="space-y-2 text-slate-600 dark:text-slate-300">
+        <ul class="space-y-2 text-slate-600 dark:text-slate-300 text-sm sm:text-base">
           {{- range first 5 $sortedSections -}}
             <li>
               <a
@@ -65,7 +65,7 @@
 
       <!-- Connect Section -->
       <div>
-        <h3 class="text-lg font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
+        <h3 class="text-lg sm:text-xl font-semibold text-neutral-900 dark:text-neutral-50 mb-4">
           {{- i18n "connect" | strings.Title -}}
         </h3>
         <ul class="space-y-2">
@@ -89,7 +89,7 @@
       <span
         class="relative z-10 rounded-full 
                    bg-sky-50 dark:bg-neutral-900
-                   px-1 py-1.5
+                   px-4 py-0.5
                    text-neutral-600 dark:text-neutral-400 
                    text-xs font-mono italic">
         Site built with
@@ -110,13 +110,13 @@
           rel="nofollow"
           target="_blank"
           href="https://github.com/wayjam/hugo-theme-fluidity">
-          Theme Fludity
+          Theme Fluidity
         </a>
       </span>
     </div>
 
     <!-- Copyright -->
-    <div class="text-center text-neutral-600 dark:text-neutral-400 font-sans">
+    <div class="text-center text-neutral-600 dark:text-neutral-400 font-sans text-sm sm:text-base">
       <p>
         &copy; {{ now.Year }} {{ .Site.Title }}.
         {{- i18n "allRightsReserved" | default "All rights reserved." | title -}}

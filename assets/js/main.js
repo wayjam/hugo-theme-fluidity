@@ -154,11 +154,61 @@ function setupArticleSidebar() {
 	})
 }
 
+function setupMobileMenu() {
+	const button = document.getElementById('mobile-menu-button')
+	const menu = document.getElementById('mobile-menu')
+	
+	if (!button || !menu) return
+	
+	let isOpen = false
+
+	function showMenu() {
+		menu.classList.remove('translate-x-full', 'opacity-0', 'scale-95')
+		menu.classList.add('translate-x-0', 'opacity-100', 'scale-100')
+		menu.setAttribute('aria-hidden', 'false')
+		button.setAttribute('aria-expanded', 'true')
+		isOpen = true
+	}
+
+	function hideMenu() {
+		menu.classList.remove('translate-x-0', 'opacity-100', 'scale-100')
+		menu.classList.add('translate-x-full', 'opacity-0', 'scale-95')
+		menu.setAttribute('aria-hidden', 'true')
+		button.setAttribute('aria-expanded', 'false')
+		isOpen = false
+	}
+
+	// Toggle menu on button click
+	button.addEventListener('click', (e) => {
+		e.stopPropagation()
+		if (isOpen) {
+			hideMenu()
+		} else {
+			showMenu()
+		}
+	})
+
+	// Close menu when clicking outside
+	document.addEventListener('click', (event) => {
+		if (isOpen && !menu.contains(event.target) && !button.contains(event.target)) {
+			hideMenu()
+		}
+	})
+
+	// Close menu on ESC key
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && isOpen) {
+			hideMenu()
+		}
+	})
+}
+
 function init() {
 	setupTheme()
 	setupToc()
 	setupArticleSidebar()
 	setupArticleAsideTabs()
+	setupMobileMenu()
 }
 
 // Initialize theme when DOM is loaded

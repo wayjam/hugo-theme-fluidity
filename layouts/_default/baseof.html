@@ -5,13 +5,13 @@
 </head>
 <body class="min-h-screen">
   <div class="bg-blue-50/30 dark:bg-neutral-950 min-h-screen flex flex-col">
-    <header>
+    <header class="relative z-50">
       {{- partial "header.html" . -}}
     </header>
-    <main class="flex-1">
+    <main class="flex-1 relative z-[1]">
       {{- block "main" . -}}{{- end -}}
     </main>
-    <footer>
+    <footer class="relative z-50">
       {{- partial "footer.html" . -}}
     </footer>
   </div>

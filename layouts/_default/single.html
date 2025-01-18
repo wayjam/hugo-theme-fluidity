@@ -1,23 +1,17 @@
 {{- define "main" -}}
-  <div class="container mt-1 mx-auto px-4 py-8 min-h-screen">
+  <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
-    <header class="mb-12">
+    <header class="mb-4 md:mb-8 lg:mb-12">
       {{- $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" -}}
       {{- $dateHuman := .Date | time.Format ":date_long" -}}
       {{- $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" -}}
       {{- $lastmodHuman := .Lastmod | time.Format ":date_long" -}}
 
 
-      <h1
-        class="text-4xl font-bold text-neutral-900 dark:text-white mb-8
-                 relative group">
+      <h1 class="fluidity-page-title text-4xl group">
         <span class="relative inline-block">
           {{ .Title }}
-          <span
-            class="absolute -bottom-1 left-0 right-0 h-0.5 
-                       bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-400
-                       transform origin-left scale-x-0 group-hover:scale-x-100
-                       transition-transform duration-300 ease-out"></span>
+          <span class="fluidity-page-title-line"></span>
         </span>
       </h1>
 
@@ -26,7 +20,7 @@
                   bg-gradient-to-br from-white/95 to-neutral-50/90
                   dark:from-neutral-900/95 dark:to-neutral-800/90
                   border border-neutral-200/80 dark:border-neutral-700/80
-                  rounded-xl p-6
+                  rounded-xl p-2 md:p-3 lg:p-6 
                   backdrop-blur-md
                   shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
                   transition-all duration-300 ease-out">
@@ -36,7 +30,7 @@
             <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 group">
               <span
                 class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                           group-hover:scale-110 group-hover:rotate-12">
+                           group-hover:scale-110">
                 {{- partial "utils/icon.html" (dict "icon" "user-star") -}}
               </span>
               <span class="font-medium text-neutral-700 dark:text-neutral-300">{{ . }}</span>
@@ -123,7 +117,7 @@
           <div class="flex flex-wrap gap-2 items-center group">
             <span
               class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                                               group-hover:scale-110 group-hover:rotate-12">
+                                               group-hover:scale-110">
               {{- partial "utils/icon.html" (dict "icon" "tags") -}}
             </span>
             {{- partial "terms.html" (dict "taxonomy" "tags" "page" .) -}}
@@ -132,17 +126,14 @@
 
 
         <!-- Decorative gradient line -->
-        <div
-          class="absolute bottom-0 left-0 right-0 h-0.5
-                    bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
-                    dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40"></div>
+        <div class="decorative-gradient-line"></div>
       </div>
     </header>
 
     <!-- Main Content Grid -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-8">
       <!-- Article Content -->
-      <div id="main-content" class="col-span-1 md:col-span-2 order-2 md:order-1">
+      <div id="main-content" class="col-span-1 lg:col-span-2 order-2 lg:order-1">
         <div
           class="relative overflow-hidden
                 bg-gradient-to-br from-white/95 to-neutral-50/90
@@ -157,20 +148,16 @@
           </article>
 
           <!-- Decorative gradient line -->
-          <div
-            class="absolute bottom-0 left-0 right-0 h-0.5
-                  bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
-                  dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40"></div>
+          <div class="decorative-gradient-line"></div>
         </div>
       </div>
       <!-- Sidebar -->
-      <aside id="sidebar" class="md:block md:col-span-1 order-1 md:order-2">
+      <aside id="sidebar" class="lg:block lg:col-span-1 order-1 lg:order-2">
         <div
-          class="sticky top-4 space-y-6 
+          class="sticky top-4 rounded-xl p-4
                     relative overflow-hidden
                     bg-gradient-to-br from-white/95 to-neutral-50/90
                     dark:from-neutral-900/95 dark:to-neutral-800/90
-                    rounded-xl p-6
                     border border-neutral-200/80 dark:border-neutral-700/80
                     backdrop-blur-md
                     shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
@@ -245,16 +232,13 @@
             </button>
 
             <!-- Decorative gradient line -->
-            <div
-              class="absolute bottom-0 left-0 right-0 h-0.5
-                        bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
-                        dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40"></div>
+            <div class="decorative-gradient-line"></div>
           </div>
         </div>
       </aside>
     </div>
 
-    <aside id="article-aside" class="mt-12">
+    <aside id="article-aside" class="mt-4 lg:mt-12">
       {{- $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableByType .Type)) -}}
       {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) -}}
       {{- $activeTab := "comments" -}}

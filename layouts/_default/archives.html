@@ -1,19 +1,16 @@
 {{- define "main" -}}
-  <div class="container mx-auto px-4 py-8 space-y-8">
-    <div class="mb-8">
-      <h1
-        class="text-3xl font-bold text-neutral-900 dark:text-white mb-2 
-                 flex items-center gap-2 group">
-        <span
-          class="inline-block text-cyan-600 dark:text-cyan-400 
-                     group-hover:rotate-12 transition-transform duration-300">
+  <div class="fluidity-container-1">
+    <div class="mb-4 lg:mb-8">
+      <h1 class="fluidity-page-title text-3xl group flex items-center gap-2">
+        <span class="fluidity-page-title-icon">
           {{- partial "utils/icon.html" (dict "icon" "archives") -}}
         </span>
         {{- i18n "archive" | strings.Title -}}
       </h1>
-      <p class="text-base text-neutral-600 dark:text-neutral-400">
+      <p class="fluidity-page-desc">
         {{- i18n "total" | default "Total" | title }}
-        {{ len (where site.RegularPages "Section" "in" site.Params.mainSections) -}}
+        {{ len (where site.RegularPages "Section" "in" site.Params.mainSections) }}
+        {{ i18n "article" | default "articles" -}}
       </p>
     </div>
 
@@ -23,11 +20,7 @@
       {{- $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize -}}
       {{- if $paginator -}}
         <div
-          class="bg-white/80 dark:bg-neutral-900/80 
-                    border border-neutral-400/80 dark:border-neutral-800/80
-                    rounded-xl divide-y divide-blue-100 dark:divide-blue-900/50 
-                    backdrop-blur-sm
-                    shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30">
+          class="fluidity-box-1">
           {{- range $paginator.Pages.GroupByPublishDate "January 2006" -}}
             {{- if ne .Key "January 0001" -}}
               <div>

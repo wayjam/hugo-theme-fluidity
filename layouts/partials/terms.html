@@ -14,15 +14,7 @@
   {{- range . -}}
     <a
       href="{{ .RelPermalink }}"
-      class="inline-flex items-center rounded-md px-2 py-0.5 text-sm
-                bg-blue-50/90 dark:bg-blue-900/30 
-                text-blue-600 dark:text-blue-300
-                hover:bg-sky-50/90 dark:hover:bg-sky-900/30
-                hover:text-sky-600 dark:hover:text-sky-300
-                ring-1 ring-blue-100 dark:ring-blue-900/50
-                hover:ring-sky-200 dark:hover:ring-sky-800
-                backdrop-blur-sm
-                transition-all duration-200">
+      class="fluidity-tag inline-flex items-center">
       {{ .LinkTitle }}
     </a>
   {{- end -}}

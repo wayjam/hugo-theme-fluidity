@@ -1,31 +1,22 @@
 {{- define "main" -}}
-  <div class="container mx-auto px-4 py-8 space-y-8">
-    <div class="mb-8">
-      <h1 class="text-3xl font-bold text-neutral-900 dark:text-white mb-2 
-                 flex items-center gap-2 group">
-        <span class="inline-block text-cyan-600 dark:text-cyan-400 
-                     group-hover:rotate-12 transition-transform duration-300">
+  <div class="fluidity-container-1">
+    <div class="mb-4 lg:mb-8">
+      <h1 class="fluidity-page-title text-3xl group flex items-center gap-2">
+        <span class="fluidity-page-title-icon">
           {{- partial "utils/icon.html" (dict "icon" "tags") -}}
         </span>
         <span class="relative">
           {{- i18n "tag" | strings.Title -}}
-          <span class="absolute -bottom-1 left-0 right-0 h-0.5 
-                       bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-400
-                       transform origin-left scale-x-0 group-hover:scale-x-100
-                       transition-transform duration-300 ease-out"></span>
+          <span class="fluidity-page-title-line"></span>
         </span>
       </h1>
-      <p class="text-base text-neutral-600 dark:text-neutral-400">
+      <p class="fluidity-page-desc">
         {{- i18n "total" | default "Total" | title }} {{ len .Data.Terms.Alphabetical }} {{ i18n "tag" | default "Tags" -}}
       </p>
     </div>
 
-    <div class="bg-white/80 dark:bg-neutral-900/80 
-                border border-neutral-400/80 dark:border-neutral-800/80
-                rounded-lg p-6
-                backdrop-blur-sm
-                shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30">
-      <div class="flex flex-wrap gap-3 justify-center">
+    <div class="fluidity-box-1 p-3 lg:p-6">
+      <div class="flex flex-wrap gap-2 lg:gap-3 justify-center">
         {{- range sort .Data.Terms.Alphabetical "Count" "desc" -}}
           {{- if ne .Page.Title "" -}}
             <a href="{{- .Page.Permalink | relURL -}}"
@@ -52,9 +43,10 @@
                       {{- end -}}">
               <span class="relative z-10">{{- .Page.Title -}}</span>
               <span class="relative z-10 inline-flex items-center justify-center 
-                          rounded-full px-2 py-0.5 text-xs font-medium
+                          rounded-full px-2 py-0.5 text-xs font-medium border border-neutral-300/50 dark:border-neutral-700/50
                           bg-neutral-100/90 dark:bg-neutral-800/60
                           text-sky-600 dark:text-sky-400
+                          group-hover:border-sky-200 dark:group-hover:border-sky-800
                           group-hover:bg-sky-100 dark:group-hover:bg-sky-800/60
                           group-hover:text-sky-700 dark:group-hover:text-sky-300
                           transition-all duration-300 ease-out

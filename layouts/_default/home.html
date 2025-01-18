@@ -5,7 +5,7 @@
   {{- $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize -}}
 
 
-  <div class="container mx-auto px-4 py-8">
+  <div class="container mx-auto px-2 lg:px-4 py-4 lg:py-8">
     {{- if $paginator.Pages -}}
       {{- if eq $paginator.PageNumber 1 -}}
         {{- with (index $paginator.Pages 0) -}}
@@ -41,7 +41,7 @@
   {{- $isFirst := .isFirst -}}
   {{- $showSection := .showSection -}}
   <div
-    class="relative overflow-hidden break-inside-avoid mb-6 last:mb-0
+    class="overflow-hidden break-inside-avoid mb-6 last:mb-0
            bg-white/95 dark:bg-neutral-900
            hover:bg-gradient-to-br hover:from-white hover:to-blue-50/95
            dark:hover:from-neutral-900 dark:hover:to-neutral-800/95
@@ -106,7 +106,7 @@
         {{- end -}}
       </div>
 
-      <div class="mt-2">
+      <div class="mt-2 hidden md:block">
         <a
           href="{{ $item.Permalink | relURL }}"
           aria-label="{{- i18n "readMore" | strings.Title }} about {{ $item.Title -}}"

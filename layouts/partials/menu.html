@@ -1,91 +1,113 @@
 {{- /*
   Renders a menu for the given menu ID.
-
   @context {page} page The current page.
   @context {string} menuID The menu ID.
-
-  @example: {{ partial "menu.html" (dict "menuID" "main" "page" .)
-}}
+  @context {bool} isMobile Whether the menu is mobile.
 */}}
 {{- $page := .page -}}
 {{- $menuID := .menuID -}}
 
 {{- with index site.Menus $menuID -}}
-  <nav class="hidden md:block">
-    <ul class="flex items-center gap-2">
+  <nav class="relative isolate" role="navigation">
+    <ul class="hidden md:flex items-center gap-2">
       {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
     </ul>
+
+    <!-- Mobile Menu Container -->
+    <div class="relative md:hidden " dir="rtl">
+      <ul
+        id="mobile-menu"
+        class="absolute top-0 -right-4 py-1 w-48
+          transform opacity-0 scale-95 
+          transition-all duration-200 ease-out
+          bg-white dark:bg-neutral-900
+          border border-neutral-200/80 dark:border-neutral-800/80
+          rounded-xl divide-y divide-neutral-100 dark:divide-neutral-900/50
+          shadow-lg shadow-neutral-100/20 dark:shadow-neutral-900/30
+          backdrop-blur-md text-left	
+          z-50">
+        {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "isMobile" true) -}}
+      </ul>
+    </div>
   </nav>
 {{- end -}}
 
 {{- define "partials/inline/menu/walk.html" -}}
   {{- $page := .page -}}
-  {{- range .menuEntries -}}
-    {{- $attrs := dict "href" ( .URL | relLangURL ) -}}
-    {{- if $page.IsMenuCurrent .Menu . -}}
-      {{- $attrs = merge $attrs (dict "class" "active" "aria-current" "page") -}}
-    {{- else if $page.HasMenuCurrent .Menu . -}}
-      {{- $attrs = merge $attrs (dict "class" "ancestor" "aria-current" "true") -}}
-    {{- end -}}
+  {{- $isMobile := .isMobile -}}
 
+  {{- range .menuEntries -}}
     {{- $name := .Name -}}
     {{- if .Identifier -}}
       {{- $name = i18n .Identifier | default $name | default .Identifier | title -}}
     {{- end -}}
 
+    {{- $title := or .Title $name -}}
+    {{- $cls := slice -}}
+
+    {{- if $isMobile -}}
+      {{- $cls = $cls | append "block px-4 py-2 text-sm"
+        "text-neutral-700 dark:text-neutral-200"
+        "hover:bg-neutral-100/80 dark:hover:bg-neutral-800/80"
+        "active:bg-neutral-200 dark:active:bg-neutral-700"
+        "transition-colors duration-200"
+      -}}
+    {{- else -}}
+      {{- $cls = $cls | append "flex items-center relative px-4 py-2.5"
+        "rounded-lg text-base font-medium"
+        "bg-transparent"
+        "text-neutral-700 dark:text-neutral-200"
+        "hover:text-sky-600 dark:hover:text-sky-300"
+        "hover:bg-sky-50/80 dark:hover:bg-sky-900/20"
+        "active:bg-sky-100 dark:active:bg-sky-900/30"
+        "transform-gpu"
+        "transition-all duration-300 ease-in-out"
+        "motion-safe:hover:scale-[1.02]"
+        "before:absolute before:inset-0 before:rounded-lg"
+        "before:bg-gradient-to-br before:from-transparent before:to-transparent"
+        "before:opacity-0 hover:before:from-sky-50/50 hover:before:to-sky-100/50"
+        "dark:hover:before:from-sky-900/30 dark:hover:before:to-sky-800/30"
+        "before:transition-opacity before:duration-300"
+      -}}
+    {{- end -}}
+
+    {{- $attrs := dict "href" ( .URL | relLangURL ) "title" $title -}}
+    {{- if or ($page.IsMenuCurrent .Menu .) (eq $page.Section .Identifier) -}}
+      {{- $attrs = merge $attrs (dict "aria-current" "page") -}}
+      {{- $cls = $cls | append "active" "text-sky-600 dark:text-sky-300 font-semibold before:opacity-100" -}}
+    {{- else if $page.HasMenuCurrent .Menu . -}}
+      {{- $attrs = merge $attrs (dict "aria-current" "true") -}}
+      {{- $cls = $cls | append "ancestor" "text-sky-600 dark:text-sky-300 font-semibold" -}}
+    {{- end -}}
+
 
     <li class="relative group">
       <a
-        class="
-          inline-flex items-center px-4 py-2.5 rounded-lg
-          text-base font-medium
-          bg-transparent
-          text-neutral-700 dark:text-neutral-200
-          hover:text-sky-600 dark:hover:text-sky-300
-          hover:bg-sky-50/80 dark:hover:bg-sky-900/20
-          active:bg-sky-100 dark:active:bg-sky-900/30
-          transform-gpu 
-          transition-all duration-300 ease-in-out
-          motion-safe:hover:scale-[1.02]
-          relative
-          before:absolute before:inset-0 
-          before:rounded-lg
-          before:bg-gradient-to-br
-          before:from-transparent before:to-transparent
-          before:opacity-0
-          hover:before:from-sky-50/50 hover:before:to-sky-100/50 
-          dark:hover:before:from-sky-900/30 dark:hover:before:to-sky-800/30
-          before:transition-opacity before:duration-300
-          {{- if or ($page.IsMenuCurrent .Menu .) ($page.HasMenuCurrent .Menu .) }}
-          text-sky-600 dark:text-sky-300 font-semibold
-          before:opacity-100
-          {{ end -}}"
+        class="{{- delimit $cls " " -}}"
         {{- range $k, $v := $attrs -}}
           {{- with $v -}}
             {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
           {{- end -}}
         {{- end -}}>
-        <span class="relative">{{ $name -}}</span>
+        {{- $name -}}
       </a>
+
       {{- with .Children -}}
         <ul
-          class="
-            absolute top-full left-0 mt-2
-            min-w-[220px]
-            bg-white/95 dark:bg-neutral-900/95
-            shadow-lg shadow-sky-100/20 dark:shadow-sky-900/30
-            rounded-xl
-            border border-sky-100/50 dark:border-sky-800/50
-            backdrop-blur-md
-            opacity-0 invisible
-            transform -translate-y-1 scale-95
-            transition-all duration-300 ease-out
-            origin-top-left
-            motion-safe:group-hover:scale-100
-            group-hover:opacity-100 
-            group-hover:visible 
-            group-hover:translate-y-0">
-          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" .) -}}
+          class="absolute top-fullleft-0 mt-1 min-w-[200px]
+          bg-white/95 dark:bg-neutral-900/95
+          shadow-md shadow-neutral-100/20 dark:shadow-neutral-900/30
+          rounded-md border border-neutral-200/80 dark:border-neutral-800/80
+          backdrop-blur-md
+          opacity-0 invisible
+          transform -translate-y-1 scale-95
+          transition-all duration-300 ease-out
+          origin-top-left
+          motion-safe:group-hover:scale-100
+          group-hover:opacity-100
+          group-hover:visible
+          group-hover:translate-y-0">
+          {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "isMobile" $isMobile) -}}
         </ul>
       {{- end -}}
     </li>
