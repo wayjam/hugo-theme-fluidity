@@ -155,6 +155,34 @@ fun main(args: Array<String>) {
 
 ---
 
+Here is very long code block:
+
+```plaintext
+var a = 1;
+var b = 2;
+var c = 3;
+var d = 4;
+var e = 5;
+var f = 6;
+var g = 7;
+var h = 8;
+var i = 9;
+var j = 10;
+var str = 'this is a very long long long long long long long long long long long long long long long long string';
+var k = 11;
+var l = 12;
+var m = 13;
+var n = 14;
+var o = 15;
+var p = 16;
+var q = 17;
+var r = 18;
+var s = 19;
+var t = 20;
+```
+
+---
+
 By `{{</* highlight go-html-template "linenos=table,hl_lines=1 3-7,linenostart=199" */>}}..{{</* / highlight */>}}`
 
 {{< highlight go-html-template "linenos=table,hl_lines=1 3-7,linenostart=199" >}}

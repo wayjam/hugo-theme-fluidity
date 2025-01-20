@@ -368,7 +368,11 @@
            prose-li:marker:dark:text-neutral-500;
 
     /* Code Block Style */
-    @apply prose-pre:font-normal
+    @apply prose-pre:overflow-auto
+           prose-pre:group-hover:overflow-scroll
+           prose-pre:max-h-[500px]
+           prose-pre:px-2
+           prose-pre:py-2
            prose-pre:bg-neutral-50
            prose-pre:dark:bg-neutral-900
            prose-pre:border-neutral-200

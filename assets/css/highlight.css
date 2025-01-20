@@ -32,11 +32,12 @@
   }
 }
 
-.chroma {
-}
-
 pre code {
   @apply bg-transparent;
+}
+
+.highlight pre code {
+  @apply block;
 }
 
 /* Basic elements */
