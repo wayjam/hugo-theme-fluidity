@@ -126,7 +126,7 @@
 
 
         <!-- Decorative gradient line -->
-        <div class="decorative-gradient-line"></div>
+        <div class="fluidity-decorative-gradient-line"></div>
       </div>
     </header>
 
@@ -138,7 +138,7 @@
           class="relative overflow-hidden
                 bg-gradient-to-br from-white/95 to-neutral-50/90
                 dark:from-neutral-900/95 dark:to-neutral-800/90
-                rounded-xl p-8
+                rounded-xl px-4 md:px-8 py-3 md:py-6
                 border border-neutral-200/80 dark:border-neutral-700/80
                 backdrop-blur-md
                 shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
@@ -148,7 +148,7 @@
           </article>
 
           <!-- Decorative gradient line -->
-          <div class="decorative-gradient-line"></div>
+          <div class="fluidity-decorative-gradient-line"></div>
         </div>
       </div>
       <!-- Sidebar -->
@@ -232,7 +232,7 @@
             </button>
 
             <!-- Decorative gradient line -->
-            <div class="decorative-gradient-line"></div>
+            <div class="fluidity-decorative-gradient-line"></div>
           </div>
         </div>
       </aside>
@@ -251,9 +251,7 @@
 
 
       <div class="w-fit">
-        <span
-          class="hidden border-blue-500 border-transparent text-blue-600 dark:text-blue-400 text-neutral-600 dark:text-neutral-400 text-neutral-900 dark:text-neutral-300"></span>
-        <nav class="flex gap-6" aria-label="Tabs" role="tablist">
+        <nav class="fluidity-tab-list flex gap-6" aria-label="Tabs" role="tablist">
           {{- if $enableComments -}}
             {{- partial "inline/single/tab-button.html" (dict "Name" "comments" "Title" (i18n "comment" | strings.Title) "ActiveTab" $activeTab) -}}
           {{- end -}}

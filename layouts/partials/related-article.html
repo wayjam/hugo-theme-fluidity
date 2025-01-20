@@ -17,15 +17,13 @@
       <!-- Decorative elements -->
       <div
         class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
-                  translate-x-[-200%] group-hover:translate-x-[200%]
-                  transition-transform duration-1000 ease-out"></div>
+                translate-x-[-200%] group-hover:translate-x-[200%]
+                transition-transform duration-1000 ease-out"></div>
 
       <div
-        class="absolute bottom-0 left-0 right-0 h-0.5
-                  bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
-                  dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40
-                  transform origin-left scale-x-0 group-hover:scale-x-100
-                  transition-transform duration-300 ease-out"></div>
+        class="fluidity-decorative-gradient-line
+                transform origin-left scale-x-0 group-hover:scale-x-100
+                transition-transform duration-300 ease-out"></div>
 
       <!-- Content -->
       <div class="relative space-y-3">
@@ -38,12 +36,7 @@
                     transition-colors duration-300">
             <span class="relative">
               {{ .Title }}
-              <span
-                class="absolute bottom-0 left-0 right-0 h-px
-                         bg-gradient-to-r from-sky-400 to-blue-500
-                         dark:from-sky-500 dark:to-blue-400
-                         transform origin-left scale-x-0 group-hover:scale-x-100
-                         transition-transform duration-300 ease-out"></span>
+              <span class="fluidity-page-title-line"></span>
             </span>
           </a>
         </h3>

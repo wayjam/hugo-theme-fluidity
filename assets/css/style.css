@@ -440,7 +440,7 @@ fluent-tab::after {
 }
 
 @layer fluidity {
-  .decorative-gradient-line {
+  .fluidity-decorative-gradient-line {
     @apply absolute bottom-0 left-0 right-0 h-0.5
     bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
     dark:from-sky-500/40 dark:via-blue-400/40 dark:to-sky-500/40;
@@ -493,5 +493,21 @@ fluent-tab::after {
     rounded-xl divide-y divide-blue-100 dark:divide-blue-900/50 
     backdrop-blur-sm
     shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30;
+  }
+
+  .fluidity-tab-list .fluidity-tab-active {
+    @apply border-blue-500 text-neutral-900 dark:text-neutral-300;
+  }
+
+  .fluidity-tab-list .fluidity-tab-inactive {
+    @apply border-transparent text-neutral-600 dark:text-neutral-400;
+  }
+
+  #mobile-menu.fluidity-mobile-menu-open {
+    @apply translate-x-0 opacity-100 scale-100;
+  }
+
+  #mobile-menu.fluidity-mobile-menu-closed {
+    @apply translate-x-full opacity-0 scale-95;
   }
 }

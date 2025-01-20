@@ -97,19 +97,15 @@ function setupArticleAsideTabs() {
 
 			// Remove all state classes first
 			button.classList.remove(
-				'border-blue-500',
-				'border-transparent',
-				'text-blue-600',
-				'dark:text-blue-400',
-				'text-neutral-600',
-				'dark:text-neutral-400',
+				'fluidity-tab-active',
+				'fluidity-tab-inactive',
 			)
 
 			// Apply active or inactive states
 			if (isSelected) {
-				button.classList.add('border-blue-500', 'text-neutral-900', 'dark:text-neutral-300')
+				button.classList.add('fluidity-tab-active')
 			} else {
-				button.classList.add('border-transparent', 'text-neutral-600', 'dark:text-neutral-400')
+				button.classList.add('fluidity-tab-inactive')
 			}
 		})
 
@@ -150,7 +146,7 @@ function setupArticleSidebar() {
 
 	toggleButton.addEventListener('click', () => {
 		sidebar.remove()
-		mainContent.parentNode.classList.remove('md:grid-cols-3')
+		mainContent.parentNode.classList.remove('lg:grid-cols-3')
 	})
 }
 
@@ -163,16 +159,16 @@ function setupMobileMenu() {
 	let isOpen = false
 
 	function showMenu() {
-		menu.classList.remove('translate-x-full', 'opacity-0', 'scale-95')
-		menu.classList.add('translate-x-0', 'opacity-100', 'scale-100')
+		menu.classList.remove('fluidity-mobile-menu-closed')
+		menu.classList.add('fluidity-mobile-menu-open')
 		menu.setAttribute('aria-hidden', 'false')
 		button.setAttribute('aria-expanded', 'true')
 		isOpen = true
 	}
 
 	function hideMenu() {
-		menu.classList.remove('translate-x-0', 'opacity-100', 'scale-100')
-		menu.classList.add('translate-x-full', 'opacity-0', 'scale-95')
+		menu.classList.remove('fluidity-mobile-menu-open')
+		menu.classList.add('fluidity-mobile-menu-closed')
 		menu.setAttribute('aria-hidden', 'true')
 		button.setAttribute('aria-expanded', 'false')
 		isOpen = false
