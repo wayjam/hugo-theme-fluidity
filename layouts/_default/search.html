@@ -2,11 +2,14 @@
   <div class="fluidity-container-1">
     <!-- Header section -->
     <div class="mb-4 lg:mb-8">
-      <h1 class="fluidity-page-title text-3xl">
+      <h1 class="fluidity-page-title text-3xl group flex items-center gap-2">
         <span class="fluidity-page-title-icon">
           {{- partial "utils/icon.html" (dict "icon" "search") -}}
         </span>
-        {{- .Title -}}
+        <span class="relative">
+          {{- .Title -}}
+          <span class="fluidity-page-title-line"></span>
+        </span>
       </h1>
     </div>
 
