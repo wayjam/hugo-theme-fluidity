@@ -423,6 +423,11 @@ body {
 }
 
 @layer fluidity {
+  #fluidity-theme-container {
+    background-color: var(--color-blue-25);
+    @apply dark:bg-neutral-950 min-h-screen flex flex-col;
+  }
+
   .fluidity-decorative-gradient-line {
     @apply absolute bottom-0 left-0 right-0 h-0.5
     bg-gradient-to-r from-sky-400/40 via-blue-500/40 to-sky-400/40
