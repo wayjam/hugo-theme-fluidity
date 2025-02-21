@@ -109,6 +109,9 @@ params:
     disableShareByType:
       - not-exist
 
+  articleMetadata:
+    position: header # Can be either header, sidebar or none.
+
   # Table of contents
   toc:
     disabled: false

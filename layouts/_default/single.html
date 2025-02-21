@@ -1,7 +1,7 @@
 {{- define "main" -}}
   <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
-    <header class="mb-4 md:mb-8 lg:mb-12">
+    <header class="md:mb-4 lg:mb-8">
       <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
         <span class="relative inline-block">
           {{ .Title }}
@@ -9,7 +9,9 @@
         </span>
       </h1>
 
-      {{ partial "article-metadata" . }}
+      {{- if eq .Site.Params.articleMetadata.position "header" -}}
+        {{- partial "article-metadata" . -}}
+      {{- end -}}
     </header>
 
     <!-- Main Content Grid -->
@@ -35,6 +37,10 @@
       </div>
       <!-- Sidebar -->
       <aside id="sidebar" class="lg:block lg:col-span-1 order-1 lg:order-2">
+        {{- if eq .Site.Params.articleMetadata.position "sidebar" -}}
+          {{- partial "article-metadata" . -}}
+        {{- end -}}
+
         <div
           class="sticky top-4 rounded-xl p-4
                     relative overflow-hidden
