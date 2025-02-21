@@ -240,7 +240,7 @@
 
     <aside id="article-aside" class="mt-4 lg:mt-12">
       {{- $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableByType .Type)) -}}
-      {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) -}}
+      {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) (.Site.RegularPages.Related .) -}}
       {{- $activeTab := "comments" -}}
       {{- if not $enableComments -}}
         {{- $activeTab = "related" -}}
@@ -269,9 +269,7 @@
         {{- end -}}
         {{- if $enableRelated -}}
           <div id="related" class="tab-content hidden" role="tabpanel">
-            {{- if .Site.RegularPages.Related . -}}
-              {{- partial "related-article.html" . -}}
-            {{- end -}}
+            {{- partial "related-article.html" . -}}
           </div>
         {{- end -}}
       </div>
