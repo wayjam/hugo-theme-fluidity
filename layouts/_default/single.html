@@ -1,4 +1,6 @@
 {{- define "main" -}}
+  {{- $metadataPosition := lower (default "header" .Site.Params.articleMetadata.position) -}}
+
   <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
     <header class="md:mb-4 lg:mb-8">
@@ -9,7 +11,7 @@
         </span>
       </h1>
 
-      {{- if eq .Site.Params.articleMetadata.position "header" -}}
+      {{- if eq $metadataPosition "header" -}}
         {{- partial "article-metadata" . -}}
       {{- end -}}
     </header>
@@ -37,7 +39,7 @@
       </div>
       <!-- Sidebar -->
       <aside id="sidebar" class="lg:block lg:col-span-1 order-1 lg:order-2">
-        {{- if eq .Site.Params.articleMetadata.position "sidebar" -}}
+        {{- if eq $metadataPosition "sidebar" -}}
           {{- partial "article-metadata" . -}}
         {{- end -}}
 
