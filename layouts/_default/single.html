@@ -203,6 +203,7 @@
               <span>{{ i18n "backToTop" | default "Back to Top" | title }}</span>
             </button>
 
+            {{- if default true (not .Site.Params.comment.disabled) }}
             <button
               onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
               class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
@@ -216,6 +217,7 @@
               </span>
               <span>{{ i18n "jumpToComments" | default "Jump to Comments" | title }}</span>
             </button>
+            {{- end }}
 
             <button
               id="toggle-sidebar"
