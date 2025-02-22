@@ -106,11 +106,29 @@ params:
     twitter: 'Your Twitter username'
     github: 'Your GitHub username'
     linkedin: 'Your LinkedIn username'
-    disableShareByType:
-      - not-exist
+
+    share:
+      disabled: false
+      disableByType: # content type
+        - not-exist
+      platforms: # available inherit platform: [redidit, x, facebook, google, telegram]
+        - name: reddit # inherit platform just need the name
+        - name: x
+        - name: facebook
+        - name: google
+        # - name: telegram # disable the inherit platform
+        - name: Linkedin # this is a custom platform
+          url: "https://www.linkedin.com/shareArticle?url=%s&title=%s" # args(Permalink, Title)
+        - name: WhatsApp
+          url: "https://wa.me/?text=%s %s"
+    connect:
+      platforms: # available inherit platform: [github, x, linkedin]
+        - github
+        - x
+        - linkedin
 
   articleMetadata:
-    position: header # Can be either header, sidebar or none.
+    position: header # Can be either [header, sidebar, none].
 
   # Table of contents
   toc:

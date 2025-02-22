@@ -1,6 +1,7 @@
 {{- define "main" -}}
   {{- $metadataPosition := lower (default "header" .Site.Params.articleMetadata.position) -}}
 
+
   <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
     <header class="md:mb-4 lg:mb-8">
@@ -43,6 +44,7 @@
           {{- partial "article-metadata" . -}}
         {{- end -}}
 
+
         <div
           class="sticky top-4 rounded-xl p-4
                     relative overflow-hidden
@@ -54,7 +56,10 @@
                     transition-all duration-300 ease-out">
           {{- $enableToc := and (gt .WordCount 400) (and (not (eq .Params.toc false)) (not .Site.Params.toc.disabled)) -}}
           {{- $enableToc = not (eq .TableOfContents "<nav id=\"TableOfContents\"></nav>") -}}
-          {{- $enableShare := not (in .Site.Params.social.disableShareByType .Type) -}}
+          {{- $enableShare := false -}}
+          {{ if and (isset .Site.Params "social") (isset .Site.Params.social "share") }}
+            {{ $enableShare = and (not .Site.Params.social.share.disabled) (not (in .Site.Params.social.share.disableByType .Type)) }}
+          {{ end }}
 
           {{- if and $enableToc -}}
             <div class="relative">
