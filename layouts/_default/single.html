@@ -1,4 +1,6 @@
 {{- define "main" -}}
+  {{- $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableByType .Type)) -}}
+
   <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
     <header class="mb-4 md:mb-8 lg:mb-12">
@@ -203,7 +205,7 @@
               <span>{{ i18n "backToTop" | default "Back to Top" | title }}</span>
             </button>
 
-            {{- if default true (not .Site.Params.comment.disabled) }}
+            {{- if $enableComments }}
             <button
               onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
               class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
@@ -241,7 +243,6 @@
     </div>
 
     <aside id="article-aside" class="mt-4 lg:mt-12">
-      {{- $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableByType .Type)) -}}
       {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) -}}
       {{- $activeTab := "comments" -}}
       {{- if not $enableComments -}}
