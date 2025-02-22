@@ -3,6 +3,7 @@ license = 'MIT'
 licenselink = 'https://github.com/wayjam/hugo-theme-fluidity/blob/master/LICENSE'
 description = 'A fluid and responsive Hugo theme.'
 homepage = 'https://github.com/wayjam/hugo-theme-fluidity'
+demositev = "https://wayjam.github.io/hugo-theme-fluidity"
 tags = ["blog", "fluent", "clean", "simple", "light", "dark" ,"writing", "syntax highlighting", "archives", "tailwindcss", "search", "emoji", "math typesetting", "fluent-design"]
 features = ["blog", "responsive", "social media", "archives"]
 [author]
