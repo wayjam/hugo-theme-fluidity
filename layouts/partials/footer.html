@@ -69,16 +69,8 @@
           {{- i18n "connect" | strings.Title -}}
         </h3>
         <ul class="space-y-2">
-          {{- partial "inline/footer/connect-item.html" (dict "icon" "rss" "title" "RSS Feed" "url" ("index.xml" | relURL)) -}}
-          {{- with .Site.Params.social.twitter -}}
-            {{- partial "inline/footer/connect-item.html" (dict "icon" "xcom" "title" "X.com" "url" (printf "https://x.com/%s" .)) -}}
-          {{- end -}}
-          {{- with .Site.Params.social.github -}}
-            {{- partial "inline/footer/connect-item.html" (dict "icon" "github" "title" "GitHub" "url" (printf "https://github.com/%s" .)) -}}
-          {{- end -}}
-          {{- with .Site.Params.social.linkedin -}}
-            {{- partial "inline/footer/connect-item.html" (dict "icon" "linkedin" "title" "LinkedIn" "url" (printf "https://linkedin.com/in/%s" .)) -}}
-          {{- end -}}
+          {{- partial "inline/connect/item.html" (dict "icon" "rss" "title" "RSS Feed" "url" ("index.xml" | relURL)) -}}
+          {{- partial "utils/social-connect.html" . -}}
         </ul>
       </div>
     </div>
@@ -124,22 +116,3 @@
     </div>
   </div>
 </div>
-
-{{- define "partials/inline/footer/connect-item.html" -}}
-  {{- $item := . -}}
-  <li>
-    <a
-      href="{{ $item.url }}"
-      target="_blank"
-      rel="noopener noreferrer"
-      class="group flex items-center gap-2 
-            text-slate-600 hover:text-sky-600 
-            dark:text-slate-300 dark:hover:text-sky-300 
-            transition-all duration-300 ease-in-out">
-      <span class="transform group-hover:scale-110 transition-transform duration-300">
-        {{- partial "utils/icon" (dict "icon" $item.icon) -}}
-      </span>
-      <span class="transform group-hover:translate-x-1 transition-transform duration-300">{{ $item.title }}</span>
-    </a>
-  </li>
-{{- end -}}

@@ -1,50 +1,84 @@
 <!-- Share component -->
 <div id="share">
-  <h2 class="text-lg font-medium text-neutral-800 dark:text-neutral-200 mb-4">
-    {{- i18n "shareWith" | strings.Title -}}
-  </h2>
-  <div class="flex flex-wrap justify-between gap-1 items-center space-y-1">
-    {{- $tag_list := "" -}}
-    {{- with .Params.Tags -}}
-      {{- $tag_list = delimit . "," -}}
-    {{- end -}}
-    {{- partial "inline/share/item.html"
-      (dict
-        "Name" "Reddit"
-        "Icon" "reddit"
-        "Title" .Title
-        "URL" (fmt.Print "https://reddit.com/submit?url=" .Permalink "&title=" .Title ))
-    -}}
-    {{- partial "inline/share/item.html"
-      (dict
-        "Name" "X.com"
-        "Icon" "twitter"
-        "Title" .Title
-        "URL" (fmt.Print "https://x.com/intent/tweet/?text=" .Title "&url= " .Permalink "&hashtags=" $tag_list))
-    -}}
-    {{- partial "inline/share/item.html"
-      (dict
-        "Name" "Facebook"
-        "Icon" "facebook"
-        "Title" .Title
-        "URL" (fmt.Print "https://facebook.com/sharer/sharer.php?u= " .Permalink ))
-    -}}
-    {{- partial "inline/share/item.html"
-      (dict
-        "Name" "Google"
-        "Icon" "google"
-        "Title" .Title
-        "URL" (fmt.Print "https://www.google.com/bookmarks/mark?op=edit&bkmk=" .Permalink "&title=" .Title ))
-    -}}
-    {{- partial "inline/share/item.html"
-      (dict
-        "Name" "Telegram"
-        "Icon" "telegram"
-        "Title" .Title
-        "URL" (fmt.Print "https://telegram.me/share/url?url=" .Permalink "&text=" .Title ))
-    -}}
-  </div>
+  {{- if not (or .Site.Params.social.share.disabled (in .Site.Params.social.share.disableByType .Type)) -}}
+    <h2 class="text-lg font-medium text-neutral-800 dark:text-neutral-200 mb-4">
+      {{- i18n "shareWith" | strings.Title -}}
+    </h2>
+    <div class="flex flex-wrap justify-between gap-1 items-center space-y-1">
+      {{- $entry := . -}}
+
+      {{/* Define default social platforms */}}
+      {{- $defaultPlatforms := dict
+        "reddit" (dict "name" "Reddit" "urlPattern" "https://reddit.com/submit?url={permalink}&title={title}")
+        "x" (dict "name" "X.com" "urlPattern" "https://x.com/intent/tweet/?text={title}&url={permalink}&hashtags={tags}")
+        "facebook" (dict "name" "Facebook" "urlPattern" "https://facebook.com/sharer/sharer.php?u={permalink}")
+        "telegram" (dict "name" "Telegram" "urlPattern" "https://t.me/share/url?url={permalink}&text={title}")
+        "linkedin" (dict "name" "Linkedin" "urlPattern" "https://www.linkedin.com/shareArticle?url={permalink}&title={title}")
+        "whatsapp" (dict "name" "WhatsApp" "urlPattern" "https://wa.me/?text={permalink} {title}")
+      -}}
+
+      {{- $tagList := "" -}}
+      {{- with .Params.Tags -}}
+        {{- $tagList = delimit . "," -}}
+      {{- end -}}
+
+      {{/* Render configured platforms */}}
+      {{- range .Site.Params.social.share.platforms -}}
+        {{- $platformName := .name | lower -}}
+        {{- $urlPattern := .urlPattern -}}
+        {{- $name := .name | title -}}
+
+        {{/* Handle inherit platform */}}
+        {{- with index $defaultPlatforms $platformName -}}
+          {{- if not $urlPattern -}}
+            {{- $urlPattern = .urlPattern -}}
+          {{- end -}}
+          {{- $name = .name -}}
+        {{- end -}}
+
+        {{- $url := partial "inline/share/generate_share_url.html" (dict
+          "pattern" $urlPattern
+          "permalink" $entry.Permalink
+          "title" $entry.Title
+          "tags" $tagList
+          "description" ($entry.Description | default $entry.Title)
+          "via" ($entry.Site.Params.social.twitter | default "")
+          "user" (index $entry.Site.Params.social $platformName | default "")
+          )
+        -}}
+
+        {{- partial "inline/share/item.html" (dict
+          "Name" $name
+          "Title" $entry.Title
+          "URL" $url )
+        -}}
+      {{- end -}}
+    </div>
+  {{- end -}}
 </div>
+
+{{/* Function to replace named parameters in URL template */}}
+{{- define "partials/inline/share/generate_share_url.html" -}}
+  {{- $url := .pattern -}}
+
+  {{/* Define available params(placeholders) */}}
+  {{- $availableParams := dict
+    "permalink" (.permalink | urlquery | safeURL )
+    "title" (.title | urlquery)
+    "tags" (.tags | urlquery)
+    "description" (.description | urlquery)
+    "via" (.via | urlquery)
+    "user" (.user | urlquery)
+  -}}
+
+  {{/* Replace each {param} with its value */}}
+  {{- range $key, $value := $availableParams -}}
+    {{- $pattern := printf "{%s}" $key -}}
+    {{- $url = replace $url $pattern $value -}}
+  {{- end -}}
+
+  {{- return $url -}}
+{{- end -}}
 
 {{- define "partials/inline/share/item.html" -}}
   <a
@@ -52,7 +86,7 @@
     target="_blank"
     rel="noopener noreferrer"
     class="inline px-2 py-1 rounded-lg
-    text-sm font-medium
+      text-sm font-medium
       bg-white/60 dark:bg-neutral-800/60
       text-neutral-700 dark:text-neutral-300
       border border-neutral-200/50 dark:border-neutral-700/50

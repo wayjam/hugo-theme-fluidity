@@ -1,0 +1,42 @@
+{{- with .Site.Params.social -}}
+  {{- $social := . -}}
+  {{- with .connect -}}
+    {{- $supportPlatforms := dict
+      "github" (dict "icon" "github" "title" "Github" "config" $social.github "urlFormat" "https://github.com/%s")
+      "x" (dict "icon" "xcom" "title" "X.com" "config" $social.twitter "urlFormat" "https://x.com/%s")
+      "linkedin" (dict "icon" "linkedin" "title" "LinkedIn" "config" $social.linkedin "urlFormat" "https://linkedin.com/in/%s")
+      "whatsapp" (dict "icon" "whatsapp" "title" "WhatsApp" "config" $social.whatsapp "urlFormat" (print "https://wa.me/%s?text=Hi, I am contacting you from " site.Title))
+    }}
+
+    {{- range .platforms -}}
+      {{- $platformName := . | lower -}}
+      {{- with index $supportPlatforms $platformName -}}
+        {{- if .config -}}
+          {{- $url := printf .urlFormat .config -}}
+          {{- partial "inline/connect/item.html" (dict "icon" .icon "title" .title "url" $url) -}}
+        {{- end -}}
+      {{- end -}}
+
+    {{- end -}}
+  {{- end -}}
+
+{{- end -}}
+
+{{- define "partials/inline/connect/item.html" -}}
+  {{- $item := . -}}
+  <li>
+    <a
+      href="{{ $item.url }}"
+      target="_blank"
+      rel="noopener noreferrer"
+      class="group flex items-center gap-2 
+            text-slate-600 hover:text-sky-600 
+            dark:text-slate-300 dark:hover:text-sky-300 
+            transition-all duration-300 ease-in-out">
+      <span class="transform group-hover:scale-110 transition-transform duration-300">
+        {{- partial "utils/icon" (dict "icon" $item.icon) -}}
+      </span>
+      <span class="transform group-hover:translate-x-1 transition-transform duration-300">{{ $item.title }}</span>
+    </a>
+  </li>
+{{- end -}}
