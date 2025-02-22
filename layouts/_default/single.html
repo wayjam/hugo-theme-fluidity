@@ -136,7 +136,7 @@
     </div>
 
     <aside id="article-aside" class="mt-4 lg:mt-12">
-      {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) -}}
+      {{- $enableRelated := and (not .Site.Params.relatedPosts.disabled) (not (in .Site.Params.relatedPosts.disableByType .Type)) (.Site.RegularPages.Related .) -}}
       {{- $activeTab := "comments" -}}
       {{- if not $enableComments -}}
         {{- $activeTab = "related" -}}
