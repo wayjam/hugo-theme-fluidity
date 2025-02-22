@@ -112,14 +112,40 @@ params:
 
   # Social links
   social:
-    twitter: 'Your Twitter username'
-    github: 'Your GitHub username'
-    linkedin: 'Your LinkedIn username'
-    disableShareByType:
-      - not-exist
+    twitter: 'Your_Twitter_username'
+    github: 'Your_GitHub_username'
+    linkedin: 'Your_LinkedIn_username'
+    whatsapp: 'Your_WhatsApp_username'
+
+    share:
+      disabled: false
+      disableByType: # content type
+        - not-exist
+      platforms: # available inherit platform: [redidit, x, facebook, google, telegram]
+        - name: reddit # inherit platform just need the name
+        - name: x
+        - name: facebook
+        # - name: telegram # disable the inherit platform
+        - name: linkedin
+        - name: whatsapp
+
+        # All Params
+        # {permalink}: Permalink of current entry, eg: "http://localhost/hugo-theme-fluidity/posts/markdown-syntax/".
+        # {title}: Title of current entry, eg: "Markdown Syntax".
+        # {description}: Description of current entry, eg: "Sample article showcasing basic Markdown syntax and formatting for HTML elements.".
+        # {via}: The X(Twitter) username which configured at site params, eg: "elonmusk".
+        # {user}: The account username of current platform(match).
+        - name: FullExample # This is a custom platform
+          urlPattern: "https://example.com?link={permalink}&title={title}&tags={tags}&description={description}&via={via}&user={user}"
+    connect:
+      platforms: # available inherit platform: [github, x, linkedin, whatsapp]
+        - github
+        - x
+        # - linkedin # disable the inherit platform
+        - whatsapp
 
   articleMetadata:
-    position: header # Can be either header, sidebar or none.
+    position: header # Can be either [header, sidebar, none].
 
   # Table of contents
   toc:
