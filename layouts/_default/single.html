@@ -1,13 +1,9 @@
 {{- define "main" -}}
+  {{- $metadataPosition := lower (default "header" .Site.Params.articleMetadata.position) -}}
+
   <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
-    <header class="mb-4 md:mb-8 lg:mb-12">
-      {{- $dateMachine := .Date | time.Format "2006-01-02T15:04:05-07:00" -}}
-      {{- $dateHuman := .Date | time.Format ":date_long" -}}
-      {{- $lastmodMachine := .Lastmod | time.Format "2006-01-02T15:04:05-07:00" -}}
-      {{- $lastmodHuman := .Lastmod | time.Format ":date_long" -}}
-
-
+    <header class="md:mb-4 lg:mb-8">
       <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
         <span class="relative inline-block">
           {{ .Title }}
@@ -15,119 +11,9 @@
         </span>
       </h1>
 
-      <div
-        class="relative overflow-hidden
-                  bg-gradient-to-br from-white/95 to-neutral-50/90
-                  dark:from-neutral-900/95 dark:to-neutral-800/90
-                  border border-neutral-200/80 dark:border-neutral-700/80
-                  rounded-xl p-2 md:p-3 lg:p-6 
-                  backdrop-blur-md
-                  shadow-lg shadow-sky-100/20 dark:shadow-sky-900/20
-                  transition-all duration-300 ease-out">
-        <!-- Article metadata -->
-        <div class="flex flex-wrap gap-6">
-          {{- with .Params.author -}}
-            <div class="flex items-center gap-2 text-neutral-700 dark:text-neutral-300 group">
-              <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                           group-hover:scale-110">
-                {{- partial "utils/icon.html" (dict "icon" "user-star") -}}
-              </span>
-              <span class="font-medium text-neutral-700 dark:text-neutral-300">{{ . }}</span>
-              {{- with $.Params.role -}}
-                <span class="text-sm text-neutral-600 dark:text-neutral-400 italic">[{{ . }}]</span>
-              {{- end -}}
-            </div>
-          {{- end -}}
-
-
-          <!-- Date, reading time, categories -->
-          <div class="flex flex-wrap items-center gap-5 text-neutral-700 dark:text-neutral-300">
-            <div class="flex items-center gap-2 group">
-              <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                           group-hover:scale-110">
-                {{- partial "utils/icon.html" (dict "icon" "calendar") -}}
-              </span>
-              <time
-                datetime="{{ $dateMachine }}"
-                title="{{ i18n "published" | default "Published" }}"
-                class="text-sm group-hover:text-sky-600 dark:group-hover:text-sky-400
-                           transition-colors duration-200">
-                {{ $dateHuman }}
-              </time>
-            </div>
-
-            {{ if ne ($lastmodHuman) ($dateHuman) }}
-              <div class="flex items-center gap-2 group">
-                <span
-                  class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                             group-hover:scale-110">
-                  {{- partial "utils/icon.html" (dict "icon" "calendar-edit") -}}
-                </span>
-                <time
-                  datetime="{{ $lastmodMachine }}"
-                  title="{{ i18n "lastModified" | default "Last modified" }}"
-                  class="text-sm group-hover:text-sky-600 dark:group-hover:text-sky-400
-                             transition-colors duration-200">
-                  {{ $lastmodHuman }}
-                </time>
-              </div>
-            {{ end }}
-
-
-            <div class="flex items-center gap-2 group">
-              <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                           group-hover:scale-110">
-                {{- partial "utils/icon.html" (dict "icon" "timer") -}}
-              </span>
-              <span
-                class="text-sm group-hover:text-sky-600 dark:group-hover:text-sky-400
-                           transition-colors duration-200">
-                {{ i18n "readingTime" .ReadingTime | strings.FirstUpper }}
-              </span>
-            </div>
-
-            {{- if .Params.categories -}}
-              <div class="flex items-center gap-2 group">
-                <span
-                  class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                           group-hover:scale-110">
-                  {{- partial "utils/icon.html" (dict "icon" "folder") -}}
-                </span>
-                <div class="flex gap-2">
-                  {{- range .Params.categories -}}
-                    <a
-                      href="{{ (site.GetPage (printf "/categories/%s" (. | urlize))).RelPermalink }}"
-                      class="text-sm underline underline-offset-2 group-hover:text-sky-600 dark:group-hover:text-sky-400
-                           transition-colors duration-200">
-                      {{ . }}
-                    </a>
-                  {{- end -}}
-                </div>
-              </div>
-            {{- end -}}
-          </div>
-        </div>
-
-        <!-- Tags -->
-        {{- if .GetTerms "tags" -}}
-          <div class="mt-4 pt-4 border-t border-neutral-200/80 dark:border-neutral-700/80"></div>
-          <div class="flex flex-wrap gap-2 items-center group">
-            <span
-              class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
-                                               group-hover:scale-110">
-              {{- partial "utils/icon.html" (dict "icon" "tags") -}}
-            </span>
-            {{- partial "terms.html" (dict "taxonomy" "tags" "page" .) -}}
-          </div>
-        {{- end -}}
-
-
-        <!-- Decorative gradient line -->
-        <div class="fluidity-decorative-gradient-line"></div>
-      </div>
+      {{- if eq $metadataPosition "header" -}}
+        {{- partial "article-metadata" . -}}
+      {{- end -}}
     </header>
 
     <!-- Main Content Grid -->
@@ -153,6 +39,10 @@
       </div>
       <!-- Sidebar -->
       <aside id="sidebar" class="lg:block lg:col-span-1 order-1 lg:order-2">
+        {{- if eq $metadataPosition "sidebar" -}}
+          {{- partial "article-metadata" . -}}
+        {{- end -}}
+
         <div
           class="sticky top-4 rounded-xl p-4
                     relative overflow-hidden
@@ -196,7 +86,7 @@
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
               <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
+                class="text-sky-600 dark:text-sky-400 transition-transform duration-300
                            group-hover:scale-110 group-hover:-translate-y-0.5">
                 {{- partial "utils/icon.html" (dict "icon" "arrow-export-up") -}}
               </span>
@@ -210,7 +100,7 @@
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
               <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
+                class="text-sky-600 dark:text-sky-400 transition-transform duration-300
                            group-hover:scale-110 group-hover:-translate-y-0.5">
                 {{- partial "utils/icon.html" (dict "icon" "comments") -}}
               </span>
@@ -224,7 +114,7 @@
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
               <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300 
+                class="text-sky-600 dark:text-sky-400 transition-transform duration-300
                            group-hover:scale-110 group-hover:rotate-12">
                 {{- partial "utils/icon.html" (dict "icon" "slide-hide") -}}
               </span>
@@ -283,7 +173,7 @@
     role="tab"
     aria-label="{{ .Title }}"
     class="tab-button border-b-4 px-1 pb-2 text-base font-medium
-      text-neutral-600 dark:text-neutral-400 
+      text-neutral-600 dark:text-neutral-400
       border-transparent cursor-pointer
       hover:border-sky-500
       hover:text-sky-600 dark:hover:text-sky-400
