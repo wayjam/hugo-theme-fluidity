@@ -29,6 +29,12 @@
             ">
             {{- .Title -}}
           </h3>
+          <div class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
+            {{- .Summary | plainify -}}
+            {{- if .Truncated -}}
+              <span class="hellip">&hellip;</span>
+            {{- end -}}
+          </div>
           <div class="flex flex-col sm:flex-row items-start sm:items-center flex-wrap gap-x-3 gap-y-2">
             <!-- Categories -->
             {{- with $article.GetTerms "categories" -}}
