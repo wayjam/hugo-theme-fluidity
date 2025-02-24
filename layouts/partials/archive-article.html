@@ -27,8 +27,8 @@
           </h3>
           <div class="flex flex-col sm:flex-row items-start sm:items-center flex-wrap gap-x-3 gap-y-2">
             <!-- Categories -->
-            {{- with $article.Params.categories -}}
-              {{- range first 1 . -}}
+            {{- with $article.GetTerms "categories" -}}
+              {{- range . -}}
                 <span
                   class="
                   inline-flex py-1.5 px-1 text-sm
@@ -36,7 +36,7 @@
                   underline underline-offset-4 decoration-sky-700
                   transform transition-all duration-300
                   group-hover:decoration-double">
-                  {{- . -}}
+                  {{- .Title -}}
                 </span>
               {{- end -}}
             {{- end -}}
