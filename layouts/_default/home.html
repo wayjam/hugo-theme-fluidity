@@ -16,7 +16,7 @@
             <span class="fluidity-page-title-line"></span>
           </span>
         </h1>
-        {{- partial "inline/home/article.html" (dict "item" (index . 0) "showSection" $showSection "wide" true) }}
+        {{- partial "inline/home/article.html" (dict "item" (index . 0) "showSection" $showSection "isFirst" true) }}
       {{- end -}}
     {{- end -}}
 
