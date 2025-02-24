@@ -2,10 +2,30 @@
   {{- $pageSize := site.Params.pageSize.home | default 5 -}}
   {{- $showSection := false -}}
   {{- if gt (len site.Params.mainSections) 1 }}{{ $showSection = true }}{{ end -}}
-  {{- $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize -}}
+  {{- $paginator := .Paginate (where (where site.RegularPages "Section" "in" site.Params.mainSections) "Params.featured" "ne" true) $pageSize -}}
 
 
   <div class="container mx-auto px-2 lg:px-4 py-4 lg:py-8">
+    {{- with (where .Site.RegularPages "Params.featured" true) -}}
+      {{- if gt (len .) 1 -}}
+        {{ errorf "Only one article may be featured but found %d" (len .) }}
+      {{- else -}}
+        <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
+          <span class="relative inline-block">
+            Featured
+            <span class="fluidity-page-title-line"></span>
+          </span>
+        </h1>
+        {{- partial "inline/home/article.html" (dict "item" (index . 0) "showSection" $showSection "wide" true) }}
+      {{- end -}}
+    {{- end -}}
+
+    <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
+      <span class="relative inline-block">
+        Latest
+        <span class="fluidity-page-title-line"></span>
+      </span>
+    </h1>
     {{- if $paginator.Pages -}}
       {{- if eq $paginator.PageNumber 1 -}}
         {{- with (index $paginator.Pages 0) -}}
