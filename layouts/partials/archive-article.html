@@ -1,4 +1,8 @@
 {{- $article := . -}}
+{{/* 1000 is used to effectively display all */}}
+{{- $numCategoriesToShow := default 1000 .Site.Params.listPage.numCategoriesToShow -}}
+{{- $numTagsToShow := default 1000 .Site.Params.listPage.numTagsToShow -}}
+
 <div class="group relative">
   <a href="{{- .Permalink | relURL -}}" class="block relative">
     <div
@@ -29,7 +33,7 @@
             <!-- Categories -->
             {{- with $article.GetTerms "categories" -}}
               <div class="flex flex-wrap gap-2">
-                {{- range . -}}
+                {{- range (first $numCategoriesToShow .) -}}
                   <span
                     class="fluidity-category inline-flex items-center text-sm">
                     {{- .Title -}}
@@ -40,7 +44,7 @@
             <!-- Tags -->
             {{- with $article.GetTerms "tags" -}}
               <div class="flex flex-wrap gap-2">
-                {{- range . -}}
+                {{- range (first $numTagsToShow .) -}}
                   <span
                     class="fluidity-tag inline-flex items-center text-sm">
                     {{- .Title -}}
