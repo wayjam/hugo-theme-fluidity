@@ -12,7 +12,7 @@
       {{- else -}}
         <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
           <span class="relative inline-block">
-            Featured
+            {{- i18n "featured" | default "Featured" | title }}
             <span class="fluidity-page-title-line"></span>
           </span>
         </h1>
@@ -22,7 +22,7 @@
 
     <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
       <span class="relative inline-block">
-        Latest
+        {{- i18n "latest" | default "Latest" | title }}
         <span class="fluidity-page-title-line"></span>
       </span>
     </h1>
@@ -84,10 +84,10 @@
           <a
             href="{{ $item.Section | relURL }}"
             class="inline-flex items-center px-2 py-1 rounded-md
-              text-xs font-medium 
+              text-xs font-medium
               bg-blue-50/80 dark:bg-blue-900/30
               text-blue-600 dark:text-blue-300
-              hover:bg-blue-100/80 dark:hover:bg-blue-800/40 
+              hover:bg-blue-100/80 dark:hover:bg-blue-800/40
               transition-colors duration-200">
             {{ $item.Section }}
           </a>
@@ -106,8 +106,8 @@
         <a
           href="{{ $item.Permalink | relURL }}"
           class="relative inline-block
-                    text-neutral-900 dark:text-white 
-                    group-hover:text-sky-600 dark:group-hover:text-sky-400 
+                    text-neutral-900 dark:text-white
+                    group-hover:text-sky-600 dark:group-hover:text-sky-400
                     transition-colors duration-300">
           {{ $item.Title }}
           <span
@@ -130,7 +130,7 @@
         <a
           href="{{ $item.Permalink | relURL }}"
           aria-label="{{- i18n "readMore" | strings.Title }} about {{ $item.Title -}}"
-          class="inline-flex items-center justify-center gap-1.5 
+          class="inline-flex items-center justify-center gap-1.5
                px-4 h-9 text-sm font-medium rounded-lg
                transition-all duration-200 ease-out
                backdrop-blur-[2px]
