@@ -6,7 +6,7 @@
 
 
   <div class="container mx-auto px-2 lg:px-4 py-4 lg:py-8">
-    {{- with (where .Site.RegularPages "Params.featured" true) -}}
+    {{- with (where .Site.Pages "Params.featured" true) -}}
       {{- if gt (len .) 1 -}}
         {{ errorf "Only one article may be featured but found %d" (len .) }}
       {{- else -}}
