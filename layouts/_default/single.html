@@ -1,5 +1,7 @@
 {{- define "main" -}}
   {{- $metadataPosition := lower (default "header" .Site.Params.articleMetadata.position) -}}
+  {{- $enableComments := and (not .Site.Params.comment.disabled) (not (in .Site.Params.comment.disableByType .Type)) -}}
+
 
   <div class="container mt-1 mx-auto px-2 py-2 md:px-2 md:py-4 lg:px-4 lg:py-8 min-h-screen">
     <!-- Article Header -->
@@ -42,6 +44,7 @@
         {{- if eq $metadataPosition "sidebar" -}}
           {{- partial "article-metadata" . -}}
         {{- end -}}
+
 
         <div
           class="sticky top-4 rounded-xl p-4
@@ -93,19 +96,22 @@
               <span>{{ i18n "backToTop" | default "Back to Top" | title }}</span>
             </button>
 
-            <button
-              onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
-              class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
+            {{- if $enableComments }}
+              <button
+                onclick="document.getElementById('comments').scrollIntoView({behavior: 'smooth'})"
+                class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
                      hover:text-sky-600 dark:hover:text-sky-400
                      transform-gpu motion-safe:hover:-translate-y-0.5
                      transition-all duration-300 ease-out">
-              <span
-                class="text-sky-600 dark:text-sky-400 transition-transform duration-300
+                <span
+                  class="text-sky-600 dark:text-sky-400 transition-transform duration-300
                            group-hover:scale-110 group-hover:-translate-y-0.5">
-                {{- partial "utils/icon.html" (dict "icon" "comments") -}}
-              </span>
-              <span>{{ i18n "jumpToComments" | default "Jump to Comments" | title }}</span>
-            </button>
+                  {{- partial "utils/icon.html" (dict "icon" "comments") -}}
+                </span>
+                <span>{{ i18n "jumpToComments" | default "Jump to Comments" | title }}</span>
+              </button>
+            {{- end }}
+
 
             <button
               id="toggle-sidebar"
