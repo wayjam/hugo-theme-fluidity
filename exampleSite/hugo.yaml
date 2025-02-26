@@ -107,6 +107,8 @@ params:
     numCategoriesToShow: 1
     # The number of tags on a page to deisplay in the list summary.
     numTagsToShow: 3
+    # Whether to show the summary of the post on the list page.
+    showSummary: false
 
   # Social links
   social:
@@ -125,14 +127,12 @@ params:
 
   relatedPosts:
     disabled: false
-    disableByType:
-      - page
+    disableByType: [page]
 
   # Comment
   comment:
     disabled: false
-    disableByType:
-      - page
+    disableByType: [page]
     thirdParty: |
       your comment script will be loaded here
 

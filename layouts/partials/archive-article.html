@@ -2,6 +2,7 @@
 {{/* 1000 is used to effectively display all */}}
 {{- $numCategoriesToShow := default 1000 .Site.Params.listPage.numCategoriesToShow -}}
 {{- $numTagsToShow := default 1000 .Site.Params.listPage.numTagsToShow -}}
+{{- $showSummary := .Site.Params.listPage.showSummary -}}
 
 <div class="group relative">
   <a href="{{- .Permalink | relURL -}}" class="block relative">
@@ -29,12 +30,14 @@
             ">
             {{- .Title -}}
           </h3>
-          <div class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
-            {{- .Summary | plainify -}}
-            {{- if .Truncated -}}
-              <span class="hellip">&hellip;</span>
-            {{- end -}}
-          </div>
+          {{- if $showSummary -}}
+            <div class="text-neutral-700 dark:text-neutral-300 leading-relaxed text-base">
+              {{- .Summary | plainify -}}
+              {{- if .Truncated -}}
+                <span class="hellip">&hellip;</span>
+              {{- end -}}
+            </div>
+          {{- end -}}
           <div class="flex flex-col sm:flex-row items-start sm:items-center flex-wrap gap-x-3 gap-y-2">
             <!-- Categories -->
             {{- with $article.GetTerms "categories" -}}
