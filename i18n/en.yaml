@@ -55,6 +55,10 @@ noSearchResults:
   other: no results found
 loading:
   other: loading...
+featured:
+  other: featured
+latest:
+  other: latest
 # Menu items
 home:
   other: home

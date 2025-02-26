@@ -2,10 +2,30 @@
   {{- $pageSize := site.Params.pageSize.home | default 5 -}}
   {{- $showSection := false -}}
   {{- if gt (len site.Params.mainSections) 1 }}{{ $showSection = true }}{{ end -}}
-  {{- $paginator := .Paginate (where site.RegularPages "Section" "in" site.Params.mainSections) $pageSize -}}
+  {{- $paginator := .Paginate (where (where site.RegularPages "Section" "in" site.Params.mainSections) "Params.featured" "ne" true) $pageSize -}}
 
 
   <div class="container mx-auto px-2 lg:px-4 py-4 lg:py-8">
+    {{- with (where .Site.Pages "Params.featured" true) -}}
+      {{- if gt (len .) 1 -}}
+        {{ errorf "Only one article may be featured but found %d" (len .) }}
+      {{- else -}}
+        <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
+          <span class="relative inline-block">
+            {{- i18n "featured" | default "Featured" | title }}
+            <span class="fluidity-page-title-line"></span>
+          </span>
+        </h1>
+        {{- partial "inline/home/article.html" (dict "item" (index . 0) "showSection" $showSection "isFirst" true) }}
+      {{- end -}}
+    {{- end -}}
+
+    <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
+      <span class="relative inline-block">
+        {{- i18n "latest" | default "Latest" | title }}
+        <span class="fluidity-page-title-line"></span>
+      </span>
+    </h1>
     {{- if $paginator.Pages -}}
       {{- if eq $paginator.PageNumber 1 -}}
         {{- with (index $paginator.Pages 0) -}}
@@ -64,10 +84,10 @@
           <a
             href="{{ $item.Section | relURL }}"
             class="inline-flex items-center px-2 py-1 rounded-md
-              text-xs font-medium 
+              text-xs font-medium
               bg-blue-50/80 dark:bg-blue-900/30
               text-blue-600 dark:text-blue-300
-              hover:bg-blue-100/80 dark:hover:bg-blue-800/40 
+              hover:bg-blue-100/80 dark:hover:bg-blue-800/40
               transition-colors duration-200">
             {{ $item.Section }}
           </a>
@@ -86,8 +106,8 @@
         <a
           href="{{ $item.Permalink | relURL }}"
           class="relative inline-block
-                    text-neutral-900 dark:text-white 
-                    group-hover:text-sky-600 dark:group-hover:text-sky-400 
+                    text-neutral-900 dark:text-white
+                    group-hover:text-sky-600 dark:group-hover:text-sky-400
                     transition-colors duration-300">
           {{ $item.Title }}
           <span
@@ -110,7 +130,7 @@
         <a
           href="{{ $item.Permalink | relURL }}"
           aria-label="{{- i18n "readMore" | strings.Title }} about {{ $item.Title -}}"
-          class="inline-flex items-center justify-center gap-1.5 
+          class="inline-flex items-center justify-center gap-1.5
                px-4 h-9 text-sm font-medium rounded-lg
                transition-all duration-200 ease-out
                backdrop-blur-[2px]

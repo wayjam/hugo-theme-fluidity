@@ -3,6 +3,7 @@ title: "Markdown Syntax"
 date: "2024-12-01"
 author: Hugo Authors
 description: "Sample article showcasing basic Markdown syntax and formatting for HTML elements."
+featured: true
 tags: [
     "markdown",
     "css",
