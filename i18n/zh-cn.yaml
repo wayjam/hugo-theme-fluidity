@@ -57,6 +57,10 @@ noSearchResults:
   other: 未找到结果
 loading:
   other: 加载中...
+featured:
+  other: 精选
+latest:
+  other: 最新
 page:
   other: 页面
 post:

@@ -3,6 +3,7 @@
   {{- $showSection := false -}}
   {{- if gt (len site.Params.mainSections) 1 }}{{ $showSection = true }}{{ end -}}
   {{- $paginator := .Paginate (where (where site.RegularPages "Section" "in" site.Params.mainSections) "Params.featured" "ne" true) $pageSize -}}
+  {{- $showLatestTitle := false -}}
 
 
   <div class="container mx-auto px-2 lg:px-4 py-4 lg:py-8">
@@ -10,6 +11,7 @@
       {{- if gt (len .) 1 -}}
         {{ errorf "Only one article may be featured but found %d" (len .) }}
       {{- else -}}
+        {{- $showLatestTitle = true -}}
         <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
           <span class="relative inline-block">
             {{- i18n "featured" | default "Featured" | title }}
@@ -20,12 +22,14 @@
       {{- end -}}
     {{- end -}}
 
-    <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
-      <span class="relative inline-block">
-        {{- i18n "latest" | default "Latest" | title }}
-        <span class="fluidity-page-title-line"></span>
-      </span>
-    </h1>
+    {{- if $showLatestTitle -}}
+      <h1 class="fluidity-page-title text-4xl group mb-2 md:mb-4 lg:mb-8">
+        <span class="relative inline-block">
+          {{- i18n "latest" | default "Latest" | title }}
+          <span class="fluidity-page-title-line"></span>
+        </span>
+      </h1>
+    {{- end -}}
     {{- if $paginator.Pages -}}
       {{- if eq $paginator.PageNumber 1 -}}
         {{- with (index $paginator.Pages 0) -}}
