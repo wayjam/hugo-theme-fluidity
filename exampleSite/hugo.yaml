@@ -101,6 +101,13 @@ params:
     list: 5
     archives: 20
 
+  # Customise list pages
+  listPage:
+    # The number of categories on a page to display in the list summary.
+    numCategoriesToShow: 1
+    # The number of tags on a page to deisplay in the list summary.
+    numTagsToShow: 3
+
   # Social links
   social:
     twitter: 'Your Twitter username'

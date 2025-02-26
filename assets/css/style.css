@@ -439,7 +439,7 @@ body {
   }
 
   .fluidity-page-title-line {
-    @apply absolute -bottom-1 left-0 right-0 h-0.5 
+    @apply absolute -bottom-1 left-0 right-0 h-0.5
            bg-gradient-to-r from-sky-400 to-blue-500 dark:from-sky-500 dark:to-blue-400
            transform origin-left scale-x-0 group-hover:scale-x-100
            transition-transform duration-300 ease-out;
@@ -455,7 +455,7 @@ body {
 
   .fluidity-tag {
     @apply rounded-md px-2 py-0.5 text-sm
-           bg-blue-50/90 dark:bg-blue-900/30 
+           bg-blue-50/90 dark:bg-blue-900/30
            text-blue-600 dark:text-blue-300
            hover:bg-sky-50/90 dark:hover:bg-sky-900/30
            hover:text-sky-600 dark:hover:text-sky-300
@@ -465,9 +465,17 @@ body {
            transition-all duration-200;
   }
 
+  .fluidity-category {
+    @apply inline-flex py-1.5 px-1 text-sm
+      text-sky-700 dark:text-sky-300
+      underline underline-offset-4 decoration-sky-700
+      transform transition-all duration-300
+      group-hover:decoration-double;
+  }
+
   .fluidity-header-icon {
-       @apply p-2 rounded-lg text-sky-700 dark:text-sky-400 
-       hover:bg-sky-50 dark:hover:bg-sky-900/40 
+       @apply p-2 rounded-lg text-sky-700 dark:text-sky-400
+       hover:bg-sky-50 dark:hover:bg-sky-900/40
        transition-colors duration-200 cursor-pointer;
   }
 
@@ -476,9 +484,9 @@ body {
   }
 
   .fluidity-box-1 {
-    @apply bg-white/80 dark:bg-neutral-900/80 
+    @apply bg-white/80 dark:bg-neutral-900/80
     border border-neutral-400/80 dark:border-neutral-800/80
-    rounded-xl divide-y divide-blue-100 dark:divide-blue-900/50 
+    rounded-xl divide-y divide-blue-100 dark:divide-blue-900/50
     backdrop-blur-sm
     shadow-sm shadow-blue-100/50 dark:shadow-blue-900/30;
   }

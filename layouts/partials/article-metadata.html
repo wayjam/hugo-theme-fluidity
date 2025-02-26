@@ -77,7 +77,7 @@
         </span>
       </div>
 
-      {{- if .Params.categories -}}
+      {{- with .GetTerms "categories" -}}
         <div class="flex items-center gap-2 group">
           <span
             class="text-sky-600 dark:text-sky-400 transition-transform duration-300
@@ -85,12 +85,12 @@
             {{- partial "utils/icon.html" (dict "icon" "folder") -}}
           </span>
           <div class="flex gap-2">
-            {{- range .Params.categories -}}
+            {{- range . -}}
               <a
-                href="{{ (site.GetPage (printf "/categories/%s" (. | urlize))).RelPermalink }}"
-                class="text-sm underline underline-offset-2 group-hover:text-sky-600 dark:group-hover:text-sky-400
+                href="{{ .RelPermalink }}"
+                class="text-sm underline underline-offset-2 hover:text-sky-600 dark:hover:text-sky-400
                       transition-colors duration-200">
-                {{ . }}
+                {{ .LinkTitle }}
               </a>
             {{- end -}}
           </div>
