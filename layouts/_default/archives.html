@@ -31,8 +31,8 @@
                       {{- replace .Key "January 0001" "" }}
                     </h2>
                     <div
-                      class="flex items-center space-x-1.5 text-xs px-2.5 py-1 
-                                bg-sky-100/80 dark:bg-sky-800/50 
+                      class="flex items-center space-x-1.5 text-xs px-2.5 py-1
+                                bg-sky-100/80 dark:bg-sky-800/50
                                 border border-sky-200/50 dark:border-sky-700/50
                                 rounded-full
                                 transition-colors duration-300">
@@ -47,12 +47,12 @@
 
                 <!-- Content -->
                 <div
-                  class="border-t border-blue-100 dark:border-blue-900/50 
+                  class="border-t border-blue-100 dark:border-blue-900/50
                             bg-white/50 dark:bg-neutral-900/50">
                   <div class="divide-y divide-blue-100 dark:divide-blue-900/50">
                     {{- range .Pages -}}
                       {{- if eq .Kind "page" -}}
-                        {{- partial "partials/archive-article.html" . -}}
+                        {{- partial "archive-article.html" . -}}
                       {{- end -}}
                     {{- end -}}
                   </div>
