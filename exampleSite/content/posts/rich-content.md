@@ -12,9 +12,12 @@ and no-JS versions of various social media embeds.
 
 ## <!--more-->
 
-## Gist Shortcode
+## GitHub Gist
 
-{{< gist spf13 7896402 "img.html" >}}
+The built-in `gist` shortcode was removed in Hugo v0.156.0.
+Use a direct gist URL instead:
+
+https://gist.github.com/spf13/7896402#file-img-html
 
 ## Instagram Shortcode
 
