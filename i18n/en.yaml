@@ -60,14 +60,10 @@ featured:
 latest:
   other: latest
 # Menu items
-home:
-  other: home
 archives:
   other: archives
 categories:
   other: categories
-about:
-  other: about
 page:
   other: page
 post:

@@ -1,0 +1,78 @@
+home:
+  other: 首頁
+tag:
+  one: 標籤
+  other: 標籤
+archive:
+  other: 歸檔
+archives:
+  other: 歸檔
+categories:
+  other: 分類
+toggleTheme:
+  other: 切換主題
+next:
+  other: 下一頁
+previous:
+  other: 上一頁
+readMore:
+  other: 閱讀更多
+readingTime:
+  one: 預計閱讀 1 分鐘
+  other: 預計閱讀 {{ .Count }} 分鐘
+comment:
+  other: 評論
+publishedAt:
+  other: 發佈於
+updatedAt:
+  other: 修改於
+taggedWith:
+  other: 標記為
+shareWith:
+  other: 分享到
+toc:
+  other: 目錄
+about:
+  other: 關於
+sections:
+  other: 欄目
+connect:
+  other: 聯絡
+allRightsReserved:
+  other: 版權所有
+published:
+  other: 發佈時間
+lastModified:
+  other: 最後修改
+article:
+  one: 篇文章
+  other: 篇文章
+total:
+  other: 總共
+toggleToc:
+  other: 切換目錄
+relatedArticles:
+  other: 相關文章
+searchPlaceholder:
+  other: 搜尋文章...
+noSearchResults:
+  other: 未找到結果
+loading:
+  other: 載入中...
+featured:
+  other: 精選
+latest:
+  other: 最新
+page:
+  other: 頁面
+post:
+  one: 文章
+  other: 文章
+search:
+  other: 搜尋
+hide:
+  other: 隱藏
+backToTop:
+  other: 返回頂部
+jumpToComments:
+  other: 跳到評論
