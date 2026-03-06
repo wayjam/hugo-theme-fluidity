@@ -20,40 +20,33 @@
         {{- range sort .Data.Terms.Alphabetical "Count" "desc" -}}
           {{- if ne .Page.Title "" -}}
             <a href="{{- .Page.Permalink | relURL -}}"
-               class="group relative inline-flex items-center gap-2 rounded-lg
-                      transform-gpu motion-safe:hover:scale-105
-                      transition-all duration-300 ease-out
-                      bg-gradient-to-r from-sky-50/90 to-blue-50/80
-                      dark:from-sky-900/30 dark:to-blue-900/20
-                      text-sky-700 dark:text-sky-300
-                      hover:text-blue-600 dark:hover:text-blue-300
-                      ring-1 ring-sky-200/50 dark:ring-sky-800/50
-                      hover:ring-blue-300/50 dark:hover:ring-blue-700/50
+               class="group relative inline-flex items-center gap-2 fluidity-tag
+                      px-3 py-1.5 text-sm font-medium
+                      bg-gradient-to-r from-sky-50/90 to-blue-50/85
+                      dark:from-sky-900/45 dark:to-blue-900/35
+                      text-sky-800 dark:text-sky-100
+                      ring-1 ring-sky-200/80 dark:ring-sky-800/80
+                      hover:text-sky-900 dark:hover:text-sky-50
+                      hover:ring-blue-300/80 dark:hover:ring-blue-600/80
                       motion-safe:hover:-translate-y-0.5
-                      backdrop-blur-sm
-                      overflow-hidden
-                      {{ if ge .Count 12 -}}
-                        py-2 px-3 text-lg font-medium
-                      {{- else if ge .Count 9 -}}
-                        py-1.5 px-3 text-base font-medium
-                      {{- else if ge .Count 6 -}}
-                        py-1.5 px-2.5 text-base
-                      {{- else -}}
-                        py-1 px-2.5 text-sm
-                      {{- end -}}">
+                      shadow-[0_6px_18px_-12px_rgba(14,165,233,0.55)]
+                      dark:shadow-[0_6px_18px_-12px_rgba(56,189,248,0.45)]
+                      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2
+                      focus-visible:ring-sky-400 dark:focus-visible:ring-sky-500
+                      dark:focus-visible:ring-offset-neutral-900
+                      overflow-hidden">
               <span class="relative z-10">{{- .Page.Title -}}</span>
               <span class="relative z-10 inline-flex items-center justify-center 
-                          rounded-full px-2 py-0.5 text-xs font-medium border border-neutral-300/50 dark:border-neutral-700/50
-                          bg-neutral-100/90 dark:bg-neutral-800/60
-                          text-sky-600 dark:text-sky-400
-                          group-hover:border-sky-200 dark:group-hover:border-sky-800
-                          group-hover:bg-sky-100 dark:group-hover:bg-sky-800/60
-                          group-hover:text-sky-700 dark:group-hover:text-sky-300
+                          rounded-full px-2 py-0.5 text-xs font-semibold border border-sky-200/80 dark:border-sky-800/80
+                          bg-white/85 dark:bg-neutral-800/80
+                          text-sky-800 dark:text-sky-100
+                          group-hover:border-blue-300 dark:group-hover:border-blue-600
+                          group-hover:bg-sky-50/90 dark:group-hover:bg-sky-900/40
                           transition-all duration-300 ease-out
                           backdrop-blur-sm">
                 {{- .Count -}}
               </span>
-              <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent
+              <div class="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent dark:via-white/15
                           translate-x-[-200%] group-hover:translate-x-[200%]
                           transition-transform duration-1000 ease-out"></div>
             </a>

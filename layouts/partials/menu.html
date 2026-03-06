@@ -14,17 +14,19 @@
     </ul>
 
     <!-- Mobile Menu Container -->
-    <div class="relative md:hidden " dir="rtl">
+    <div class="relative md:hidden">
       <ul
         id="mobile-menu"
-        class="absolute top-0 -right-4 py-1 w-48
+        aria-hidden="true"
+        inert
+        class="absolute top-0 -right-4 py-1 w-48 fluidity-mobile-menu-closed
           transform opacity-0 scale-95 
           transition-all duration-200 ease-out
           bg-white dark:bg-neutral-900
           border border-neutral-200/80 dark:border-neutral-800/80
           rounded-xl divide-y divide-neutral-100 dark:divide-neutral-900/50
           shadow-lg shadow-neutral-100/20 dark:shadow-neutral-900/30
-          backdrop-blur-md text-left	
+          backdrop-blur-md text-left
           z-50">
         {{- partial "inline/menu/walk.html" (dict "page" $page "menuEntries" . "isMobile" true) -}}
       </ul>
@@ -94,7 +96,7 @@
 
       {{- with .Children -}}
         <ul
-          class="absolute top-fullleft-0 mt-1 min-w-[200px]
+          class="absolute top-full left-0 mt-1 min-w-[200px]
           bg-white/95 dark:bg-neutral-900/95
           shadow-md shadow-neutral-100/20 dark:shadow-neutral-900/30
           rounded-md border border-neutral-200/80 dark:border-neutral-800/80

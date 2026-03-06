@@ -96,6 +96,51 @@ params:
 
 4. Run pagefind before every build: `npx pagefind`
 
+### Third-party Comments (Dark/Light Sync)
+
+You can inject third-party comments via `params.comment.thirdParty`.
+
+```yaml
+params:
+  comment:
+    disabled: false
+    thirdParty: |
+      <link href="https://your-cdn.example.com/comment.css" rel="stylesheet">
+      <script src="https://your-cdn.example.com/comment.js"></script>
+      <div id="comments"></div>
+      <script>
+        (() => {
+          const isDark = () => document.documentElement.classList.contains('dark')
+
+          // Replace with your comment system initializer
+          const comment = window.YourCommentSystem?.init({
+            el: '#comments',
+            pageKey: location.pathname,
+            pageTitle: document.title,
+            server: 'https://your-comment-server.example.com',
+            site: 'YOUR_SITE_NAME',
+            darkMode: isDark(),
+          })
+
+          const syncTheme = () => comment?.setDarkMode?.(isDark())
+          syncTheme()
+
+          const observer = new MutationObserver(syncTheme)
+          observer.observe(document.documentElement, {
+            attributes: true,
+            attributeFilter: ['class'],
+          })
+        })()
+      </script>
+```
+
+This is a generic, desensitized example. Replace script URLs, init method, and config fields based on your provider's API.
+
+## Development
+
+1. Install dependencies: `npm i`
+2. Run the example:`./run_eample.sh`
+
 ## License
 
 [MIT](LICENSE)

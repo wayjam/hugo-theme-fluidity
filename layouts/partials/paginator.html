@@ -4,16 +4,11 @@
     <div id="pagination">
       <nav class="mt-8 flex justify-center items-center gap-2" aria-label="Pagination">
         <!-- Previous button -->
-        <a
-          aria-label="{{ i18n "previous" }}"
-          {{- if $pag.HasPrev }}
+        {{- if $pag.HasPrev }}
+          <a
+            aria-label="{{ i18n "previous" }}"
             href="{{ $pag.Prev.URL }}"
-          {{- else }}
-            href="#"
-            disabled
-          {{ end -}}
-          class="inline-flex items-center justify-center w-10 h-10 rounded-lg
-          {{- if $pag.HasPrev }}
+            class="inline-flex items-center justify-center w-10 h-10 rounded-lg
             bg-white/80 dark:bg-neutral-800/80
             text-neutral-700 dark:text-neutral-200
             border border-neutral-200/50 dark:border-neutral-700/50
@@ -23,15 +18,21 @@
             hover:scale-105
             focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800
             transform-gpu transition-all duration-200 ease-out
-            shadow-sm
-          {{- else }}
+            shadow-sm">
+            {{- partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") -}}
+          </a>
+        {{- else -}}
+          <span
+            aria-label="{{ i18n "previous" }}"
+            aria-disabled="true"
+            class="inline-flex items-center justify-center w-10 h-10 rounded-lg
             bg-neutral-50/80 dark:bg-neutral-800/80
             text-neutral-300 dark:text-neutral-600
             border border-neutral-200/50 dark:border-neutral-700/50
-            cursor-not-allowed
-          {{ end -}}">
-          {{- partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") -}}
-        </a>
+            cursor-not-allowed">
+            {{- partial "utils/icon.html" (dict "icon" "arrow-left" "class" "w-5 h-5") -}}
+          </span>
+        {{- end -}}
 
         <!-- Page numbers -->
         <div class="flex items-center gap-1.5">
@@ -87,15 +88,11 @@
         </div>
 
         <!-- Next button -->
-        <a
-          aria-label="{{ i18n "next" }}"
-          {{- if $pag.HasNext }}
+        {{- if $pag.HasNext }}
+          <a
+            aria-label="{{ i18n "next" }}"
             href="{{ $pag.Next.URL }}"
-          {{- else }}
-            disabled
-          {{ end -}}
-          class="inline-flex items-center justify-center w-10 h-10 rounded-lg
-          {{- if $pag.HasNext }}
+            class="inline-flex items-center justify-center w-10 h-10 rounded-lg
             bg-white/80 dark:bg-neutral-800/80
             text-neutral-700 dark:text-neutral-200
             border border-neutral-200/50 dark:border-neutral-700/50
@@ -105,15 +102,21 @@
             hover:scale-105
             focus:outline-none focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800
             transform-gpu transition-all duration-200 ease-out
-            shadow-sm
-          {{- else }}
+            shadow-sm">
+            {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
+          </a>
+        {{- else -}}
+          <span
+            aria-label="{{ i18n "next" }}"
+            aria-disabled="true"
+            class="inline-flex items-center justify-center w-10 h-10 rounded-lg
             bg-neutral-50/80 dark:bg-neutral-800/80
             text-neutral-300 dark:text-neutral-600
             border border-neutral-200/50 dark:border-neutral-700/50
-            cursor-not-allowed
-          {{ end -}}">
-          {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
-        </a>
+            cursor-not-allowed">
+            {{- partial "utils/icon.html" (dict "icon" "arrow-right" "class" "w-5 h-5") -}}
+          </span>
+        {{- end -}}
       </nav>
     </div>
   {{- end -}}

@@ -397,8 +397,8 @@
 
 /* Base styles */
 body {
-  @apply bg-[rgb(var(--color-neutral-base))]
-         text-[rgb(var(--color-neutral))]
+  @apply bg-neutral-50 dark:bg-neutral-950
+         text-neutral-900 dark:text-neutral-100
          font-[var(--font-family-base)]
          antialiased;
 }

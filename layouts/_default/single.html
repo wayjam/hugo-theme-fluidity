@@ -119,6 +119,9 @@
 
             <button
               id="toggle-sidebar"
+              aria-expanded="true"
+              data-hide-label="{{ i18n "hide" | default "Hide" | title }}"
+              data-show-label="{{ i18n "show" | default "Show" | title }}"
               class="group inline-flex items-center gap-1 py-1.5 rounded-lg cursor-pointer
                      hover:text-sky-600 dark:hover:text-sky-400
                      transform-gpu motion-safe:hover:-translate-y-0.5

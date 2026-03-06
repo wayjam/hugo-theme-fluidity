@@ -9,6 +9,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width">
 <meta name="color-scheme" content="dark light">
+<script>
+  (() => {
+    try {
+      const storedTheme = localStorage.getItem('color-theme')
+      const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+      const isDark = storedTheme ? storedTheme === 'dark' : prefersDark
+      document.documentElement.classList.toggle('dark', isDark)
+    } catch (_) {}
+  })()
+</script>
 <meta name="description" content="{{ $description }}" />
 <meta name="author" content="{{ (partial "utils/author.html" . ) }}">
 <meta name="keywords" content="{{ $tags }}">
